@@ -6,7 +6,11 @@ package com.mycompany.proyecto_seguimiento;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -14,6 +18,15 @@ import javafx.fxml.Initializable;
  * @author natha
  */
 public class InicioSesionController implements Initializable {
+
+    @FXML
+    private TextField txtCI;
+    @FXML
+    private TextField txtContrasenhia;
+    @FXML
+    private Label link;
+    @FXML
+    private Button btInicioSesion;
 
     /**
      * Initializes the controller class.
