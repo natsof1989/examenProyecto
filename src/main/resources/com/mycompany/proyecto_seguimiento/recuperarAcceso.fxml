@@ -13,7 +13,7 @@
    <children>
       <Pane layoutX="58.0" layoutY="30.0" prefHeight="437.0" prefWidth="427.0" style="-fx-border-color: white;" styleClass="custom-pane" stylesheets="@styles.css">
          <children>
-            <Label layoutX="100.0" layoutY="22.0" prefHeight="35.0" prefWidth="275.0" styleClass="title-label" text="Recuperación de Acceso">
+            <Label layoutX="80.0" layoutY="21.0" prefHeight="35.0" prefWidth="275.0" styleClass="label-title" text="Recuperación de Acceso">
                <font>
                   <Font name="Segoe UI Semibold" size="24.0" />
                </font>
@@ -28,9 +28,9 @@
                   <Font name="Segoe UI Semibold" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="48.0" layoutY="116.0" styleClass="label-input" text="Número de cédula:" />
+            <Label layoutX="46.0" layoutY="123.0" styleClass="label-form" text="Número de cédula:" />
             <TextField fx:id="txt_ci" disable="true" layoutX="49.0" layoutY="152.0" prefHeight="36.0" prefWidth="297.0" promptText="999999999" styleClass="campo-login" />
-            <Label layoutX="57.0" layoutY="194.0" styleClass="label-input" text="Correo electŕonico:" />
+            <Label layoutX="46.0" layoutY="201.0" styleClass="label-form" text="Correo electŕonico:" />
             <TextField fx:id="txt_correo" disable="true" layoutX="49.0" layoutY="232.0" prefHeight="36.0" prefWidth="306.0" promptText="example@gmail.com" styleClass="campo-login" />
             <Button layoutX="99.0" layoutY="352.0" mnemonicParsing="false" styleClass="boton-principal" text="Enviar código de verificación" />
          </children></Pane>

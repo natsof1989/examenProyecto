@@ -99,3 +99,54 @@
     -fx-font-weight: bold;
     -fx-padding: 0;
 }
+
+
+.label-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1a237e;
+    -fx-effect: dropshadow(gaussian, rgba(33, 33, 33, 0.2), 2, 0.2, 1, 1);
+}
+
+.label-subtitle {
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #5c6bc0;
+    -fx-padding: 4 0 10 0;
+    -fx-opacity: 0.85;
+}
+.label-form {
+    -fx-font-size: 12.5px;
+    -fx-text-fill: #333333;
+    -fx-font-weight: 500;
+    -fx-label-padding: 0 0 3 3;
+    -fx-effect: dropshadow(gaussian, transparent, 0, 0, 0, 0);
+}
+
+
+
+.text-field, .text-area {
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #ccc;
+    -fx-padding: 6 10;
+    -fx-background-color: #f9f9f9;
+    -fx-pref-height: 30;
+}
+.text-area {
+    -fx-pref-height: 120;
+}
+
+.combo-box, .button {
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-background-color: #2196f3;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 4, 0.5, 0.0, 2.0);
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #1976d2;
+}

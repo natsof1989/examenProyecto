@@ -13,7 +13,7 @@
    <children>
       <Pane layoutX="69.0" layoutY="59.0" prefHeight="479.0" prefWidth="457.0" styleClass="custom-pane">
          <children>
-            <Label layoutX="135.0" layoutY="39.0" styleClass="title-label" text="Introduzca el código" />
+            <Label layoutX="135.0" layoutY="39.0" styleClass="label-title" text="Introduzca el código" />
             <ImageView fitHeight="50.0" fitWidth="51.0" layoutX="64.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/security.png" />
@@ -30,7 +30,7 @@
                </children>
             </HBox>
             <Button fx:id="bt_verificar" layoutX="171.0" layoutY="167.0" mnemonicParsing="false" styleClass="boton-principal" text="Verificar" />
-            <Label layoutX="52.0" layoutY="222.0" styleClass="label-input" text="Nueva contraseña:" />
+            <Label layoutX="52.0" layoutY="222.0" styleClass="label-form" text="Nueva contraseña:" />
             <TextField fx:id="txt_newContra" layoutX="55.0" layoutY="247.0" prefHeight="23.0" prefWidth="210.0" styleClass="campo-login" />
             <Label layoutX="52.0" layoutY="295.0" styleClass="label-input" text="Confirmar nueva contraseña:" />
             <TextField fx:id="txt_condirmarContra" layoutX="55.0" layoutY="320.0" prefHeight="23.0" prefWidth="210.0" styleClass="campo-login" />
