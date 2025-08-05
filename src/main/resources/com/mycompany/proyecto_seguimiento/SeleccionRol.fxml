@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.mycompany.proyecto_seguimiento.SeleccionRolController">
+   <children>
+      <VBox fx:id="contenedorRoles" layoutX="129.0" layoutY="100.0" prefHeight="200.0" prefWidth="324.0" />
+      <Label layoutX="187.0" layoutY="71.0" styleClass="titulo-principal" text="Seleccione su rol" />
+   </children>
+</AnchorPane>
