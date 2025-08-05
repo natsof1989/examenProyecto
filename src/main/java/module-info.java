@@ -6,4 +6,5 @@ module com.mycompany.proyecto_seguimiento {
     requires java.base;  
     opens com.mycompany.proyecto_seguimiento to javafx.fxml;
     exports com.mycompany.proyecto_seguimiento;
+    requires jbcrypt;
 }

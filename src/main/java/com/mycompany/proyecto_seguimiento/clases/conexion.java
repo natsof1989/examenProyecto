@@ -19,7 +19,7 @@ public class conexion {
     
     private Connection con; 
 
-    public Connection getCon() {
+    public Connection getConnection() {
         try {
             String url= "jdbc:mysql://"+host+"/"+base;//direccion de BD
             con = DriverManager.getConnection(url, this.usuario, this.password);

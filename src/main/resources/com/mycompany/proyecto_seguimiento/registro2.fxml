@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane id="AnchorPane" prefHeight="633.0" prefWidth="552.0" styleClass="mainFxmlClass" stylesheets="@styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.mycompany.proyecto_seguimiento.Registro2Controller">
+   <children>
+      <Pane layoutX="71.0" layoutY="50.0" prefHeight="543.0" prefWidth="390.0" styleClass="panel-contenedor">
+         <children>
+            <Label layoutX="124.0" layoutY="44.0" styleClass="titulo-principal" text="Registrarse" />
+            <Label layoutX="42.0" layoutY="111.0" styleClass="label-formulario" text="Número de cédula:" />
+            <Label layoutX="40.0" layoutY="163.0" prefHeight="28.0" prefWidth="126.0" styleClass="label-formulario" text="Correo eléctronico:" />
+            <Label layoutX="42.0" layoutY="214.0" prefHeight="0.0" prefWidth="98.0" styleClass="label-formulario" text="Nombre:" />
+            <Label layoutX="49.0" layoutY="292.0" prefHeight="0.0" prefWidth="98.0" styleClass="label-formulario" text="Apellido:" />
+            <TextField fx:id="txt_nombre" layoutX="49.0" layoutY="242.0" styleClass="campo-texto" />
+            <Label layoutX="50.0" layoutY="373.0" prefHeight="28.0" prefWidth="149.0" styleClass="label-formulario" text="Número de telefono:" />
+            <TextField fx:id="txt_apellido" layoutX="49.0" layoutY="320.0" styleClass="campo-texto" />
+            <Label fx:id="lb_CI" layoutX="178.0" layoutY="111.0" styleClass="label-formulario" text="1234567" />
+            <Label fx:id="lb_correo" layoutX="168.0" layoutY="163.0" styleClass="label-formulario" text="example@gmail.com" />
+            <TextField fx:id="txt_telefono" layoutX="49.0" layoutY="401.0" styleClass="campo-texto" />
+            <Button fx:id="btn_registrarse" layoutX="144.0" layoutY="470.0" mnemonicParsing="false" onAction="#reg_insert" styleClass="boton-azul" text="Siguiente" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

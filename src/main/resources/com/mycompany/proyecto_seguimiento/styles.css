@@ -1,152 +1,112 @@
-
-.my-pane {
-    -fx-border-color: #87CEEB;
-    -fx-border-width: 3px;
-    -fx-border-radius: 12px;
-    -fx-background-radius: 12px;
-    -fx-background-color: white; 
-}
-
+/* ===== ESTILOS BASE ===== */
 .root {
     -fx-background-color: linear-gradient(to right, #1e90ff, #6a5acd);
     -fx-font-family: "Segoe UI", sans-serif;
 }
 
-/* Panel blanco central */
-.custom-pane {
+/* ===== PANEL PRINCIPAL ===== */
+.panel-contenedor {
     -fx-background-color: white;
-    -fx-background-radius: 15;
-    -fx-padding: 30;
+    -fx-background-radius: 15px;
+    -fx-border-width: 3px;
+    -fx-border-radius: 12px;
+    -fx-padding: 30px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 20, 0, 0, 8);
 }
 
-/* Título azul oscuro */
-.title-label {
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #003366;
-    -fx-padding: 0 0 20 0;
-}
-
-/* Labels de los campos */
-.label-input {
-    -fx-font-size: 13px;
-    -fx-text-fill: #555555;
-    -fx-font-weight: normal;
-    -fx-padding: 5 0 3 2;
-}
-
-/* Campos de entrada */
-.campo-login {
-    -fx-background-color: #f0f0f0;
-    -fx-background-radius: 10;
-    -fx-border-color: #cccccc;
-    -fx-border-radius: 10;
-    -fx-padding: 8 12;
-    -fx-font-size: 14px;
-    -fx-text-fill: #111111; /* texto principal: negro casi absoluto */
-    -fx-prompt-text-fill: #444444; /* texto de sugerencia más oscuro */
-    -fx-font-weight: 500;
-}
-
-/* Pseudo-clase para el texto de sugerencia (promptText) */
-.campo-login .text {
-    -fx-fill: #222222;
-}
-
-
-/* Botón azul elegante */
-.boton-principal {
-    -fx-background-color: #1e90ff;
-    -fx-background-radius: 10;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-cursor: hand;
-    -fx-font-size: 14px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 8, 0, 0, 3);
-    -fx-padding: 10 20;
-}
-
-.boton-principal:hover {
-    -fx-background-color: #1565c0;
-}
-
-.boton-principal2 {
-    -fx-background-color: #1e90ff;
-    -fx-background-radius: 10;
-    -fx-text-fill: black;
-    -fx-font-weight: bold;
-    -fx-cursor: hand;
-    -fx-font-size: 14px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 8, 0, 0, 3);
-    -fx-padding: 10 20;
-}
-
-.boton-principal2:hover {
-    -fx-background-color: white;
-}
-
-
-.codigo-box {
-    -fx-background-color: #f5f5f5;
-    -fx-background-radius: 8;
-    -fx-border-color: #cccccc;
-    -fx-border-radius: 8;
-    -fx-font-size: 18px;
-    -fx-text-fill: #111111;
-    -fx-text-alignment: center;
-    -fx-alignment: center;
-    -fx-font-weight: bold;
-    -fx-padding: 0;
-}
-
-
-.label-title {
+/* ===== TÍTULOS ===== */
+.titulo-principal {
     -fx-font-size: 24px;
     -fx-font-weight: bold;
     -fx-text-fill: #1a237e;
     -fx-effect: dropshadow(gaussian, rgba(33, 33, 33, 0.2), 2, 0.2, 1, 1);
 }
 
-.label-subtitle {
+.subtitulo {
     -fx-font-size: 14px;
     -fx-font-weight: 600;
     -fx-text-fill: #5c6bc0;
-    -fx-padding: 4 0 10 0;
+    -fx-padding: 4px 0 10px 0;
     -fx-opacity: 0.85;
 }
-.label-form {
-    -fx-font-size: 12.5px;
-    -fx-text-fill: #333333;
-    -fx-font-weight: 500;
-    -fx-label-padding: 0 0 3 3;
-    -fx-effect: dropshadow(gaussian, transparent, 0, 0, 0, 0);
+
+/* ===== LABELS DE FORMULARIO ===== */
+.label-formulario {
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #003366;
+    -fx-padding: 6px 0 4px 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 2, 0.5, 0, 1);
 }
 
-
-
-.text-field, .text-area {
-    -fx-background-radius: 8;
-    -fx-border-radius: 8;
-    -fx-border-color: #ccc;
-    -fx-padding: 6 10;
-    -fx-background-color: #f9f9f9;
-    -fx-pref-height: 30;
-}
-.text-area {
-    -fx-pref-height: 120;
+/* ===== LINK DE REGISTRO (Ej: "¿No tienes cuenta? Crea una") ===== */
+.link-registro {
+    -fx-font-size: 13px;
+    -fx-text-fill: #1e90ff; /* Azul brillante */
+    -fx-font-weight: 600;
+    -fx-underline: true;
+    -fx-cursor: hand; /* Mano al pasar el mouse */
+    -fx-padding: 8px 0 0 0;
 }
 
-.combo-box, .button {
-    -fx-background-radius: 8;
-    -fx-border-radius: 8;
+.link-registro:hover {
+    -fx-text-fill: #1565c0; /* Azul más oscuro al pasar el mouse */
+    -fx-effect: innershadow(gaussian, rgba(30, 144, 255, 0.3), 0, 0, 1, 1); /* Efecto sutil */
+}
+
+/* ===== CAMPOS DE TEXTO ===== */
+.campo-texto {
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 8px;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 8px;
+    -fx-padding: 8px 12px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #111111;
+    -fx-prompt-text-fill: #777777;
+}
+
+/* ===== BOTONES ===== */
+/* Botón Azul (Principal) */
+.boton-azul {
+    -fx-background-color: #1e90ff;
+    -fx-background-radius: 10px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 8, 0, 0, 3);
+    -fx-padding: 10px 20px;
+}
+
+.boton-azul:hover {
+    -fx-background-color: #1565c0;
+}
+
+/* Botón Blanco (Secundario) */
+.boton-blanco {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 8, 0, 0, 3);
+    -fx-padding: 10px 20px;
+    
+}
+
+.boton-blanco:hover {
+    -fx-background-color: #f5f5f5;
+}
+
+/* ===== COMBO BOX ===== */
+.combo-box {
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
     -fx-background-color: #2196f3;
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 4, 0.5, 0.0, 2.0);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 4, 0.5, 0, 2);
     -fx-cursor: hand;
-}
-
-.button:hover {
-    -fx-background-color: #1976d2;
 }

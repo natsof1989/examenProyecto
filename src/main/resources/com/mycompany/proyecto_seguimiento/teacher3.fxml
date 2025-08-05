@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="AnchorPane" prefHeight="609.0" prefWidth="675.0" styleClass="mainFxmlClass" stylesheets="@styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.mycompany.proyecto_seguimiento.Teacher3Controller">
+<AnchorPane id="AnchorPane" prefHeight="609.0" prefWidth="675.0" styleClass="mainFxmlClass" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.Teacher3Controller">
    <children>
       <Pane layoutX="70.0" layoutY="34.0" prefHeight="553.0" prefWidth="544.0" styleClass="custom-pane">
          <children>
@@ -31,7 +31,7 @@
                   <MenuItem mnemonicParsing="false" text="Tercer año" />
               </items>
             </MenuButton>
-            <MenuButton layoutX="259.0" layoutY="100.0" mnemonicParsing="false" styleClass="combo-box" text="Sección">
+            <MenuButton layoutX="259.0" layoutY="100.0" mnemonicParsing="false" styleClass="combo-box" text="Sección" textFill="#e10c0c">
               <items>
                 <MenuItem mnemonicParsing="false" text="A" />
                 <MenuItem mnemonicParsing="false" text="B" />
