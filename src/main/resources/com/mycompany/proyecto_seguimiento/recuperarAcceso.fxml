@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="512.0" prefWidth="557.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.RecuperarAccesoController">
    <children>
-      <Pane layoutX="58.0" layoutY="30.0" prefHeight="437.0" prefWidth="427.0" style="-fx-border-color: white;" styleClass="custom-pane" stylesheets="@styles.css">
+      <Pane layoutX="58.0" layoutY="30.0" prefHeight="437.0" prefWidth="427.0" style="-fx-border-color: white;" styleClass="panel-contenedor" stylesheets="@styles.css">
          <children>
             <Label layoutX="80.0" layoutY="21.0" prefHeight="35.0" prefWidth="275.0" styleClass="label-title" text="Recuperación de Acceso">
                <font>
@@ -23,16 +23,16 @@
                   <Image url="@img/security.png" />
                </image>
             </ImageView>
-            <Label layoutX="36.0" layoutY="296.0" lineSpacing="1.0" prefHeight="39.0" prefWidth="403.0" styleClass="label-input" text="Se enviará un código de verificación a su email registrado." textAlignment="JUSTIFY" wrapText="true">
+            <Label layoutX="36.0" layoutY="296.0" lineSpacing="1.0" prefHeight="39.0" prefWidth="403.0" styleClass="subtitulo" text="Se enviará un código de verificación a su email registrado." textAlignment="JUSTIFY" wrapText="true">
                <font>
                   <Font name="Segoe UI Semibold" size="13.0" />
                </font>
             </Label>
             <Label layoutX="46.0" layoutY="123.0" styleClass="label-form" text="Número de cédula:" />
-            <TextField fx:id="txt_ci" disable="true" layoutX="49.0" layoutY="152.0" prefHeight="36.0" prefWidth="297.0" promptText="999999999" styleClass="campo-login" />
-            <Label layoutX="46.0" layoutY="201.0" styleClass="label-form" text="Correo electŕonico:" />
-            <TextField fx:id="txt_correo" disable="true" layoutX="49.0" layoutY="232.0" prefHeight="36.0" prefWidth="306.0" promptText="example@gmail.com" styleClass="campo-login" />
-            <Button layoutX="99.0" layoutY="352.0" mnemonicParsing="false" styleClass="boton-principal" text="Enviar código de verificación" />
+            <TextField fx:id="txt_ci" disable="true" layoutX="49.0" layoutY="152.0" prefHeight="36.0" prefWidth="297.0" promptText="999999999" styleClass="campo-texto" />
+            <Label layoutX="46.0" layoutY="201.0" styleClass="label-formulario" text="Correo electŕonico:" />
+            <TextField fx:id="txt_correo" disable="true" layoutX="49.0" layoutY="232.0" prefHeight="36.0" prefWidth="306.0" promptText="example@gmail.com" styleClass="campo-texto" />
+            <Button layoutX="99.0" layoutY="352.0" mnemonicParsing="false" styleClass="boton-azul" text="Enviar código de verificación" />
          </children></Pane>
    </children>
 </AnchorPane>

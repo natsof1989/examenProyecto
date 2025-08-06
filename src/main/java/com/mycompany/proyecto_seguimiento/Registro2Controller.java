@@ -4,7 +4,14 @@
  */
 package com.mycompany.proyecto_seguimiento;
 
+import com.mycompany.proyecto_seguimiento.clases.ControladorUtils;
+import com.mycompany.proyecto_seguimiento.clases.SessionManager;
+import java.io.IOException;
+
+
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +19,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputControl;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -25,24 +34,60 @@ public class Registro2Controller implements Initializable {
     @FXML
     private TextField txt_apellido;
     @FXML
-    private Label lb_CI;
-    @FXML
-    private Label lb_correo;
-    @FXML
     private TextField txt_telefono;
     @FXML
     private Button btn_registrarse;
+    @FXML
+    private Text txt_CI;
+    @FXML
+    private Text txt_correo;
 
     /**
      * Initializes the controller class.
      */
+    private final SessionManager session = SessionManager.getInstance();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        txt_CI.setText(session.getCiUsuario()); 
+        txt_correo.setText(session.getCorreoUsuario()); 
+        
         // TODO
     }    
 
     @FXML
-    private void reg_insert(ActionEvent event) {
+    private void reg_insert(ActionEvent event) throws IOException {
+    
+        if (ControladorUtils.hayCamposVacios(txt_nombre, txt_apellido, txt_telefono)) {
+            ControladorUtils.mostrarAlerta("Error", "Todos los campos son obligatorios"); 
+            return;
+        }
+
+        
+        
+        String telefono = txt_telefono.getText().trim();
+
+        // 3. Validar formato del teléfono (CORRECCIÓN IMPORTANTE: se niega la condición)
+        if (!ControladorUtils.validarNumero(telefono, "TEL")) {
+            ControladorUtils.mostrarAlerta("Error", 
+                "El teléfono debe contener:\n" +
+                "- Solo números\n" +
+                "- 8 o 9 dígitos\n" +
+                "- Sin espacios ni caracteres especiales");
+            return;
+        }
+        if (!ControladorUtils.validarCamposLetras(txt_nombre, txt_apellido)) {
+            ControladorUtils.mostrarAlerta("Error", 
+                "Nombre y apellido solo pueden contener letras");
+            return;
+        }
+        String nombre = txt_nombre.getText(); 
+        String apellido = txt_apellido.getText();
+
+    
+        session.setNombre(nombre); 
+        session.setApellido(apellido); 
+        session.setTelefono(telefono);
+        ControladorUtils.abrirVentana("registro3.fxml", "Registro", btn_registrarse); 
     }
     
 }

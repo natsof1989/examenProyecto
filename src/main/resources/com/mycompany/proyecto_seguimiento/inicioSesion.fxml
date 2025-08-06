@@ -43,12 +43,12 @@
                </image>
             </ImageView>
             <PasswordField fx:id="txtContrasenhia" layoutX="38.0" layoutY="277.0" prefWidth="202.0" styleClass="campo-texto" />
-            <Hyperlink layoutX="60.0" layoutY="135.0" onAction="#registrarse" styleClass="link-registro" text="¿No tenes cuenta? Crear cuenta" textFill="WHITE">
+            <Hyperlink fx:id="link1" layoutX="60.0" layoutY="135.0" onAction="#registrarse" styleClass="link-registro" text="¿No tenes cuenta? Crear cuenta" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Semibold" size="12.0" />
                </font>
             </Hyperlink>
-            <Hyperlink layoutX="42.0" layoutY="330.0" onAction="#recuperarAcceso" styleClass="link-registro" text="¿Olvidaste tu contraseña?" />
+            <Hyperlink fx:id="link2" layoutX="42.0" layoutY="330.0" onAction="#recuperarAcceso" styleClass="link-registro" text="¿Olvidaste tu contraseña?" />
          </children>
       </Pane>
    </children>

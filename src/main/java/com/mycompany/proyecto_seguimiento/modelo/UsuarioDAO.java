@@ -107,4 +107,78 @@ public class UsuarioDAO {
             return stmt.executeQuery().next();
         }
     }
+    
+    public boolean existeCiCorreo(String ci, String correo) throws SQLException {
+    String sql = "SELECT 1 FROM profesor WHERE CI = ? AND email = ? " +
+                 "UNION ALL " +
+                 "SELECT 1 FROM equipo_tecnico WHERE CI = ? AND email = ? LIMIT 1";
+
+        try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+            stmt.setString(1, ci);
+            stmt.setString(2, correo);
+            stmt.setString(3, ci);
+            stmt.setString(4, correo);
+
+            // executeQuery().next() devolverá true si al menos un registro existe, 
+            // ya sea en profesor, equipo_tecnico, o en ambos sin problemas.
+            return stmt.executeQuery().next();
+        }
+    }
+    public boolean insertarUsuarioCompletoTransaccional(String ci, String nombre, String apellido, 
+                                                   String telefono, String correo, String password) 
+                                                   throws SQLException {
+        try {
+            conexion.setAutoCommit(false); // Iniciamos transacción
+
+            boolean existeEnProfesor = esDeRol(ci, "profesor");
+            boolean existeEnEquipoTecnico = esDeRol(ci, "equipo_tecnico");
+
+            if (!existeEnProfesor && !existeEnEquipoTecnico) {
+                return false;
+            }
+
+            boolean exitoProfesor = false;
+            boolean exitoEquipoTecnico = false;
+
+            if (existeEnProfesor) {
+                String sqlProfesor = "UPDATE profesor SET nombre = ?, apellido = ?, telefono = ?, email = ?, password = ? WHERE CI = ?";
+                try (PreparedStatement stmt = conexion.prepareStatement(sqlProfesor)) {
+                    stmt.setString(1, nombre);
+                    stmt.setString(2, apellido);
+                    stmt.setString(3, telefono);
+                    stmt.setString(4, correo);
+                    stmt.setString(5, password);
+                    stmt.setString(6, ci);
+                    exitoProfesor = stmt.executeUpdate() > 0;
+                }
+            }
+
+            if (existeEnEquipoTecnico) {
+                String sqlEquipo = "UPDATE equipo_tecnico SET nombre = ?, apellido = ?, telefono = ?, email = ?, password = ? WHERE CI = ?";
+                try (PreparedStatement stmt = conexion.prepareStatement(sqlEquipo)) {
+                    stmt.setString(1, nombre);
+                    stmt.setString(2, apellido);
+                    stmt.setString(3, telefono);
+                    stmt.setString(4, correo);
+                    stmt.setString(5, password);
+                    stmt.setString(6, ci);
+                    exitoEquipoTecnico = stmt.executeUpdate() > 0;
+                }
+            }
+
+            if (exitoProfesor || exitoEquipoTecnico) {
+                conexion.commit(); // Confirmamos los cambios
+                return true;
+            } else {
+                conexion.rollback(); // Deshacemos los cambios
+                return false;
+            }
+        } catch (SQLException e) {
+            conexion.rollback(); // En caso de error, deshacemos
+            throw e;
+        } finally {
+            conexion.setAutoCommit(true); // Restauramos el modo auto-commit
+        }
+    }
+
 }

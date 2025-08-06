@@ -23,8 +23,8 @@
             <TextField fx:id="txt_CI" layoutX="63.0" layoutY="204.0" prefHeight="36.0" prefWidth="213.0" styleClass="campo-texto" />
             <Label layoutX="65.0" layoutY="239.0" styleClass="label-formulario" text="Correo eléctrónico" />
             <TextField fx:id="txt_correo" layoutX="63.0" layoutY="267.0" prefHeight="36.0" prefWidth="213.0" styleClass="campo-texto" />
-            <Button layoutX="133.0" layoutY="348.0" mnemonicParsing="false" onAction="#verificacion" styleClass="boton-azul" text="Siguiente" />
-            <Hyperlink layoutX="95.0" layoutY="129.0" styleClass="link-registro" text="¿Ya tiene una cuenta? Iniciar sesión" />
+            <Button fx:id="btn_verificacion" layoutX="133.0" layoutY="348.0" mnemonicParsing="false" onAction="#verificacion" styleClass="boton-azul" text="Siguiente" />
+            <Hyperlink fx:id="link1" layoutX="95.0" layoutY="129.0" onAction="#inicaSesion" styleClass="link-registro" text="¿Ya tiene una cuenta? Iniciar sesión" />
          </children>
       </Pane>
    </children>
