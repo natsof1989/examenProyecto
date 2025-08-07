@@ -141,7 +141,7 @@ public class UsuarioDAO {
             boolean exitoEquipoTecnico = false;
 
             if (existeEnProfesor) {
-                String sqlProfesor = "UPDATE profesor SET nombre = ?, apellido = ?, telefono = ?, email = ?, password = ? WHERE CI = ?";
+                String sqlProfesor = "UPDATE profesor SET nombre = ?, apellido = ?, nro_telefono = ?, email = ?, password = ? WHERE CI = ?";
                 try (PreparedStatement stmt = conexion.prepareStatement(sqlProfesor)) {
                     stmt.setString(1, nombre);
                     stmt.setString(2, apellido);
@@ -154,7 +154,7 @@ public class UsuarioDAO {
             }
 
             if (existeEnEquipoTecnico) {
-                String sqlEquipo = "UPDATE equipo_tecnico SET nombre = ?, apellido = ?, telefono = ?, email = ?, password = ? WHERE CI = ?";
+                String sqlEquipo = "UPDATE equipo_tecnico SET nombre = ?, apellido = ?, nro_telefono = ?, email = ?, password = ? WHERE CI = ?";
                 try (PreparedStatement stmt = conexion.prepareStatement(sqlEquipo)) {
                     stmt.setString(1, nombre);
                     stmt.setString(2, apellido);

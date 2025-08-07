@@ -27,6 +27,13 @@ public class ControladorUtils {
     public static void mostrarAlerta(String titulo, String mensaje) {
         new Alert(Alert.AlertType.ERROR, mensaje).showAndWait();
     }
+    public static void mostrarAlertaChill(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText("Aviso");  // Esto elimina el "Message" por defecto
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
 
     public static void mostrarError(String mensaje, Exception ex, Class<?> claseOrigen) {
         Logger.getLogger(claseOrigen.getName()).log(Level.SEVERE, mensaje, ex);

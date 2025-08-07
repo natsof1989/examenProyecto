@@ -70,6 +70,12 @@ public class RegistroController implements Initializable {
                 txt_correo.setText(""); 
                 return;
             }
+            if(usuarioDao.registroCompleto(cedula)){
+                ControladorUtils.mostrarAlertaChill("Aviso", "El usuario ya se registró. Su cuenta ya existe"+
+                        " Séra redirigido al Login");
+                ControladorUtils.abrirVentana("inicioSesion.fxml", "Iniciar sesión", btn_verificacion); 
+                return; 
+            }
             session.setCiUsuario(cedula);
             session.setCorreoUsuario(correo);
             ControladorUtils.abrirVentana("registro2.fxml", "Registro", btn_verificacion);

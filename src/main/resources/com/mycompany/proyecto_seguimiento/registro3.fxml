@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="AnchorPane" prefHeight="466.0" prefWidth="493.0" styleClass="mainFxmlClass" stylesheets="@styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.mycompany.proyecto_seguimiento.Registro3Controller">
+<AnchorPane id="AnchorPane" prefHeight="466.0" prefWidth="493.0" styleClass="mainFxmlClass" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.Registro3Controller">
    <children>
       <Pane layoutX="74.0" layoutY="32.0" prefHeight="388.0" prefWidth="346.0" styleClass="panel-contenedor">
          <children>
@@ -15,7 +15,7 @@
             <PasswordField fx:id="txt_password" layoutX="43.0" layoutY="161.0" styleClass="campo-texto" />
             <Label layoutX="43.0" layoutY="200.0" styleClass="label-formulario" text="Confirmar contraseña:" />
             <PasswordField fx:id="txt_password2" layoutX="43.0" layoutY="228.0" styleClass="campo-texto" />
-            <Button layoutX="115.0" layoutY="303.0" mnemonicParsing="false" styleClass="boton-azul" text="Siguiente" />
+            <Button fx:id="btn_registro" layoutX="115.0" layoutY="303.0" mnemonicParsing="false" onAction="#guardar_datos" styleClass="boton-azul" text="Siguiente" />
          </children>
       </Pane>
    </children>
