@@ -4,6 +4,7 @@
  */
 package com.mycompany.proyecto_seguimiento;
 
+import com.mycompany.proyecto_seguimiento.clases.SessionManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -27,6 +28,8 @@ public class RecuperarAccesoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        txt_ci.setText(SessionManager.getInstance().getCiUsuario()); 
+        txt_correo.setText(SessionManager.getInstance().getUsuarioDatos().getEmail()); 
         // TODO
     }    
     

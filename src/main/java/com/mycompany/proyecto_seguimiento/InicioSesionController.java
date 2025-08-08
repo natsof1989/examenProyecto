@@ -5,6 +5,7 @@ import com.mycompany.proyecto_seguimiento.clases.ControladorUtils;
 import com.mycompany.proyecto_seguimiento.clases.conexion;
 import com.mycompany.proyecto_seguimiento.modelo.Seguridad;
 import com.mycompany.proyecto_seguimiento.clases.SessionManager;
+import com.mycompany.proyecto_seguimiento.clases.UsuarioDatos;
 import com.mycompany.proyecto_seguimiento.modelo.UsuarioDAO;
 import java.io.IOException;
 import java.net.URL;
@@ -35,6 +36,7 @@ public class InicioSesionController implements Initializable {
     private UsuarioDAO usuarioDao;
     private final SessionManager session = SessionManager.getInstance();
     private final conexion dbConexion = new conexion(); // Instancia de tu clase conexion
+    UsuarioDatos datos; 
     @FXML
     private Hyperlink link1;
     @FXML
@@ -59,13 +61,23 @@ public class InicioSesionController implements Initializable {
         String contrasenia = txtContrasenhia.getText();
 
         try {
+            if(!usuarioDao.existeRegistroCompleto(ci)){
+                ControladorUtils.mostrarAlertaChill("Aviso", "Usted aún no se ha registrado. \nCree su cuenta antes de inciar sesión.");
+                txtCI.clear();
+                txtContrasenhia.clear();
+                return;
+            }
             if (!usuarioDao.validarCredenciales(ci, contrasenia)) {
                 ControladorUtils.mostrarAlerta("Error", "Credenciales incorrectas");
                 return;
             }
+            
 
             session.setCiUsuario(ci);
             session.setRolesUsuario(usuarioDao.obtenerRoles(ci));
+            datos = usuarioDao.obtenerDatosUsuario(ci); 
+            session.setUsuarioDatos(datos);
+           
 
             List<String> roles = session.getRolesUsuario();
 
@@ -73,7 +85,7 @@ public class InicioSesionController implements Initializable {
                 session.setRolSeleccionado(roles.get(0));
                 ControladorUtils.abrirVentana(
                     roles.get(0).equals("PROFESOR") 
-                        ? "teacher1.fxml" 
+                        ? "teacher.fxml" 
                         : "EquipoTecnicoDashboard.fxml",
                     "Panel Principal",
                     btInicioSesion
@@ -85,7 +97,8 @@ public class InicioSesionController implements Initializable {
             }
 
         } catch (SQLException | IOException ex) {
-            ControladorUtils.mostrarError("Error durante el login", ex, getClass());
+            ControladorUtils.mostrarError("Error", "Ocurrió un error en el login", ex);
+
         }
     }
 

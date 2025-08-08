@@ -3,13 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 package com.mycompany.proyecto_seguimiento;
+import com.mycompany.proyecto_seguimiento.clases.SessionManager;
+import com.mycompany.proyecto_seguimiento.clases.ControladorUtils;
+import java.io.IOException;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -21,11 +26,11 @@ public class Teacher1Controller implements Initializable {
     @FXML
     private Label txt_bienvenida;
     @FXML
-    private Label txt_nombre;
+    private Text txt_nombre;
     @FXML
-    private Label txt_especialidad;
+    private Text txt_especialidad;
     @FXML
-    private Label txt_ci;
+    private Text txt_ci;
     @FXML
     private Button bt_verCaso;
     @FXML
@@ -42,7 +47,32 @@ public class Teacher1Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        txt_ci.setText(SessionManager.getInstance().getCiUsuario());
+        txt_nombre.setText(SessionManager.getInstance().getUsuarioDatos().getNombre() + " "+ SessionManager.getInstance().getUsuarioDatos().getApellido()); 
+        
         // TODO
     }    
+
+    @FXML
+    private void casosEnviados(ActionEvent event) {
+    }
+
+    @FXML
+    private void casoNuevo(ActionEvent event) {
+    }
+
+    @FXML
+    private void orientaciones(ActionEvent event) {
+    }
+
+    @FXML
+    private void configurar(ActionEvent event) throws IOException {
+        ControladorUtils.abrirVentana("configurarCuenta.fxml", "Configuración de cuenta", bt_configurar);
+        
+    }
+
+    @FXML
+    private void logout(ActionEvent event) {
+    }
     
 }

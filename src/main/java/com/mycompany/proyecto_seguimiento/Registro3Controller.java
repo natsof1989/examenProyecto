@@ -47,7 +47,7 @@ public class Registro3Controller implements Initializable {
         
         // 2. Validar que coincidan
         if (!password.equals(confirmacion)) {
-            ControladorUtils.mostrarAlerta("Error", "Las contraseñas no coinciden");
+            ControladorUtils.mostrarAlertaChill("Error", "Las contraseñas no coinciden");
             txt_password.requestFocus();
             return;
         }
@@ -71,7 +71,7 @@ public class Registro3Controller implements Initializable {
             boolean registroExitoso = completarRegistroEnBD();
             
             if (registroExitoso) {
-                ControladorUtils.mostrarAlerta("Éxito", "Registro completado correctamente");
+                ControladorUtils.mostrarAlertaChill("Éxito", "Registro completado correctamente");
                 limpiarCampos();
                 ControladorUtils.abrirVentana("inicioSesion.fxml", "Inicio de Sesión", btn_registro);
             } else {

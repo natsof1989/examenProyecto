@@ -2,6 +2,7 @@ package com.mycompany.proyecto_seguimiento.clases;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputControl;
 import javafx.stage.Stage;
 
@@ -35,11 +38,36 @@ public class ControladorUtils {
         alert.showAndWait();
     }
 
-    public static void mostrarError(String mensaje, Exception ex, Class<?> claseOrigen) {
-        Logger.getLogger(claseOrigen.getName()).log(Level.SEVERE, mensaje, ex);
-        mostrarAlerta("Error", mensaje);
+    public static void mostrarError(String titulo, String mensaje, Exception ex) {
+        // Log del error
+        System.err.println("ERROR [" + titulo + "]: " + mensaje);
+        if (ex != null) {
+            ex.printStackTrace();
+        }
+
+        // Mostrar alerta
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+}
+    // En tu clase ControladorUtils
+    public static boolean mostrarConfirmacion(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+
+        // Personalizar botones (opcional)
+        ButtonType buttonTypeYes = new ButtonType("Sí", ButtonBar.ButtonData.YES);
+        ButtonType buttonTypeNo = new ButtonType("No", ButtonBar.ButtonData.NO);
+        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+        // Mostrar diálogo y esperar respuesta
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == buttonTypeYes;
     }
-  
 
     // Retorna true si alguno de los campos está vacío (trim para ignorar espacios)
     public static boolean hayCamposVacios(TextInputControl... campos) {
