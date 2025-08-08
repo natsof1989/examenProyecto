@@ -50,6 +50,8 @@ public class RegistroController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.usuarioDao = new UsuarioDAO(dbConexion.getConnection());
+        
+        
         // TODO
     }    
 
@@ -59,27 +61,37 @@ public class RegistroController implements Initializable {
             ControladorUtils.mostrarAlerta("Error", "Todos los campos son obligatorios"); 
             return;
         }
+
         String correo = txt_correo.getText(); 
         String cedula = txt_CI.getText(); 
-        
-        try 
-        {
+
+        try {
+            // 1. Verificar si está en lista blanca
             if (!usuarioDao.existeCiCorreo(cedula, correo)) {
-                ControladorUtils.mostrarAlerta("Error", "Credenciales incorrectas");
+                ControladorUtils.mostrarAlerta("Error", "Credenciales incorrectas o no está en lista blanca");
                 txt_CI.setText("");
                 txt_correo.setText(""); 
                 return;
             }
+
+            // 2. Verificar si existe registro COMPLETO
+            if (usuarioDao.existeRegistroCompleto(cedula)) {
+                ControladorUtils.mostrarAlerta("Aviso", "Ya existe un registro completo. Será redirigido al login");
+                ControladorUtils.abrirVentana("inicioSesion.fxml", "Login", btn_verificacion);
+                return;
+            }
+
+            
+           
+            // 4. Continuar con el registro
             session.setCiUsuario(cedula);
             session.setCorreoUsuario(correo);
             ControladorUtils.abrirVentana("registro2.fxml", "Registro", btn_verificacion);
-            
-            
-        } catch (SQLException ex){
-            ControladorUtils.mostrarError("Error durante la verificacion", ex, getClass());
+
+        } catch (SQLException ex) {
+            ControladorUtils.mostrarError("Error de verificación", "Ocurrió un error al verificar los datos", ex);
+
         }
-        
-        
     }
 
     @FXML

@@ -126,3 +126,24 @@
     -fx-background-color: #1565c0;
     -fx-cursor: hand;
 }
+
+/* Estilo para el VBox contenedor */
+#contenedorRoles {
+    -fx-spacing: 20px; /* Espacio entre botones */
+    -fx-padding: 20px; /* Margen interno */
+    -fx-alignment: center; /* Centrar elementos */
+}
+
+/* Estilo para los botones dentro del VBox */
+#contenedorRoles .button {
+    -fx-pref-width: 200px; /* Ancho uniforme */
+    -fx-pref-height: 40px; /* Altura uniforme */
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+
+/* Efecto hover para los botones */
+#contenedorRoles .button:hover {
+    -fx-background-color: #e0e0e0;
+}

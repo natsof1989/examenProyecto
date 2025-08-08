@@ -2,12 +2,16 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.mycompany.proyecto_seguimiento.SeleccionRolController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.SeleccionRolController">
    <children>
-      <VBox fx:id="contenedorRoles" layoutX="129.0" layoutY="100.0" prefHeight="200.0" prefWidth="324.0" />
-      <Label layoutX="187.0" layoutY="71.0" styleClass="titulo-principal" text="Seleccione su rol" />
+      <Pane layoutX="52.0" layoutY="49.0" prefHeight="302.0" prefWidth="491.0" styleClass="panel-contenedor">
+         <children>
+            <Label layoutX="171.0" layoutY="46.0" styleClass="titulo-principal" text="Elija su rol" />
+            <VBox fx:id="contenedorRoles" layoutX="58.0" layoutY="75.0" prefHeight="200.0" prefWidth="368.0" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

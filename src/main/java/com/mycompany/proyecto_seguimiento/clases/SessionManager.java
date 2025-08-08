@@ -1,5 +1,6 @@
 package com.mycompany.proyecto_seguimiento.clases;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SessionManager {
@@ -17,6 +18,17 @@ public class SessionManager {
     private String telefono;
     private String passwordTemporal;
     private boolean registroEnProgreso = false;
+    private UsuarioDatos usuarioDatos; 
+
+    public UsuarioDatos getUsuarioDatos() {
+        return usuarioDatos;
+    }
+
+    public void setUsuarioDatos(UsuarioDatos usuarioDatos) {
+        this.usuarioDatos = usuarioDatos;
+    }
+
+    
 
     private SessionManager() {}
 
@@ -104,4 +116,6 @@ public class SessionManager {
         this.passwordTemporal = null;
         this.registroEnProgreso = false;
     }
+    
+
 }
