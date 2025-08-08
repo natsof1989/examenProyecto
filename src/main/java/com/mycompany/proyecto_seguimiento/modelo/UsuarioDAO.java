@@ -19,7 +19,7 @@ public class UsuarioDAO {
         this.conexion = conexion;
     }
 
-    /** 1) Verifica si existe CI en profesor, equipo_tecnico o tutor */
+    /** 1) Verifica si existe CI en profesor o equipo_tecnico */
     public boolean existeCI(String ci) throws SQLException {
         String sql = "SELECT 1 FROM profesor WHERE CI = ? UNION ALL " +
                      "SELECT 1 FROM equipo_tecnico WHERE CI = ? LIMIT 1";
@@ -30,7 +30,7 @@ public class UsuarioDAO {
         }
     }
 
-    /** 2) Verifica si existe email en cualquiera de las tres tablas */
+    /** 2) Verifica si existe email en cualquiera de las dos tablas */
     public boolean existeEmail(String email) throws SQLException{
         String sql = "SELECT 1 FROM profesor WHERE email = ? UNION ALL " +
                      "SELECT 1 FROM equipo_tecnico WHERE email = ? LIMIT 1";
@@ -66,7 +66,7 @@ public class UsuarioDAO {
         return Optional.empty();
     }
     
-    /** 4) Busca usuarios por fragmento de nombre en las tres tablas */
+    /** 4) Busca usuarios por fragmento de nombre en las dos tablas */
     public List<Usuario> buscarUsuariosPorNombre(String nombreParcial) throws SQLException {
         String sql = "SELECT CI, nombre, apellido, telefono, email, password, 'PROFESOR' AS rol FROM profesor WHERE nombre LIKE ? " +
                      "UNION ALL " +
@@ -99,7 +99,7 @@ public class UsuarioDAO {
         return lista;
     }
     
-    /** 6) Cuenta el total de usuarios entre las tres tablas */
+    /** 6) Cuenta el total de usuarios entre las dos tablas */
     public int contarUsuarios() throws SQLException {
         String sql = "SELECT (SELECT COUNT(*) FROM profesor) + (SELECT COUNT(*) FROM equipo_tecnico) AS total";
         try (PreparedStatement stmt = conexion.prepareStatement(sql);
