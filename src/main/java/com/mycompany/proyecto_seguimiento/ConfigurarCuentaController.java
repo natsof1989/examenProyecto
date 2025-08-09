@@ -102,7 +102,8 @@ private void eliminar(ActionEvent event) throws SQLException, IOException {
             );
             
             // Redirigir
-            ControladorUtils.abrirVentana("inicioSesion.fxml", "Inicio de Sesión", btn_eliminar);
+            
+            ControladorUtils.cambiarFormulario(event, "/com/mycompany/proyecto_seguimiento/inicioSesion.fxml", "Inicio Sesión");
             
         } catch (SQLException ex) {
             ControladorUtils.mostrarError(
@@ -211,12 +212,13 @@ private void eliminar(ActionEvent event) throws SQLException, IOException {
 
     @FXML
     private void salir(ActionEvent event) throws IOException {
-        ControladorUtils.abrirVentana("teacher1.fxml", "Pagina del Profesor", btn_salir); 
+        ControladorUtils.cambiarFormulario(event, "/com/mycompany/proyecto_seguimiento/teacher1.fxml", "Página del docente");
+        
     }
 
     @FXML
     private void cambiarPassword(ActionEvent event) throws IOException {
-        ControladorUtils.abrirVentana("recuperarAcceso.fxml", "Cambiar contraseña", btn_password);
+        ControladorUtils.cambiarFormulario(event, "/com/mycompany/proyecto_seguimiento/recuperarAcceso.fxml", "Verificar cuenta");
     }
     
 }

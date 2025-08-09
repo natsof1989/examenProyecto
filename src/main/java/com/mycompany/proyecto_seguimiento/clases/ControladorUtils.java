@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -16,16 +17,32 @@ import javafx.scene.control.TextInputControl;
 import javafx.stage.Stage;
 
 public class ControladorUtils {
-
-    public static void abrirVentana(String fxml, String titulo, Node nodoCualquiera) throws IOException {
-        FXMLLoader loader = new FXMLLoader(ControladorUtils.class.getResource("/com/mycompany/proyecto_seguimiento/" + fxml));
+    // Para uso directo con nodos contenedores
+    public static void cambiarFormularioDesdeNodo(Node nodoOrigen, String fxmlPath) throws IOException {
+        FXMLLoader loader = new FXMLLoader(ControladorUtils.class.getResource(fxmlPath));
         Parent root = loader.load();
-
-        Stage stage = (Stage) nodoCualquiera.getScene().getWindow();
+        Stage stage = (Stage) nodoOrigen.getScene().getWindow();
         stage.setScene(new Scene(root));
-        stage.setTitle(titulo);
         stage.centerOnScreen();
     }
+
+   public static void cambiarFormulario(ActionEvent event, String fxmlPath, String titulo) throws IOException {
+    FXMLLoader loader = new FXMLLoader(ControladorUtils.class.getResource(fxmlPath));
+    Parent root = loader.load();
+    
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    Scene scene = new Scene(root);
+    
+    stage.setScene(scene);
+    stage.setTitle(titulo); // Establece el nuevo título
+    stage.centerOnScreen();
+    
+    // Opcional: Mantener tamaño actual
+    double currentWidth = stage.getWidth();
+    double currentHeight = stage.getHeight();
+    stage.setMinWidth(currentWidth);
+    stage.setMinHeight(currentHeight);
+}
 
     public static void mostrarAlerta(String titulo, String mensaje) {
         new Alert(Alert.AlertType.ERROR, mensaje).showAndWait();
@@ -95,7 +112,7 @@ public class ControladorUtils {
         switch(tipo.toUpperCase()) {
             case "CI":
                 // Validar cédula uruguaya (8 dígitos)
-                return textoLimpio.length() == 8;
+                return textoLimpio.length() == 7;
                 
             case "TEL":
                 // Validar teléfono uruguayo (8 o 9 dígitos)
