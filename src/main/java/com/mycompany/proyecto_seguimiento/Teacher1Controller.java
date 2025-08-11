@@ -59,6 +59,7 @@ public class Teacher1Controller implements Initializable {
 
     @FXML
     private void casoNuevo(ActionEvent event) {
+        
     }
 
     @FXML
@@ -73,7 +74,8 @@ public class Teacher1Controller implements Initializable {
     }
 
     @FXML
-    private void logout(ActionEvent event) {
+    private void logout(ActionEvent event) throws IOException {
+        ControladorUtils.cambiarFormulario(event, "/com/mycompany/proyecto_seguimiento/inicioSesion.fxml", "Inicio de sesión");
     }
     
 }
