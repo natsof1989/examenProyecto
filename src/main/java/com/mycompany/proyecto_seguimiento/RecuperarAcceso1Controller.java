@@ -4,8 +4,11 @@
  */
 package com.mycompany.proyecto_seguimiento;
 
+import com.mycompany.proyecto_seguimiento.clases.ControladorUtils;
+import com.mycompany.proyecto_seguimiento.clases.SessionManager;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,7 +17,7 @@ import javafx.scene.control.TextField;
 /**
  * FXML Controller class
  *
- * @author natha
+ * @author natha y mauri
  */
 public class RecuperarAcceso1Controller implements Initializable {
 
@@ -51,16 +54,27 @@ public class RecuperarAcceso1Controller implements Initializable {
     private void configurarCamposCodigo() {
     TextField[] campos = {digit1, digit2, digit3, digit4, digit5, digit6};
 
-    for (int i = 0; i < campos.length; i++) {
-        final int index = i;
-        campos[i].textProperty().addListener((obs, oldText, newText) -> {
-            if (newText.length() > 1)
-                campos[index].setText(newText.substring(0, 1));
-            if (!newText.isEmpty() && index < campos.length - 1)
-                campos[index + 1].requestFocus();
-        });
-    }
-}
+        for (int i = 0; i < campos.length; i++) {
+            final int index = i;
+            campos[i].textProperty().addListener((obs, oldText, newText) -> {
+                if (newText.length() > 1)
+                    campos[index].setText(newText.substring(0, 1));
+                if (!newText.isEmpty() && index < campos.length - 1)
+                    campos[index + 1].requestFocus();
+            });
+        }
+    }   
+    @FXML
+    private void verificarCodigo(ActionEvent event) {
+        String codigoIngresado = digit1.getText() + digit2.getText() + digit3.getText()
+                                + digit4.getText() + digit5.getText() + digit6.getText();
 
-    
+        if (codigoIngresado.equals(SessionManager.getInstance().getCodigoVerificacion())) {
+            ControladorUtils.mostrarAlertaChill("Correcto", "Código verificado");
+            // Continuar con el cambio de contraseña
+        } else {
+            ControladorUtils.mostrarAlerta("Error", "Código incorrecto");
+        }
+    }
+
 }

@@ -20,6 +20,7 @@ public class SessionManager {
     private boolean registroEnProgreso = false;
     private UsuarioDatos usuarioDatos; 
 
+    private String codigoVerificacion; // Nuevo campo del mauri
     public UsuarioDatos getUsuarioDatos() {
         return usuarioDatos;
     }
@@ -104,6 +105,15 @@ public class SessionManager {
         this.registroEnProgreso = registroEnProgreso; 
     }
 
+    // Getter y Setter para el código de verificación
+    public String getCodigoVerificacion() {
+        return codigoVerificacion;
+    }
+
+    public void setCodigoVerificacion(String codigoVerificacion) {
+        this.codigoVerificacion = codigoVerificacion;
+    }
+    
     // Método limpiarSesion modificado
     public void limpiarSesion() {
         this.ciUsuario = null;
