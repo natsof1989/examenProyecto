@@ -29,10 +29,10 @@
                </font>
             </Label>
             <Label layoutX="46.0" layoutY="123.0" styleClass="label-formulario" text="Número de cédula:" />
-            <TextField fx:id="txt_ci" disable="true" layoutX="49.0" layoutY="152.0" prefHeight="36.0" prefWidth="297.0" styleClass="campo-texto" />
+            <TextField fx:id="txt_ci" layoutX="49.0" layoutY="152.0" prefHeight="36.0" prefWidth="297.0" styleClass="campo-texto" />
             <Label layoutX="46.0" layoutY="201.0" styleClass="label-formulario" text="Correo electŕonico:" />
-            <TextField fx:id="txt_correo" disable="true" layoutX="49.0" layoutY="232.0" prefHeight="36.0" prefWidth="306.0" styleClass="campo-texto" />
-            <Button layoutX="99.0" layoutY="352.0" mnemonicParsing="false" styleClass="boton-azul" text="Enviar código de verificación" />
+            <TextField fx:id="txt_correo" layoutX="49.0" layoutY="232.0" prefHeight="36.0" prefWidth="306.0" styleClass="campo-texto" />
+            <Button layoutX="99.0" layoutY="352.0" mnemonicParsing="false" onAction="#enviarCodigo" styleClass="boton-azul" text="Enviar código de verificación" />
          </children></Pane>
    </children>
 </AnchorPane>

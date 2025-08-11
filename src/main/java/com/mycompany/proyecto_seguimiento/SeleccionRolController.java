@@ -26,7 +26,12 @@ public class SeleccionRolController {
         
         if (roles == null || roles.isEmpty()) {
             ControladorUtils.mostrarAlerta("Error", "No se encontraron roles asignados");
-            ControladorUtils.abrirVentana("inicioSesion.fxml", "Iniciar Sesión", contenedorRoles);
+            try {
+                ControladorUtils.cambiarFormularioDesdeNodo(contenedorRoles, "/com/empresa/proyecto/inicioSesion.fxml");
+            } catch (IOException ex) {
+                ControladorUtils.mostrarError("Error", "No se pudo cargar la vista", ex);
+            }
+            
             return;
         }
         
@@ -79,24 +84,32 @@ public class SeleccionRolController {
     private void redirigirSegunRol(String rol) throws IOException {
         try {
             String archivoFxml = obtenerArchivoFxml(rol);
-            ControladorUtils.abrirVentana(archivoFxml, "Panel de " + rol, contenedorRoles);
+            try {
+                ControladorUtils.cambiarFormularioDesdeNodo(contenedorRoles, archivoFxml);
+            } catch (IOException ex) {
+                ControladorUtils.mostrarError("Error", "No se pudo cargar la vista", ex);
+            }
         } catch (Exception e) {
             ControladorUtils.mostrarAlerta("Error", "Ocurrión un error al redirigir");
-            
-            ControladorUtils.abrirVentana("inicioSesion.fxml", "Iniciar Sesión", contenedorRoles);
+            try {
+                ControladorUtils.cambiarFormularioDesdeNodo(contenedorRoles, "/com/empresa/proyecto/inicioSesion.fxml");
+            } catch (IOException ex) {
+                ControladorUtils.mostrarError("Error", "No se pudo cargar la vista", ex);
+            }
+           
         }
     }
     
     private String obtenerArchivoFxml(String rol) {
         switch(rol) {
             case "PROFESOR":
-                return "teacher1.fxml";
+                return "/com/mycompany/proyecto_seguimiento/teacher1.fxml";
             case "EQUIPO_TECNICO":
-                return "EquipoTecnicoDashboard.fxml";
+                return "/com/mycompany/proyecto_seguimiento/equipo_tecnico.fxml";
             case "ADMINISTRADOR":
-                return "AdminDashboard.fxml";
+                return "/com/mycompany/proyecto_seguimiento/admi.fxml";
             default:
-                return "inicioSesion.fxml"; // Redirigir a login si el rol no es reconocido
+                return "/com/mycompany/proyecto_seguimiento/inicioSesion.fxml"; // Redirigir a login si el rol no es reconocido
         }
     }
 }

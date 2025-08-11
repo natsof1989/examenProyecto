@@ -64,6 +64,10 @@ public class RegistroController implements Initializable {
 
         String correo = txt_correo.getText(); 
         String cedula = txt_CI.getText(); 
+        if(!ControladorUtils.validarNumero(cedula, "CI")){
+            ControladorUtils.mostrarAlerta("Error", "Introducción del número de cédula erronea"); 
+            return; 
+        }
 
         try {
             // 1. Verificar si está en lista blanca
@@ -77,7 +81,8 @@ public class RegistroController implements Initializable {
             // 2. Verificar si existe registro COMPLETO
             if (usuarioDao.existeRegistroCompleto(cedula)) {
                 ControladorUtils.mostrarAlerta("Aviso", "Ya existe un registro completo. Será redirigido al login");
-                ControladorUtils.abrirVentana("inicioSesion.fxml", "Login", btn_verificacion);
+                ControladorUtils.cambiarFormulario(event, "/com/mycompany/proyecto_seguimiento/inicioSesion.fxml", "Inicio Sesión");
+                
                 return;
             }
 
@@ -86,7 +91,8 @@ public class RegistroController implements Initializable {
             // 4. Continuar con el registro
             session.setCiUsuario(cedula);
             session.setCorreoUsuario(correo);
-            ControladorUtils.abrirVentana("registro2.fxml", "Registro", btn_verificacion);
+            ControladorUtils.cambiarFormulario(event, "/com/mycompany/proyecto_seguimiento/registro2.fxml", "Complete sus datos");
+            
 
         } catch (SQLException ex) {
             ControladorUtils.mostrarError("Error de verificación", "Ocurrió un error al verificar los datos", ex);
@@ -96,7 +102,8 @@ public class RegistroController implements Initializable {
 
     @FXML
     private void inicaSesion(ActionEvent event) throws IOException {
-        ControladorUtils.abrirVentana("inicioSesion.fxml", "Iniciar sesión", link1); 
+        ControladorUtils.cambiarFormulario(event, "/com/mycompany/proyecto_seguimiento/inicioSesion.fxml", "Inicio Sesión");
+        
     }
      
     

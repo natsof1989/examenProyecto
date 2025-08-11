@@ -67,7 +67,8 @@ public class Teacher1Controller implements Initializable {
 
     @FXML
     private void configurar(ActionEvent event) throws IOException {
-        ControladorUtils.abrirVentana("configurarCuenta.fxml", "Configuración de cuenta", bt_configurar);
+        ControladorUtils.cambiarFormulario(event, "/com/mycompany/proyecto_seguimiento/configurarCuenta.fxml", "Configuración de cuenta");
+        
         
     }
 

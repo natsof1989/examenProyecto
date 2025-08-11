@@ -73,7 +73,8 @@ public class Registro3Controller implements Initializable {
             if (registroExitoso) {
                 ControladorUtils.mostrarAlertaChill("Éxito", "Registro completado correctamente");
                 limpiarCampos();
-                ControladorUtils.abrirVentana("inicioSesion.fxml", "Inicio de Sesión", btn_registro);
+                ControladorUtils.cambiarFormulario(event,"/com/mycompany/proyecto_seguimiento/inicioSesion.fxml" , "Inicio Sesión");
+                
             } else {
                 ControladorUtils.mostrarAlerta("Error", "No se pudo completar el registro");
             }

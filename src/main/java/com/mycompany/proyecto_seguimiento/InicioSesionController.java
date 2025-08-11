@@ -49,7 +49,6 @@ public class InicioSesionController implements Initializable {
     }
 
     @FXML
-    
     private void iniciarSesion(ActionEvent event) {
         if (ControladorUtils.hayCamposVacios(txtCI, txtContrasenhia)) {
             ControladorUtils.mostrarAlerta("Error", "Todos los campos son obligatorios");
@@ -59,56 +58,83 @@ public class InicioSesionController implements Initializable {
         
         String ci = txtCI.getText().trim();
         String contrasenia = txtContrasenhia.getText();
-
+        if(!ControladorUtils.validarNumero(ci, "CI")){
+            ControladorUtils.mostrarAlerta("Error", "Introducción del número de cédula erronea"); 
+            return; 
+        }
         try {
-            if(!usuarioDao.existeRegistroCompleto(ci)){
-                ControladorUtils.mostrarAlertaChill("Aviso", "Usted aún no se ha registrado. \nCree su cuenta antes de inciar sesión.");
+            if(!usuarioDao.existeCI(ci)){
+                ControladorUtils.mostrarAlerta("Error", "El número de cédula no está registrado");
+                return;
+            }
+             if(!usuarioDao.existeRegistroCompleto(ci)){
+                ControladorUtils.mostrarAlertaChill("Aviso", "Usted aún no se ha registrado. \nCree su cuenta antes de iniciar sesión.");
                 txtCI.clear();
                 txtContrasenhia.clear();
                 return;
             }
+            // Validar credenciales
             if (!usuarioDao.validarCredenciales(ci, contrasenia)) {
-                ControladorUtils.mostrarAlerta("Error", "Credenciales incorrectas");
+                ControladorUtils.mostrarAlerta("Error", "Contraseña incorrecta");
                 return;
             }
+            // Validar registro completo
+           
+
             
 
+            // Establecer datos de sesión
             session.setCiUsuario(ci);
-            session.setRolesUsuario(usuarioDao.obtenerRoles(ci));
-            datos = usuarioDao.obtenerDatosUsuario(ci); 
+            session.setRolesUsuario(usuarioDao.obtenerRoles(ci)); 
+            datos = usuarioDao.obtenerDatosUsuario(ci);
             session.setUsuarioDatos(datos);
-           
 
             List<String> roles = session.getRolesUsuario();
 
+            // Manejo de redirección según roles
             if (roles.size() == 1) {
                 session.setRolSeleccionado(roles.get(0));
-                ControladorUtils.abrirVentana(
-                    roles.get(0).equals("PROFESOR") 
-                        ? "teacher.fxml" 
-                        : "EquipoTecnicoDashboard.fxml",
-                    "Panel Principal",
-                    btInicioSesion
-                );
+                
+                try {
+                    String fxmlPath = roles.get(0).equals("PROFESOR") 
+                        ? "/com/mycompany/proyecto_seguimiento/teacher.fxml" 
+                        : "/com/mycompany/proyecto_seguimiento/EquipoTecnicoDashboard.fxml";
+                    
+
+                    ControladorUtils.cambiarFormulario(event, fxmlPath, "Ventana");
+
+                } catch (IOException ex) {
+                    ControladorUtils.mostrarError("Error", "No se pudo cargar el panel principal", ex);
+                }
             } else if (roles.size() > 1) {
-                ControladorUtils.abrirVentana("SeleccionRol.fxml", "Seleccione su rol", btInicioSesion);
-            } else {
+                try {
+                    ControladorUtils.cambiarFormulario(
+                        event, 
+                        "/com/mycompany/proyecto_seguimiento/SeleccionRol.fxml", "Seleccion de rol"
+                    );
+                } catch (IOException ex) {
+                    ControladorUtils.mostrarError("Error", "No se pudo cargar la selección de roles", ex);
+                }
+            } 
+            else {
                 ControladorUtils.mostrarAlerta("Error", "Usuario sin roles asignados");
             }
 
-        } catch (SQLException | IOException ex) {
+        } catch (SQLException ex) {
             ControladorUtils.mostrarError("Error", "Ocurrió un error en el login", ex);
-
         }
     }
 
     @FXML
     private void registrarse(ActionEvent event) throws IOException {
-        ControladorUtils.abrirVentana("registro.fxml", "Registrese", link1); 
+        ControladorUtils.cambiarFormulario(event, "/com/mycompany/proyecto_seguimiento/registro.fxml", "Cree su cuenta para registrarse");
+        
     }
 
     @FXML
     private void recuperarAcceso(ActionEvent event) throws IOException {
-        ControladorUtils.abrirVentana("recuperarAcceso.fxml", "Recuperar Acceso", link2);
+        
+        ControladorUtils.cambiarFormulario(event, "/com/mycompany/proyecto_seguimiento/recuperarAcceso.fxml", "Verificación de cuenta");
+        
     }
 }

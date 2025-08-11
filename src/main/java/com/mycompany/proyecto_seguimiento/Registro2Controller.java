@@ -87,7 +87,8 @@ public class Registro2Controller implements Initializable {
         session.setNombre(nombre); 
         session.setApellido(apellido); 
         session.setTelefono(telefono);
-        ControladorUtils.abrirVentana("registro3.fxml", "Registro", btn_registrarse); 
+        ControladorUtils.cambiarFormulario(event, "/com/mycompany/proyecto_seguimiento/registro3.fxml", "Complete sus datos"); 
+        
     }
     
 }
