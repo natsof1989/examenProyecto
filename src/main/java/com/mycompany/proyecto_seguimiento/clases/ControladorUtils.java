@@ -151,42 +151,9 @@ public class ControladorUtils {
     }
     
     public static boolean validarCorreo(String email) {
-        if (email == null || email.isEmpty()) {
-            mostrarAlerta("Error", "El correo no puede estar vacío");
-            return false;
-        }
-
-        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        String emailRegex = "^[A-Za-z0-9+_.-]+@([A-Za-z0-9-]+\\.){2}[A-Za-z]{2,}$";
         if (!email.matches(emailRegex)) {
             mostrarAlerta("Error", "Formato de correo inválido");
-            return false;
-        }
-
-        conexion conector = new conexion();
-        try (Connection conn = conector.getConnection()) {
-            if (conn == null) {
-                mostrarAlerta("Error", "No se pudo conectar a la base de datos");
-                return false;
-            }
-            String sql = "SELECT COUNT(*) FROM ( " +
-                     "SELECT email FROM profesor WHERE email = ? " +
-                     "UNION " +
-                     "SELECT email FROM equipo_tecnico WHERE email = ? " +
-                     ") AS combined";
-            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setString(1, email);
-                stmt.setString(2, email);
-                ResultSet rs = stmt.executeQuery();
-                if (rs.next()) {
-                    int count = rs.getInt(1);
-                    if (count == 0) {
-                        mostrarAlerta("Error", "Este correo no está autorizado");
-                        return false;
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            mostrarAlerta("Error", "No se pudo validar el correo: " + e.getMessage());
             return false;
         }
 

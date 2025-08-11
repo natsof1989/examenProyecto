@@ -317,8 +317,8 @@ public class UsuarioDAO {
 
     // Método para eliminar cuenta (establece campos a NULL excepto CI y email)
     public boolean desactivarCuenta(String ci) throws SQLException {
-        String sqlProfesor = "UPDATE profesor SET nombre = NULL, apellido = NULL, nro_telefono = NULL, password = NULL WHERE CI = ?";
-        String sqlEquipo = "UPDATE equipo_tecnico SET nombre = NULL, apellido = NULL, nro_telefono = NULL, password = NULL WHERE CI = ?";
+        String sqlProfesor = "UPDATE profesor SET nombre = NULL, apellido = NULL, nro_telefono = NULL, password = '' WHERE CI = ?";
+        String sqlEquipo = "UPDATE equipo_tecnico SET nombre = NULL, apellido = NULL, nro_telefono = NULL, password = '' WHERE CI = ?";
 
         int filasProfesor = 0;
         int filasEquipo = 0;
