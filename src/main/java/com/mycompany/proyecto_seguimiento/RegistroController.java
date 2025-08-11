@@ -68,7 +68,12 @@ public class RegistroController implements Initializable {
             ControladorUtils.mostrarAlerta("Error", "Introducción del número de cédula erronea"); 
             return; 
         }
-
+        
+        //validación de correo del mauri
+        if (!ControladorUtils.validarCorreo(correo)) {
+            return; // Detenemos el registro
+        }
+        
         try {
             // 1. Verificar si está en lista blanca
             if (!usuarioDao.existeCiCorreo(cedula, correo)) {

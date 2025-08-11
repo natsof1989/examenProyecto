@@ -54,9 +54,13 @@ public class RecuperarAccesoController implements Initializable {
             ControladorUtils.mostrarAlerta("Error", "Introducción del número de cédula erronea"); 
             return; 
         }
-         //Aca se debe validar la entrada del correo
          
-         //Esta seria la validacion con consultas sql 
+        //Aca se debe validar la entrada del correo
+        //validación de correo del mauri
+        if (!ControladorUtils.validarCorreo(correo)) {
+            return; // Detenemos recuperación
+        } 
+        //Esta seria la validacion con consultas sql 
          try {
             // 1. Verificar si está en lista blanca
                 if (!usuarioDao.existeCiCorreo(cedula, correo)) {
@@ -88,6 +92,6 @@ public class RecuperarAccesoController implements Initializable {
 
             }
     }
-    
+
     
 }
