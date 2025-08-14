@@ -97,7 +97,7 @@ public class InicioSesionController implements Initializable {
                 
                 try {
                     String fxmlPath = roles.get(0).equals("PROFESOR") 
-                        ? "/com/mycompany/proyecto_seguimiento/teacher.fxml" 
+                        ? "/com/mycompany/proyecto_seguimiento/teacher1.fxml" 
                         : "/com/mycompany/proyecto_seguimiento/equipoTecnico.fxml";
                     
 
