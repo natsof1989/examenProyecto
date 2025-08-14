@@ -5,6 +5,7 @@
 package com.mycompany.proyecto_seguimiento;
 
 import com.mycompany.proyecto_seguimiento.clases.ControladorUtils;
+import com.mycompany.proyecto_seguimiento.clases.EmailUtils;
 import com.mycompany.proyecto_seguimiento.clases.SessionManager;
 import com.mycompany.proyecto_seguimiento.clases.conexion;
 import com.mycompany.proyecto_seguimiento.modelo.UsuarioDAO;
@@ -20,7 +21,7 @@ import javafx.scene.control.TextField;
 /**
  * FXML Controller class
  *
- * @author natha
+ * @author natha y mauri
  */
 
 public class RecuperarAccesoController implements Initializable {
@@ -54,9 +55,13 @@ public class RecuperarAccesoController implements Initializable {
             ControladorUtils.mostrarAlerta("Error", "Introducción del número de cédula erronea"); 
             return; 
         }
-         //Aca se debe validar la entrada del correo
          
-         //Esta seria la validacion con consultas sql 
+        //Aca se debe validar la entrada del correo
+        //validación de correo del mauri
+        /*if (!ControladorUtils.validarCorreo(correo)) {
+            return; // Detenemos recuperación
+        }*/ 
+        //Esta seria la validacion con consultas sql 
          try {
             // 1. Verificar si está en lista blanca
                 if (!usuarioDao.existeCiCorreo(cedula, correo)) {
@@ -70,6 +75,21 @@ public class RecuperarAccesoController implements Initializable {
                 if (usuarioDao.existeRegistroCompleto(cedula)) {
                     //Aca se debe programar el envio del codigo de verificacion
                     ControladorUtils.cambiarFormulario(event, "/com/mycompany/proyecto_seguimiento/recuperarAcceso1.fxml", "Inicio Sesión");
+                    
+                    // Generar código aleatorio de 6 dígitos
+                    String codigoVerificacion = String.format("%06d", (int)(Math.random() * 1000000));
+
+                    // Guardarlo en la sesión para verificar después
+                    session.setCodigoVerificacion(codigoVerificacion);
+
+                    // Enviar el correo
+                    try {
+                        EmailUtils.enviarCodigo(correo, codigoVerificacion);
+                        ControladorUtils.mostrarAlertaChill("Código enviado", "Revisa tu correo para continuar");
+                    } catch (Exception e) {
+                        ControladorUtils.mostrarError("Error de envío", "No se pudo enviar el código", e);
+                        return;
+                    }
 
                     return;
                 } else {
@@ -88,6 +108,6 @@ public class RecuperarAccesoController implements Initializable {
 
             }
     }
-    
+
     
 }

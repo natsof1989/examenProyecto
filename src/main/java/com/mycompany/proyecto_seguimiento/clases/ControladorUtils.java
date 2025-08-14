@@ -1,6 +1,12 @@
 package com.mycompany.proyecto_seguimiento.clases;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ConnectionBuilder;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -144,7 +150,13 @@ public class ControladorUtils {
         return true;
     }
     
+    public static boolean validarCorreo(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@([A-Za-z0-9-]+\\.){2}[A-Za-z]{2,}$";
+        if (!email.matches(emailRegex)) {
+            mostrarAlerta("Error", "Formato de correo inválido");
+            return false;
+        }
 
+        return true;
+    }
 }
-
-

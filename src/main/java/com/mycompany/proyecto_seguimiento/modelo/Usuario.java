@@ -6,7 +6,7 @@ package com.mycompany.proyecto_seguimiento.modelo;
 
 /**
  *
- * @author natha
+ * @author natha y mauri
  */
 public class Usuario {
     private int cedula; 
@@ -15,14 +15,16 @@ public class Usuario {
     private String email; 
     private String nro_telefono; 
     private String password_hash; 
+    private String rol;
 
-    public Usuario(int cedula, String nombre, String apellido, String email, String nro_telefono, String password_hash) {
+    public Usuario(int cedula, String nombre, String apellido, String email, String nro_telefono, String password_hash, String rol) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.nro_telefono = nro_telefono;
         this.password_hash = password_hash;
+        this.rol = rol;
     }
 
     public int getCedula() {
@@ -69,10 +71,16 @@ public class Usuario {
         return password_hash;
     }
 
-    public void setPassword(String password_hash) {
+    //ajusté el nombre del setter para que coincida
+    public void setPassword_hash(String password_hash) {
         this.password_hash = password_hash;
     }
     
+    public String getRol() {
+        return rol;
+    }
     
-    
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
 }
