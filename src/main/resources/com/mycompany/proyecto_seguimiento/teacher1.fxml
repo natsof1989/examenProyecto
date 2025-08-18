@@ -2,51 +2,63 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="552.0" prefWidth="575.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.Teacher1Controller">
-   <children>
-      <Pane layoutX="66.0" layoutY="49.0" prefHeight="461.0" prefWidth="425.0" styleClass="panel-contenedor" stylesheets="@styles.css">
-         <children>
-            <Label fx:id="txt_bienvenida" layoutX="88.0" layoutY="36.0" prefHeight="45.0" prefWidth="302.0" styleClass="titulo-principal" text="Bienvenido, Profesor" textAlignment="CENTER">
-               <font>
-                  <Font name="Segoe UI Semibold" size="29.0" />
-               </font>
-            </Label>
-            <Button fx:id="bt_verCaso" layoutX="89.0" layoutY="186.0" mnemonicParsing="false" onAction="#casosEnviados" prefHeight="25.0" prefWidth="257.0" styleClass="boton-azul" text="📄 Ver mis casos enviados">
-               <font>
-                  <Font name="Segoe UI Semibold" size="12.0" />
-               </font>
+<StackPane xmlns="http://javafx.com/javafx/23.0.1"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.mycompany.proyecto_seguimiento.Teacher1Controller"
+           prefWidth="575.0" prefHeight="552.0"
+           stylesheets="@styles.css">
+    <!-- Fondo azul degradado se puede hacer en CSS del StackPane -->
+    <VBox alignment="CENTER" spacing="20" styleClass="panel-contenedor" maxWidth="425" maxHeight="461">
+        <Label fx:id="txt_bienvenida" styleClass="titulo-principal" text="Bienvenido">
+            <font>
+                <Font name="Segoe UI Semibold" size="29.0" />
+            </font>
+        </Label>
+        <VBox spacing="3" alignment="CENTER_LEFT">
+            <HBox spacing="5">
+                <Text styleClass="subtitulo" text="👤 Nombre:" />
+                <Text fx:id="txt_nombre" styleClass="subtitulo" />
+            </HBox>
+            <HBox spacing="5">
+                <Text styleClass="subtitulo" text="🎓 Especialidad :" />
+                <Text fx:id="txt_especialidad" styleClass="subtitulo" />
+            </HBox>
+            <HBox spacing="5">
+                <Text styleClass="subtitulo" text="📄 CI:" />
+                <Text fx:id="txt_ci" styleClass="subtitulo" />
+            </HBox>
+        </VBox>
+        <VBox spacing="15" alignment="CENTER">
+            <Button fx:id="bt_verCaso" onAction="#casosEnviados" prefHeight="25.0" prefWidth="257.0" styleClass="boton-azul" text="📄 Ver mis casos enviados">
+                <font>
+                    <Font name="Segoe UI Semibold" size="12.0" />
+                </font>
             </Button>
-            <Button fx:id="bt_casoNew" layoutX="89.0" layoutY="238.0" mnemonicParsing="false" onAction="#casoNuevo" prefHeight="25.0" prefWidth="257.0" styleClass="boton-azul" text="➕ Enviar caso nuevo">
-               <font>
-                  <Font name="Segoe UI Semibold" size="12.0" />
-               </font>
+            <Button fx:id="bt_casoNew" onAction="#casoNuevo" prefHeight="25.0" prefWidth="257.0" styleClass="boton-azul" text="➕ Enviar caso nuevo">
+                <font>
+                    <Font name="Segoe UI Semibold" size="12.0" />
+                </font>
             </Button>
-            <Button fx:id="bt_orientaciones" layoutX="88.0" layoutY="289.0" mnemonicParsing="false" onAction="#orientaciones" prefHeight="25.0" prefWidth="257.0" styleClass="boton-azul" text="✉ Ver orientaciones enviadas">
-               <font>
-                  <Font name="Segoe UI Semibold" size="12.0" />
-               </font>
+            <Button fx:id="bt_orientaciones" onAction="#orientaciones" prefHeight="25.0" prefWidth="257.0" styleClass="boton-azul" text="✉ Ver orientaciones enviadas">
+                <font>
+                    <Font name="Segoe UI Semibold" size="12.0" />
+                </font>
             </Button>
-            <Button fx:id="bt_configurar" layoutX="88.0" layoutY="338.0" mnemonicParsing="false" onAction="#configurar" prefHeight="25.0" prefWidth="257.0" styleClass="boton-azul" text="⚙ Configurar cuenta">
-               <font>
-                  <Font name="Segoe UI Semibold" size="12.0" />
-               </font>
+            <Button fx:id="bt_configurar" onAction="#configurar" prefHeight="25.0" prefWidth="257.0" styleClass="boton-azul" text="⚙ Configurar cuenta">
+                <font>
+                    <Font name="Segoe UI Semibold" size="12.0" />
+                </font>
             </Button>
-            <Button fx:id="bt_cerrarSesion" layoutX="89.0" layoutY="388.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="257.0" styleClass="boton-azul" text="🔁 Cerrar sesión">
-               <font>
-                  <Font name="Segoe UI Semibold" size="12.0" />
-               </font>
+            <Button fx:id="bt_cerrarSesion" onAction="#logout" prefHeight="25.0" prefWidth="257.0" styleClass="boton-azul" text="🔁 Cerrar sesión">
+                <font>
+                    <Font name="Segoe UI Semibold" size="12.0" />
+                </font>
             </Button>
-            <Text layoutX="89.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitulo" text="👤 Nombre:" />
-            <Text layoutX="88.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitulo" text="🎓 Especialidad : " />
-            <Text layoutX="89.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitulo" text="📄 CI: " />
-            <Text fx:id="txt_nombre" layoutX="165.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitulo" wrappingWidth="103.13671875" />
-            <Text fx:id="txt_especialidad" layoutX="192.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitulo" wrappingWidth="103.13671875" />
-            <Text fx:id="txt_ci" layoutX="126.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitulo" wrappingWidth="103.13671875" />
-         </children></Pane>
-   </children>
-</AnchorPane>
+        </VBox>
+    </VBox>
+</StackPane>

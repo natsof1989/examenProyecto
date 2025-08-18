@@ -26,12 +26,7 @@ public class SeleccionRolController {
         
         if (roles == null || roles.isEmpty()) {
             ControladorUtils.mostrarAlerta("Error", "No se encontraron roles asignados");
-            try {
-                ControladorUtils.cambiarFormularioDesdeNodo(contenedorRoles, "/com/empresa/proyecto/inicioSesion.fxml");
-            } catch (IOException ex) {
-                ControladorUtils.mostrarError("Error", "No se pudo cargar la vista", ex);
-            }
-            
+            ControladorUtils.cambiarVista("inicioSesion");
             return;
         }
         
@@ -83,33 +78,27 @@ public class SeleccionRolController {
     
     private void redirigirSegunRol(String rol) throws IOException {
         try {
-            String archivoFxml = obtenerArchivoFxml(rol);
-            try {
-                ControladorUtils.cambiarFormularioDesdeNodo(contenedorRoles, archivoFxml);
-            } catch (IOException ex) {
-                ControladorUtils.mostrarError("Error", "No se pudo cargar la vista", ex);
-            }
+            String fxmlName = obtenerArchivoFxml(rol);
+            ControladorUtils.cambiarVista(fxmlName);
         } catch (Exception e) {
-            ControladorUtils.mostrarAlerta("Error", "Ocurrión un error al redirigir");
-            try {
-                ControladorUtils.cambiarFormularioDesdeNodo(contenedorRoles, "/com/empresa/proyecto/inicioSesion.fxml");
-            } catch (IOException ex) {
-                ControladorUtils.mostrarError("Error", "No se pudo cargar la vista", ex);
-            }
-           
+            ControladorUtils.mostrarAlerta("Error", "Ocurrió un error al redirigir");
+            ControladorUtils.cambiarVista("inicioSesion");
         }
     }
     
+    /**
+     * Devuelve el nombre del archivo FXML (sin extensión) correspondiente al rol.
+     */
     private String obtenerArchivoFxml(String rol) {
         switch(rol) {
             case "PROFESOR":
-                return "/com/mycompany/proyecto_seguimiento/teacher1.fxml";
+                return "teacher1";
             case "EQUIPO_TECNICO":
-                return "/com/mycompany/proyecto_seguimiento/equipo_tecnico.fxml";
+                return "equipo_tecnico";
             case "ADMINISTRADOR":
-                return "/com/mycompany/proyecto_seguimiento/admi.fxml";
+                return "admi";
             default:
-                return "/com/mycompany/proyecto_seguimiento/inicioSesion.fxml"; // Redirigir a login si el rol no es reconocido
+                return "inicioSesion"; // Redirigir a login si el rol no es reconocido
         }
     }
 }

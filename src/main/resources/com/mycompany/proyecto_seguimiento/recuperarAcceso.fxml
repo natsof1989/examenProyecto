@@ -5,34 +5,37 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="512.0" prefWidth="557.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.RecuperarAccesoController">
-   <children>
-      <Pane layoutX="58.0" layoutY="30.0" prefHeight="437.0" prefWidth="427.0" style="-fx-border-color: white;" styleClass="panel-contenedor" stylesheets="@styles.css">
-         <children>
-            <Label layoutX="80.0" layoutY="21.0" prefHeight="35.0" prefWidth="275.0" styleClass="titulo-principal" text="Verificación de cuenta">
-               <font>
-                  <Font name="Segoe UI Semibold" size="24.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="54.0" fitWidth="48.0" layoutX="190.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/security.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="36.0" layoutY="296.0" lineSpacing="1.0" prefHeight="39.0" prefWidth="403.0" styleClass="subtitulo" text="Se enviará un código de verificación a su email registrado." textAlignment="JUSTIFY" wrapText="true">
-               <font>
-                  <Font name="Segoe UI Semibold" size="13.0" />
-               </font>
-            </Label>
-            <Label layoutX="46.0" layoutY="123.0" styleClass="label-formulario" text="Número de cédula:" />
-            <TextField fx:id="txt_ci" layoutX="49.0" layoutY="152.0" prefHeight="36.0" prefWidth="297.0" styleClass="campo-texto" />
-            <Label layoutX="46.0" layoutY="201.0" styleClass="label-formulario" text="Correo electŕonico:" />
-            <TextField fx:id="txt_correo" layoutX="49.0" layoutY="232.0" prefHeight="36.0" prefWidth="306.0" styleClass="campo-texto" />
-            <Button layoutX="99.0" layoutY="352.0" mnemonicParsing="false" onAction="#enviarCodigo" styleClass="boton-azul" text="Enviar código de verificación" />
-         </children></Pane>
-   </children>
-</AnchorPane>
+<StackPane xmlns="http://javafx.com/javafx/23.0.1"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.mycompany.proyecto_seguimiento.RecuperarAccesoController"
+           prefHeight="512.0" prefWidth="557.0"
+           stylesheets="@styles.css">
+    <VBox alignment="CENTER" spacing="20" styleClass="panel-contenedor" maxWidth="427" maxHeight="437">
+        <Label styleClass="titulo-principal" text="Verificación de cuenta">
+            <font>
+                <Font name="Segoe UI Semibold" size="24.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="54.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@img/security.png" />
+            </image>
+        </ImageView>
+        <Label styleClass="subtitulo" text="Se enviará un código de verificación a su email registrado." textAlignment="JUSTIFY" wrapText="true">
+            <font>
+                <Font name="Segoe UI Semibold" size="13.0" />
+            </font>
+        </Label>
+        <VBox spacing="10" alignment="CENTER_LEFT" maxWidth="340">
+            <Label styleClass="label-formulario" text="Número de cédula:" />
+            <TextField fx:id="txt_ci" styleClass="campo-texto" />
+            <Label styleClass="label-formulario" text="Correo electrónico:" />
+            <TextField fx:id="txt_correo" styleClass="campo-texto" />
+        </VBox>
+        <Button mnemonicParsing="false" onAction="#enviarCodigo" styleClass="boton-azul" text="Enviar código de verificación" />
+    </VBox>
+</StackPane>

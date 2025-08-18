@@ -86,7 +86,7 @@ public class RegistroController implements Initializable {
             // 2. Verificar si existe registro COMPLETO
             if (usuarioDao.existeRegistroCompleto(cedula)) {
                 ControladorUtils.mostrarAlerta("Aviso", "Ya existe un registro completo. Será redirigido al login");
-                ControladorUtils.cambiarFormulario(event, "/com/mycompany/proyecto_seguimiento/inicioSesion.fxml", "Inicio Sesión");
+                ControladorUtils.cambiarVista("inicioSesion");
                 
                 return;
             }
@@ -96,7 +96,7 @@ public class RegistroController implements Initializable {
             // 4. Continuar con el registro
             session.setCiUsuario(cedula);
             session.setCorreoUsuario(correo);
-            ControladorUtils.cambiarFormulario(event, "/com/mycompany/proyecto_seguimiento/registro2.fxml", "Complete sus datos");
+            ControladorUtils.cambiarVista("registro2");
             
 
         } catch (SQLException ex) {
@@ -107,7 +107,7 @@ public class RegistroController implements Initializable {
 
     @FXML
     private void inicaSesion(ActionEvent event) throws IOException {
-        ControladorUtils.cambiarFormulario(event, "/com/mycompany/proyecto_seguimiento/inicioSesion.fxml", "Inicio Sesión");
+        ControladorUtils.cambiarVista("inicioSesion");
         
     }
      

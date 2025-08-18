@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package com.mycompany.proyecto_seguimiento;
 import com.mycompany.proyecto_seguimiento.clases.SessionManager;
 import com.mycompany.proyecto_seguimiento.clases.ControladorUtils;
@@ -16,11 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 
-/**
- * FXML Controller class
- *
- * @author natha
- */
 public class Teacher1Controller implements Initializable {
 
     @FXML
@@ -42,40 +33,38 @@ public class Teacher1Controller implements Initializable {
     @FXML
     private Button bt_cerrarSesion;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         txt_ci.setText(SessionManager.getInstance().getCiUsuario());
-        txt_nombre.setText(SessionManager.getInstance().getUsuarioDatos().getNombre() + " "+ SessionManager.getInstance().getUsuarioDatos().getApellido()); 
-        
+        txt_nombre.setText(SessionManager.getInstance().getUsuarioDatos().getNombre() + " " + SessionManager.getInstance().getUsuarioDatos().getApellido());
         // TODO
-    }    
+    }
 
     @FXML
     private void casosEnviados(ActionEvent event) {
+        // Implementa navegación si lo necesitas, ejemplo:
+        // ControladorUtils.cambiarVista("casosEnviados");
     }
 
     @FXML
     private void casoNuevo(ActionEvent event) {
-        
+        // Implementa navegación si lo necesitas, ejemplo:
+        // ControladorUtils.cambiarVista("casoNuevo");
     }
 
     @FXML
     private void orientaciones(ActionEvent event) {
+        // Implementa navegación si lo necesitas, ejemplo:
+        // ControladorUtils.cambiarVista("orientaciones");
     }
 
     @FXML
-    private void configurar(ActionEvent event) throws IOException {
-        ControladorUtils.cambiarFormulario(event, "/com/mycompany/proyecto_seguimiento/configurarCuenta.fxml", "Configuración de cuenta");
-        
-        
+    private void configurar(ActionEvent event) {
+        ControladorUtils.cambiarVista("configurarCuenta");
     }
 
     @FXML
-    private void logout(ActionEvent event) throws IOException {
-        ControladorUtils.cambiarFormulario(event, "/com/mycompany/proyecto_seguimiento/inicioSesion.fxml", "Inicio de sesión");
+    private void logout(ActionEvent event) {
+        ControladorUtils.cambiarVista("inicioSesion");
     }
-    
 }

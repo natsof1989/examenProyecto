@@ -74,7 +74,7 @@ public class RecuperarAccesoController implements Initializable {
                 // 2. Verificar si existe registro COMPLETO
                 if (usuarioDao.existeRegistroCompleto(cedula)) {
                     //Aca se debe programar el envio del codigo de verificacion
-                    ControladorUtils.cambiarFormulario(event, "/com/mycompany/proyecto_seguimiento/recuperarAcceso1.fxml", "Inicio Sesión");
+                    ControladorUtils.cambiarVista( "recuperarAcceso1");
                     
                     // Generar código aleatorio de 6 dígitos
                     String codigoVerificacion = String.format("%06d", (int)(Math.random() * 1000000));
@@ -99,7 +99,7 @@ public class RecuperarAccesoController implements Initializable {
                         //se guardan los datos en la clase singlenton
                         session.setCiUsuario(cedula);
                         session.setCorreoUsuario(correo); 
-                        ControladorUtils.cambiarFormulario(event, "/com/mycompany/proyecto_seguimiento/registro2.fxml", cedula);
+                        ControladorUtils.cambiarVista("registro2");
                     }
                 }
 

@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="609.0" prefWidth="675.0" styleClass="mainFxmlClass" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.Teacher3Controller">
+<AnchorPane id="AnchorPane" prefHeight="643.0" prefWidth="675.0" styleClass="mainFxmlClass" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.Teacher3Controller">
    <children>
-      <Pane layoutX="70.0" layoutY="34.0" prefHeight="536.0" prefWidth="544.0" styleClass="panel-contenedor">
+      <Pane layoutX="70.0" layoutY="34.0" prefHeight="551.0" prefWidth="544.0" styleClass="panel-contenedor">
          <children>
             <MenuButton fx:id="espe" layoutX="29.0" layoutY="100.0" mnemonicParsing="false" styleClass="combo-box" text="Especialidad">
               <items>

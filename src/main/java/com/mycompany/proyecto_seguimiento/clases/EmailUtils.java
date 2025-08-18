@@ -15,7 +15,7 @@ import javax.mail.internet.*;
 
 public class EmailUtils {
     public static void enviarCodigo(String destinatario, String codigo) {
-        final String remitente = "hayQueCrearElEmailSofi@gmail.com";
+        final String remitente = "ctncorreo@gmail.com";
         final String clave = "Despues te muestro cómo crear la contraseña, porque tiene su manera"; // Contraseña de aplicación
 
         Properties props = new Properties();

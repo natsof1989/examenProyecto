@@ -1,5 +1,6 @@
 package com.mycompany.proyecto_seguimiento.clases;
 
+import com.mycompany.proyecto_seguimiento.App;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ConnectionBuilder;
@@ -20,35 +21,19 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 public class ControladorUtils {
     // Para uso directo con nodos contenedores
-    public static void cambiarFormularioDesdeNodo(Node nodoOrigen, String fxmlPath) throws IOException {
-        FXMLLoader loader = new FXMLLoader(ControladorUtils.class.getResource(fxmlPath));
-        Parent root = loader.load();
-        Stage stage = (Stage) nodoOrigen.getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.centerOnScreen();
-    }
+    public static void cambiarVista(String fxmlName) {
+    try {
+        App.setRoot(fxmlName);
+        } catch (IOException e) {
+            mostrarError("Error", "No se pudo cambiar la vista", e);
+        }
 
-   public static void cambiarFormulario(ActionEvent event, String fxmlPath, String titulo) throws IOException {
-    FXMLLoader loader = new FXMLLoader(ControladorUtils.class.getResource(fxmlPath));
-    Parent root = loader.load();
-    
-    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    Scene scene = new Scene(root);
-    
-    stage.setScene(scene);
-    stage.setTitle(titulo); // Establece el nuevo título
-    stage.centerOnScreen();
-    
-    // Opcional: Mantener tamaño actual
-    double currentWidth = stage.getWidth();
-    double currentHeight = stage.getHeight();
-    stage.setMinWidth(currentWidth);
-    stage.setMinHeight(currentHeight);
-}
+    }
 
     public static void mostrarAlerta(String titulo, String mensaje) {
         new Alert(Alert.AlertType.ERROR, mensaje).showAndWait();
