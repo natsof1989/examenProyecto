@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
@@ -9,45 +10,52 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="643.0" prefWidth="675.0" styleClass="mainFxmlClass" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.Teacher3Controller">
-   <children>
-      <Pane layoutX="70.0" layoutY="34.0" prefHeight="551.0" prefWidth="544.0" styleClass="panel-contenedor">
-         <children>
-            <MenuButton fx:id="espe" layoutX="29.0" layoutY="100.0" mnemonicParsing="false" styleClass="combo-box" text="Especialidad">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Informática" />
-                <MenuItem mnemonicParsing="false" text="Electrónica" />
-                  <MenuItem mnemonicParsing="false" text="Química Industrial" />
-                  <MenuItem mnemonicParsing="false" text="Construcciones Civíles" />
-                  <MenuItem mnemonicParsing="false" text="Mecánica Automotriz" />
-                  <MenuItem mnemonicParsing="false" text="Electricidad" />
-                  <MenuItem mnemonicParsing="false" text="Electromecánica" />
-              </items>
-            </MenuButton>
-            <MenuButton fx:id="curso" layoutX="153.0" layoutY="101.0" mnemonicParsing="false" styleClass="combo-box" text="Curso">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Primer año" />
-                <MenuItem mnemonicParsing="false" text="Segundo año" />
-                  <MenuItem mnemonicParsing="false" text="Tercer año" />
-              </items>
-            </MenuButton>
-            <MenuButton fx:id="seccion" layoutX="243.0" layoutY="100.0" mnemonicParsing="false" styleClass="combo-box" text="Sección" textFill="#e10c0c">
-              <items>
-                <MenuItem mnemonicParsing="false" text="A" />
-                <MenuItem mnemonicParsing="false" text="B" />
-                  <MenuItem mnemonicParsing="false" text="C" />
-              </items>
-            </MenuButton>
-            <Label layoutX="198.0" layoutY="43.0" styleClass="subtitulo" text="Información del alumno" />
-            <Label layoutX="205.0" layoutY="14.0" prefHeight="29.0" prefWidth="149.0" styleClass="titulo-principal" text="Nuevo caso" />
-            <Button fx:id="btn_alumno" layoutX="372.0" layoutY="94.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="99.0" styleClass="boton-azul" text="Alumno" />
-            <Label layoutX="29.0" layoutY="150.0" styleClass="label-formulario" text="Nombre:" />
-            <Label layoutX="305.0" layoutY="149.0" styleClass="label-formulario" text="Apellido:" />
-            <Label layoutX="212.0" layoutY="190.0" styleClass="subtitulo" text="Describa el caso" />
-            <TextArea fx:id="txt_caso" layoutX="44.0" layoutY="215.0" prefHeight="234.0" prefWidth="451.0" styleClass="campo-texto" />
-            <Text fx:id="txt_nombre" layoutX="95.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-formulario" text="souigk" wrappingWidth="147.5126953125" />
-            <Text fx:id="txt_apellido" layoutX="372.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-formulario" text="kjhkb" wrappingWidth="147.5126953125" />
-         </children>
-      </Pane>
-   </children>
+<AnchorPane prefHeight="643.0" prefWidth="675.0" styleClass="mainFxmlClass" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.Teacher3Controller">
+    <children>
+        <Pane layoutX="70.0" layoutY="34.0" prefHeight="551.0" prefWidth="544.0" styleClass="panel-contenedor">
+            <children>
+                <MenuButton fx:id="espe" layoutX="29.0" layoutY="100.0" styleClass="combo-box" text="Especialidad">
+                    <items>
+                        <MenuItem text="Informática" />
+                        <MenuItem text="Electrónica" />
+                        <MenuItem text="Química Industrial" />
+                        <MenuItem text="Construcciones Civíles" />
+                        <MenuItem text="Mecánica Automotriz" />
+                        <MenuItem text="Electricidad" />
+                        <MenuItem text="Electromecánica" />
+                    </items>
+                </MenuButton>
+                <MenuButton fx:id="curso" layoutX="153.0" layoutY="101.0" styleClass="combo-box" text="Curso">
+                    <items>
+                        <MenuItem text="Primer año" />
+                        <MenuItem text="Segundo año" />
+                        <MenuItem text="Tercer año" />
+                    </items>
+                </MenuButton>
+                <MenuButton fx:id="seccion" layoutX="243.0" layoutY="100.0" styleClass="combo-box" text="Sección">
+                    <items>
+                        <MenuItem text="A" />
+                        <MenuItem text="B" />
+                        <MenuItem text="C" />
+                    </items>
+                </MenuButton>
+                <Label layoutX="198.0" layoutY="43.0" styleClass="subtitulo" text="Información del alumno" />
+                <Label layoutX="205.0" layoutY="14.0" prefHeight="29.0" prefWidth="149.0" styleClass="titulo-principal" text="Nuevo caso" />
+                
+                <ComboBox fx:id="comboAlumno" layoutX="29.0" layoutY="150.0" prefWidth="250.0" promptText="Seleccionar alumno" styleClass="combo-box" />
+                
+                <Label layoutX="311.0" layoutY="190.0" styleClass="label-formulario" text="Apellido:" />
+                <Text fx:id="txt_apellido" layoutX="372.0" layoutY="168.0" styleClass="label-formulario" />
+                
+                <Label layoutX="29.0" layoutY="190.0" styleClass="label-formulario" text="Nombre:" />
+                <Text fx:id="txt_nombre" layoutX="95.0" layoutY="209.0" styleClass="label-formulario" />
+                
+                <Label layoutX="212.0" layoutY="250.0" styleClass="subtitulo" text="Describa el caso" />
+                <TextArea fx:id="txt_caso" layoutX="44.0" layoutY="275.0" prefHeight="179.0" prefWidth="451.0" styleClass="campo-texto" />
+                
+                <Button fx:id="btn_guardar" layoutX="200.0" layoutY="479.0" onAction="#onGuardarCaso" prefHeight="38.0" prefWidth="145.0" styleClass="boton-azul" text="Guardar caso" />
+                <Button layoutX="28.0" layoutY="479.0" onAction="#volver" prefHeight="38.0" prefWidth="120.0" styleClass="boton-azul" text="⬅ Volver" />
+            </children>
+        </Pane>
+    </children>
 </AnchorPane>
