@@ -1,5 +1,3 @@
-
-
 package com.mycompany.proyecto_seguimiento.clases;
 
 import java.sql.Connection;
@@ -19,7 +17,22 @@ public class conexion {
     
     private Connection con; 
 
+    
+    //Hola Sofi, así me dijo copilot que haga para que no me de un error raro en CasoDAO:
     public Connection getConnection() {
+        try {
+            if (con == null || con.isClosed()) {
+                String url = "jdbc:mysql://" + host + "/" + base + "?useSSL=false&serverTimezone=UTC";
+                con = DriverManager.getConnection(url, usuario, password);
+                System.out.println("Conectado a la base de datos");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("No Conectado: " + ex.getMessage());
+        }
+        return con;
+    }
+    /*public Connection getConnection() {
         try {
             String url= "jdbc:mysql://"+host+"/"+base;//direccion de BD
             con = DriverManager.getConnection(url, this.usuario, this.password);
@@ -30,7 +43,7 @@ public class conexion {
         }
         return con;
         
-    }
+    }*/
     
     
    public conexion() {

@@ -43,19 +43,19 @@ public class Teacher1Controller implements Initializable {
     @FXML
     private void casosEnviados(ActionEvent event) {
         // Implementa navegación si lo necesitas, ejemplo:
-        // ControladorUtils.cambiarVista("casosEnviados");
+        ControladorUtils.cambiarVista("teacher2");
     }
 
     @FXML
     private void casoNuevo(ActionEvent event) {
         // Implementa navegación si lo necesitas, ejemplo:
-        // ControladorUtils.cambiarVista("casoNuevo");
+        ControladorUtils.cambiarVista("teacher3");
     }
 
     @FXML
     private void orientaciones(ActionEvent event) {
         // Implementa navegación si lo necesitas, ejemplo:
-        // ControladorUtils.cambiarVista("orientaciones");
+        ControladorUtils.cambiarVista("teacher4");
     }
 
     @FXML
