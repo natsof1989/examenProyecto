@@ -16,20 +16,20 @@ import javafx.scene.control.Button;
  *
  * @author natha
  */
-public class AdmiController implements Initializable {
+public class EquipoTecnicoController implements Initializable {
 
     @FXML
-    private Button btnProfe;
+    private Button btn_admiCaso;
     @FXML
-    private Button btnEquipo;
+    private Button btn_atenderC;
     @FXML
-    private Button btnAlumno;
+    private Button btn_orientacion;
     @FXML
-    private Button btnEspecialidad;
+    private Button btn_reporte;
     @FXML
-    private Button btnCursos;
+    private Button btn_configCuenta;
     @FXML
-    private Button btnCambioA;
+    private Button btn_logout;
 
     /**
      * Initializes the controller class.
@@ -40,27 +40,27 @@ public class AdmiController implements Initializable {
     }    
 
     @FXML
-    private void abrirCursos(ActionEvent event) {
+    private void administrarCaso(ActionEvent event) {
     }
 
     @FXML
-    private void cambioAnual(ActionEvent event) {
+    private void atenderCaso(ActionEvent event) {
     }
 
     @FXML
-    private void abrirProfe(ActionEvent event) {
+    private void verOrientaciones(ActionEvent event) {
     }
 
     @FXML
-    private void abrirEquipoT(ActionEvent event) {
+    private void generaReporte(ActionEvent event) {
     }
 
     @FXML
-    private void abrirAlumnos(ActionEvent event) {
+    private void configurarCuenta(ActionEvent event) {
     }
 
     @FXML
-    private void abrirEspecialidad(ActionEvent event) {
+    private void cerrarSesion(ActionEvent event) {
     }
     
 }

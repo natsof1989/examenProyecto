@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane id="AnchorPane" prefHeight="439.0" prefWidth="623.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.Admi_teacher1Controller">
+   <children>
+      <Pane layoutX="14.0" layoutY="14.0" prefHeight="407.0" prefWidth="599.0" styleClass="panel-contenedor">
+         <children>
+            <MenuBar fx:id="menu" layoutX="84.0" layoutY="21.0" prefHeight="37.0" prefWidth="383.0">
+              <menus>
+                <Menu fx:id="btn" mnemonicParsing="false" text="Cargar Datos" />
+                <Menu mnemonicParsing="false" text="Editar Datos" />
+                  <Menu disable="true" mnemonicParsing="false" text="Abrir" />
+                  <Menu disable="true" mnemonicParsing="false" text="Guardar" />
+                <Menu mnemonicParsing="false" text="Informe" />
+              </menus>
+            </MenuBar>
+            <TableView layoutX="34.0" layoutY="136.0" prefHeight="232.0" prefWidth="532.0">
+              <columns>
+                <TableColumn prefWidth="125.0" text="CI" />
+                <TableColumn prefWidth="195.0" text="Nombre" />
+                  <TableColumn prefWidth="211.0" text="Apellido" />
+              </columns>
+            </TableView>
+            <TextField layoutX="34.0" layoutY="98.0" prefHeight="23.0" prefWidth="532.0" promptText="🔎" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -58,8 +58,9 @@ public class RecuperarAccesoController implements Initializable {
          
         //Aca se debe validar la entrada del correo
         //validación de correo del mauri
+        
         if (!ControladorUtils.validarCorreo(correo)) {
-            return; // Detenemos recuperación
+            return; // Detenemos el registro
         }
         //Esta seria la validacion con consultas sql 
          try {

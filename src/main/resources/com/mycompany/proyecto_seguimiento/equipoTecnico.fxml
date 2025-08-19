@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="434.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.EquipoTecnicoController">
+   <children>
+      <Pane layoutX="55.0" layoutY="26.0" prefHeight="382.0" prefWidth="514.0" styleClass="panel-contenedor">
+         <children>
+            <Label layoutX="173.0" layoutY="24.0" styleClass="titulo-principal" text="Bienvenido" />
+            <VBox layoutX="156.0" layoutY="73.0" prefHeight="295.0" prefWidth="160.0" spacing="10.0">
+               <children>
+                  <Button fx:id="btn_admiCaso" mnemonicParsing="false" onAction="#administrarCaso" prefHeight="38.0" prefWidth="161.0" styleClass="boton-azul" text="Administrar casos" />
+                  <Button fx:id="btn_atenderC" mnemonicParsing="false" onAction="#atenderCaso" prefHeight="38.0" prefWidth="163.0" styleClass="boton-azul" text="Atender casos" />
+                  <Button fx:id="btn_orientacion" mnemonicParsing="false" onAction="#verOrientaciones" styleClass="boton-azul" text="Ver orientaciones " />
+                  <Button fx:id="btn_reporte" mnemonicParsing="false" onAction="#generaReporte" prefHeight="38.0" prefWidth="166.0" styleClass="boton-azul" text="Generar reporte" />
+                  <Button fx:id="btn_configCuenta" mnemonicParsing="false" onAction="#configurarCuenta" styleClass="boton-azul" text="Configurar cuenta" />
+                  <Button fx:id="btn_logout" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="38.0" prefWidth="173.0" styleClass="boton-azul" text="Cerrar sesión" />
+               </children>
+            </VBox>
+         </children></Pane>
+   </children>
+</AnchorPane>
