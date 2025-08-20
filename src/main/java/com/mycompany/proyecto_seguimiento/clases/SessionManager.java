@@ -1,5 +1,6 @@
 package com.mycompany.proyecto_seguimiento.clases;
 
+import com.mycompany.proyecto_seguimiento.modelo.UsuarioDatos;
 import java.util.ArrayList;
 import java.util.List;
 

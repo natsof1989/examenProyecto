@@ -6,7 +6,7 @@ package com.mycompany.proyecto_seguimiento;
 import com.mycompany.proyecto_seguimiento.clases.ControladorUtils;
 import com.mycompany.proyecto_seguimiento.clases.SessionManager;
 import com.mycompany.proyecto_seguimiento.clases.conexion;
-import com.mycompany.proyecto_seguimiento.modelo.UsuarioDAO;
+import com.mycompany.proyecto_seguimiento.clases.UsuarioDAO;
 
 import java.io.IOException;
 import java.net.URL;

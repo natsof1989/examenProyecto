@@ -8,7 +8,7 @@ import com.mycompany.proyecto_seguimiento.clases.ControladorUtils;
 import com.mycompany.proyecto_seguimiento.clases.EmailUtils;
 import com.mycompany.proyecto_seguimiento.clases.SessionManager;
 import com.mycompany.proyecto_seguimiento.clases.conexion;
-import com.mycompany.proyecto_seguimiento.modelo.UsuarioDAO;
+import com.mycompany.proyecto_seguimiento.clases.UsuarioDAO;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;

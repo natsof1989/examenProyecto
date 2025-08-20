@@ -5,16 +5,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.mycompany.proyecto_seguimiento.EquipoTecnico1Controller">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.EquipoTecnico1Controller">
    <children>
       <Pane layoutX="30.0" layoutY="24.0" prefHeight="353.0" prefWidth="544.0" styleClass="panel-contenedor">
          <children>
-            <ButtonBar layoutX="85.0" layoutY="14.0" prefHeight="40.0" prefWidth="341.0">
+            <ButtonBar layoutX="26.0" layoutY="14.0" prefHeight="40.0" prefWidth="471.0">
               <buttons>
-                <Button mnemonicParsing="false" text="Button" />
-                  <Button mnemonicParsing="false" text="Button" />
-                  <Button mnemonicParsing="false" text="Button" />
+                <Button mnemonicParsing="false" text="Abrir" />
+                  <Button mnemonicParsing="false" text="Escribir Avance" />
+                  <Button mnemonicParsing="false" text="Escribir Orientacion" />
                   <Button mnemonicParsing="false" text="Button" />
               </buttons>
             </ButtonBar>

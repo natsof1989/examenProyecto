@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.proyecto_seguimiento.modelo;
+package com.mycompany.proyecto_seguimiento.clases;
 
 /**
  *
@@ -10,8 +10,11 @@ package com.mycompany.proyecto_seguimiento.modelo;
  */
 
 
-import com.mycompany.proyecto_seguimiento.clases.UsuarioDatos;
 
+import com.mycompany.proyecto_seguimiento.modelo.Seguridad;
+import com.mycompany.proyecto_seguimiento.modelo.Seguridad;
+import com.mycompany.proyecto_seguimiento.modelo.UsuarioDatos;
+import com.mycompany.proyecto_seguimiento.modelo.UsuarioDatos;
 import java.sql.*;
 import java.util.*;
 
@@ -32,104 +35,7 @@ public class UsuarioDAO {
             return stmt.executeQuery().next();
         }
     }
-
-    /** 2) Verifica si existe email en cualquiera de las dos tablas */
-    public boolean existeEmail(String email) throws SQLException{
-        String sql = "SELECT 1 FROM profesor WHERE email = ? UNION ALL " +
-                     "SELECT 1 FROM equipo_tecnico WHERE email = ? LIMIT 1";
-        try (PreparedStatement stmt = conexion.prepareStatement(sql)){
-            stmt.setString(1, email);
-            stmt.setString(2, email);
-            return stmt.executeQuery().next();
-        }
-    }
     
-    /** 3) Obtiene un Usuario completo por CI (profesor o equipo tecnico) */
-    public Optional<Usuario> obtenerUsuarioPorCI(String ci) throws SQLException {
-        // profesor
-        String sqlProf = "SELECT CI, nombre, apellido, telefono, email, password, 'PROFESOR' AS rol FROM profesor WHERE CI = ?";
-        try (PreparedStatement stmt = conexion.prepareStatement(sqlProf)) {
-            stmt.setString(1, ci);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return Optional.of(mapearUsuario(rs));
-                }
-            }
-        }
-        // equipo técnico
-        String sqlEq = "SELECT CI, nombre, apellido, telefono, email, password, 'EQUIPO_TECNICO' AS rol FROM equipo_tecnico WHERE CI = ?";
-        try (PreparedStatement stmt = conexion.prepareStatement(sqlEq)) {
-            stmt.setString(1, ci);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return Optional.of(mapearUsuario(rs));
-                }
-            }
-        }
-        return Optional.empty();
-    }
-    
-    /** 4) Busca usuarios por fragmento de nombre en las dos tablas */
-    public List<Usuario> buscarUsuariosPorNombre(String nombreParcial) throws SQLException {
-        String sql = "SELECT CI, nombre, apellido, telefono, email, password, 'PROFESOR' AS rol FROM profesor WHERE nombre LIKE ? " +
-                     "UNION ALL " +
-                     "SELECT CI, nombre, apellido, telefono, email, password, 'EQUIPO_TECNICO' AS rol FROM equipo_tecnico WHERE nombre LIKE ?";
-        List<Usuario> lista = new ArrayList<>();
-        try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
-            String like = "%" + nombreParcial + "%";
-            stmt.setString(1, like);
-            stmt.setString(2, like);
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    lista.add(mapearUsuario(rs));
-                }
-            }
-        }
-        return lista;
-    }
-    
-    /** 5) Lista todos los usuarios de un rol específico */
-    public List<Usuario> listarUsuariosPorRol(String rol) throws SQLException {
-        String tabla = rol.equalsIgnoreCase("PROFESOR") ? "profesor" : "equipo_tecnico";
-        String sql = String.format("SELECT CI, nombre, apellido, telefono, email, password, '%s' AS rol FROM %s", rol, tabla);
-        List<Usuario> lista = new ArrayList<>();
-        try (PreparedStatement stmt = conexion.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-            while (rs.next()) {
-                lista.add(mapearUsuario(rs));
-            }
-        }
-        return lista;
-    }
-    
-    /** 6) Cuenta el total de usuarios entre las dos tablas */
-    public int contarUsuarios() throws SQLException {
-        String sql = "SELECT (SELECT COUNT(*) FROM profesor) + (SELECT COUNT(*) FROM equipo_tecnico) AS total";
-        try (PreparedStatement stmt = conexion.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-            if (rs.next()) {
-                return rs.getInt("total");
-            }
-        }
-        return 0;
-    }
-    
-    // Mapea un ResultSet a objeto Usuario
-    private Usuario mapearUsuario(ResultSet rs) throws SQLException {
-        // 1) Convertir CI (String en la base) a int:
-        int cedula = Integer.parseInt(rs.getString("CI"));
-        
-        // 2) Extraer los demás campos:
-        String nombre       = rs.getString("nombre");
-        String apellido     = rs.getString("apellido");
-        String telefono     = rs.getString("telefono");
-        String email        = rs.getString("email");
-        String passwordHash = rs.getString("password");
-        String rol          = rs.getString("rol");
-
-        // 3) llamar al constructor que incluye rol:
-        return new Usuario(cedula, nombre, apellido, email, telefono, passwordHash, rol);
-    }
     
     // Obtiene todos los roles del usuario
     public List<String> obtenerRoles(String ci) throws SQLException {

@@ -9,7 +9,7 @@ import com.mycompany.proyecto_seguimiento.clases.ControladorUtils;
 import com.mycompany.proyecto_seguimiento.clases.conexion;
 import com.mycompany.proyecto_seguimiento.modelo.Seguridad;
 import com.mycompany.proyecto_seguimiento.clases.SessionManager;
-import com.mycompany.proyecto_seguimiento.modelo.UsuarioDAO;
+import com.mycompany.proyecto_seguimiento.clases.UsuarioDAO;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -62,9 +62,9 @@ public class ConfigurarCuentaController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         session = SessionManager.getInstance();
         this.usuarioDao = new UsuarioDAO(dbConexion.getConnection());
-        txt_nombre.setText(SessionManager.getInstance().getUsuarioDatos().getNombre());
-        txt_apellido.setText(SessionManager.getInstance().getUsuarioDatos().getApellido());
-        txt_telefono.setText(SessionManager.getInstance().getUsuarioDatos().getTelefono());
+        txt_nombre.setText(session.getUsuarioDatos().getNombre());
+        txt_apellido.setText(session.getUsuarioDatos().getApellido());
+        txt_telefono.setText(session.getUsuarioDatos().getTelefono());
         
     }    
 
@@ -88,8 +88,6 @@ private void eliminar(ActionEvent event) throws SQLException, IOException {
     
     if (confirmado) {
         try {
-            // Obtener CI de la sesión
-            String ci = session.getCiUsuario();
             
             // Ejecutar desactivación
             usuarioDao.desactivarCuenta(ci); 
@@ -173,8 +171,8 @@ private void eliminar(ActionEvent event) throws SQLException, IOException {
         if (confirmar) {
             try {
                 usuarioDao.actualizarDatosBasicos(ci, nombre, apellido, telefono);
-                String email = SessionManager.getInstance().getUsuarioDatos().getEmail(); 
-                SessionManager.getInstance().setUsuarioDatos(usuarioDao.obtenerDatosUsuario(ci)); 
+                String email = session.getUsuarioDatos().getEmail(); 
+                session.setUsuarioDatos(usuarioDao.obtenerDatosUsuario(ci)); 
                 ControladorUtils.mostrarAlertaChill("Éxito", "Datos actualizados correctamente");
                 reactivarControles(); 
             } catch (SQLException ex) {
@@ -189,9 +187,9 @@ private void eliminar(ActionEvent event) throws SQLException, IOException {
 
 // Método auxiliar para reactivar controles
     private void reactivarControles() {
-        txt_nombre.setText(SessionManager.getInstance().getUsuarioDatos().getNombre());
-        txt_apellido.setText(SessionManager.getInstance().getUsuarioDatos().getApellido());
-        txt_telefono.setText(SessionManager.getInstance().getUsuarioDatos().getTelefono());
+        txt_nombre.setText(session.getUsuarioDatos().getNombre());
+        txt_apellido.setText(session.getUsuarioDatos().getApellido());
+        txt_telefono.setText(session.getUsuarioDatos().getTelefono());
         txt_nombre.setDisable(true);
         txt_apellido.setDisable(true);
         txt_telefono.setDisable(true);

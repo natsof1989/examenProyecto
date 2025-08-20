@@ -4,43 +4,96 @@
  */
 package com.mycompany.proyecto_seguimiento.modelo;
 
-import java.time.LocalDate;
 
+import java.time.LocalDateTime;
 /**
  *
- * @author Mauricio Mazier
+ * @author natha
  */
+
+import java.time.LocalDateTime;
+
 public class Caso {
     private int idCaso;
-    private LocalDate fecha;
+    private LocalDateTime fecha;
     private String obsGenerales;
+    private boolean activo;
+    private int profesorCI;
     private int estudianteCI;
-    private String estudianteNombre;
-    private String estudianteApellido;
-    private String especialidad;
-    private String curso;
-    private String seccion;
+    private byte[] archivo; // Para almacenar el MEDIUMBLOB
 
-    public Caso(int idCaso, LocalDate fecha, String obsGenerales, int estudianteCI, String estudianteNombre, String estudianteApellido, String especialidad, String curso, String seccion) {
+    // Constructor vacío
+    public Caso() {
+    }
+
+    // Constructor completo
+    public Caso(int idCaso, LocalDateTime fecha, String obsGenerales, boolean activo, int profesorCI, int estudianteCI, byte[] archivo) {
         this.idCaso = idCaso;
         this.fecha = fecha;
         this.obsGenerales = obsGenerales;
+        this.activo = activo;
+        this.profesorCI = profesorCI;
         this.estudianteCI = estudianteCI;
-        this.estudianteNombre = estudianteNombre;
-        this.estudianteApellido = estudianteApellido;
-        this.especialidad = especialidad;
-        this.curso = curso;
-        this.seccion = seccion;
+        this.archivo = archivo;
     }
 
-    // Getters
-    public int getIdCaso() { return idCaso; }
-    public LocalDate getFecha() { return fecha; }
-    public String getObsGenerales() { return obsGenerales; }
-    public int getEstudianteCI() { return estudianteCI; }
-    public String getEstudianteNombre() { return estudianteNombre; }
-    public String getEstudianteApellido() { return estudianteApellido; }
-    public String getEspecialidad() { return especialidad; }
-    public String getCurso() { return curso; }
-    public String getSeccion() { return seccion; }
+    // Getters y Setters
+    public int getIdCaso() {
+        return idCaso;
+    }
+
+    public void setIdCaso(int idCaso) {
+        this.idCaso = idCaso;
+    }
+
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getObsGenerales() {
+        return obsGenerales;
+    }
+
+    public void setObsGenerales(String obsGenerales) {
+        this.obsGenerales = obsGenerales;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public int getProfesorCI() {
+        return profesorCI;
+    }
+
+    public void setProfesorCI(int profesorCI) {
+        this.profesorCI = profesorCI;
+    }
+
+    public int getEstudianteCI() {
+        return estudianteCI;
+    }
+
+    public void setEstudianteCI(int estudianteCI) {
+        this.estudianteCI = estudianteCI;
+    }
+
+    public byte[] getArchivo() {
+        return archivo;
+    }
+
+    public void setArchivo(byte[] archivo) {
+        this.archivo = archivo;
+    }
+
+   
 }
+

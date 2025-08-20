@@ -2,8 +2,15 @@ package com.mycompany.proyecto_seguimiento;
 
 import com.mycompany.proyecto_seguimiento.clases.SessionManager;
 import com.mycompany.proyecto_seguimiento.clases.ControladorUtils;
+import com.mycompany.proyecto_seguimiento.clases.ProfesorDAO;
+import com.mycompany.proyecto_seguimiento.clases.UsuarioDAO;
 import com.mycompany.proyecto_seguimiento.clases.conexion;
-import com.mycompany.proyecto_seguimiento.modelo.CasoDAO;
+import com.mycompany.proyecto_seguimiento.modelo.Alumno;
+import com.mycompany.proyecto_seguimiento.modelo.Curso;
+import com.mycompany.proyecto_seguimiento.modelo.Especialidad;
+import java.io.File;
+import java.io.IOException;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -14,277 +21,205 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 
 public class Teacher3Controller implements Initializable {
 
-    @FXML private MenuButton espe;
-    @FXML private MenuButton curso;
-    @FXML private MenuButton seccion;
-    @FXML private ComboBox<AlumnoItem> comboAlumno;
-    @FXML private TextArea txt_caso;
-    @FXML private Text txt_nombre;
-    @FXML private Text txt_apellido;
-    @FXML private Button btn_guardar;
+    @FXML
+    private TextArea txt_caso;
+    @FXML
+    private Button btn_guardar;
+    @FXML
+    private ComboBox<Especialidad> cmb_espe;
+    @FXML
+    private ComboBox<Curso> cmb_curso;
+    @FXML
+    private ComboBox<Alumno> cmb_alumno;
+    @FXML
+    private Text txt_estudiante;
+    @FXML
+    private Button btn_adjuntar;
+    @FXML
+    private Button btn_cancelar;
+    @FXML
+    private HBox hboxBotones;
 
-    private String especialidadSeleccionada;
-    private String cursoSeleccionado;
-    private String seccionSeleccionada;
-    private AlumnoItem alumnoSeleccionado;
+    private final SessionManager session = SessionManager.getInstance();
+    private final conexion dbConexion = new conexion();
+    private UsuarioDAO usuarioDao;
+    private ProfesorDAO profesorDao = new ProfesorDAO(dbConexion.getConnection());; 
+    
+    private final String profCI = session.getCiUsuario(); 
+    private File archivoSeleccionado;
+    private HBox hboxArchivoSeleccionado; 
+    
 
+   
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        espe.getItems().forEach(item -> item.setOnAction(e -> {
-            especialidadSeleccionada = ((MenuItem) e.getSource()).getText();
-            espe.setText(especialidadSeleccionada);
-            cargarAlumnos();
-        }));
-        curso.getItems().forEach(item -> item.setOnAction(e -> {
-            cursoSeleccionado = ((MenuItem) e.getSource()).getText();
-            curso.setText(cursoSeleccionado);
-            cargarAlumnos();
-        }));
-        seccion.getItems().forEach(item -> item.setOnAction(e -> {
-            seccionSeleccionada = ((MenuItem) e.getSource()).getText();
-            seccion.setText(seccionSeleccionada);
-            cargarAlumnos();
-        }));
-
-        comboAlumno.valueProperty().addListener((obs, oldVal, newVal) -> {
-            alumnoSeleccionado = newVal;
-            if (newVal != null) {
-                txt_nombre.setText(newVal.nombre);
-                txt_apellido.setText(newVal.apellido);
-            } else {
-                txt_nombre.setText("");
-                txt_apellido.setText("");
-            }
-        });
+        
+        List<Especialidad> especialidades = profesorDao.obtenerEspecialidad(profCI);
+        cmb_espe.getItems().clear(); // limpiamos por si ya tenía algo
+        cmb_espe.getItems().addAll(especialidades);
+        
+          
     }
 
-    // Carga la lista de alumnos según filtros seleccionados
-    private void cargarAlumnos() {
-        comboAlumno.getItems().clear();
-        txt_nombre.setText("");
-        txt_apellido.setText("");
-        alumnoSeleccionado = null;
-
-        if (especialidadSeleccionada == null || cursoSeleccionado == null || seccionSeleccionada == null)
-            return;
-
-        try (Connection conn = new conexion().getConnection()) {
-            String sql = "SELECT e.CI, e.nombre, e.apellido " +
-                         "FROM estudiante e " +
-                         "JOIN inscripcion i ON e.CI = i.estudiante_CI " +
-                         "JOIN curso c ON i.curso_id_curso = c.id_curso " +
-                         "JOIN especialidad es ON c.especialidad_id_especialidad = es.id_especialidad " +
-                         "WHERE es.nombre = ? AND c.anhio = ? AND c.seccion = ? " +
-                         "ORDER BY e.apellido, e.nombre";
-            try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, especialidadSeleccionada);
-                ps.setString(2, cursoSeleccionado);
-                ps.setString(3, seccionSeleccionada);
-                try (ResultSet rs = ps.executeQuery()) {
-                    List<AlumnoItem> alumnos = new ArrayList<>();
-                    while (rs.next()) {
-                        alumnos.add(new AlumnoItem(
-                            rs.getInt("CI"),
-                            rs.getString("nombre"),
-                            rs.getString("apellido")
-                        ));
-                    }
-                    comboAlumno.setItems(FXCollections.observableArrayList(alumnos));
-                }
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "Error al cargar alumnos.").showAndWait();
-        }
-    }
 
     @FXML
-    private void onGuardarCaso() {
-        if (especialidadSeleccionada == null || cursoSeleccionado == null || seccionSeleccionada == null
-                || alumnoSeleccionado == null || txt_caso.getText().trim().isEmpty()) {
-            new Alert(Alert.AlertType.ERROR, "Completa todos los campos.").showAndWait();
-            return;
-        }
-
-        Integer profesorCI = obtenerCedulaProfesor();
-        if (profesorCI == null) {
-            new Alert(Alert.AlertType.ERROR, "No se pudo obtener la cédula del profesor desde la sesión.").showAndWait();
-            return;
-        }
-
-        try (Connection conn = new conexion().getConnection()) {
-            CasoDAO dao = new CasoDAO(conn);
-            boolean ok = dao.insertarCaso(
-                profesorCI,
-                alumnoSeleccionado.ci,
-                txt_caso.getText().trim(),
-                especialidadSeleccionada,
-                cursoSeleccionado,
-                seccionSeleccionada
-            );
-            if (ok) {
-                new Alert(Alert.AlertType.INFORMATION, "Caso creado correctamente.").showAndWait();
-                limpiarFormulario();
-            } else {
-                new Alert(Alert.AlertType.ERROR, "No se pudo crear el caso.").showAndWait();
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "Error al conectar a la base de datos.").showAndWait();
-        }
-    }
-
-    /**
-     * Intenta obtener la cédula del profesor desde SessionManager buscando en:
-     * 1) session.getUsuario()  -> varios getters posibles en Usuario (getCi, getCI, getCedula, getId)
-     * 2) session.getUsuarioDatos().getUsuario() -> idem
-     * 3) session.getUsuarioDatos() directamente (si guarda la cédula ahí con alguno de los getters/fields)
-     *
-     * Usa reflexión para no depender de firmas exactas.
-     */
-    private Integer obtenerCedulaProfesor() {
-        SessionManager session = SessionManager.getInstance();
-        if (session == null) return null;
-
-        // 1) Intento directo: session.getUsuario()
-        try {
-            Method mGetUsuario = session.getClass().getMethod("getUsuario");
-            Object usuario = mGetUsuario.invoke(session);
-            Integer ci = extraerCI(usuario);
-            if (ci != null) return ci;
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored) {
-            // sigue intentando otras rutas
-        }
-
-        // 2) Intento desde session.getUsuarioDatos()
-        try {
-            Method mGetUsuarioDatos = session.getClass().getMethod("getUsuarioDatos");
-            Object usuarioDatos = mGetUsuarioDatos.invoke(session);
-            if (usuarioDatos != null) {
-                // 2a) usuarioDatos.getUsuario()
-                try {
-                    Method mGetUsuario2 = usuarioDatos.getClass().getMethod("getUsuario");
-                    Object usuario = mGetUsuario2.invoke(usuarioDatos);
-                    Integer ci = extraerCI(usuario);
-                    if (ci != null) return ci;
-                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored) {}
-
-                // 2b) tal vez usuarioDatos tiene la cédula directamente (getCedula/getCi...)
-                Integer ciDirecto = extraerCI(usuarioDatos);
-                if (ciDirecto != null) return ciDirecto;
-            }
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored) {
-            // si no existe getUsuarioDatos o falla, seguimos
-        }
-
-        // 3) Como último recurso, si SessionManager tiene algún campo público o getter alternativo que contenga usuario,
-        // lo intentamos (ej. campo "usuario" o "usuarioDatos")
-        Integer ciFromField = buscarCampoCIEnObjeto(session);
-        if (ciFromField != null) return ciFromField;
-
-        return null;
-    }
-
-    // Intenta extraer la cédula (int) desde un objeto (Usuario o UsuarioDatos) probando varios getters y fields comunes
-    private Integer extraerCI(Object obj) {
-        if (obj == null) return null;
-
-        // Intenta métodos comunes
-        String[] methodNames = { "getCi", "getCI", "getCedula", "getCedulaInt", "getId", "getUsuarioId", "getCedulaProfesor" };
-        for (String name : methodNames) {
-            try {
-                Method m = obj.getClass().getMethod(name);
-                Object val = m.invoke(obj);
-                Integer ci = parseNumberLike(val);
-                if (ci != null) return ci;
-            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored) {}
-        }
-
-        // Intenta campos directos
-        String[] fieldNames = { "ci", "CI", "cedula", "id", "cedulaProfesor" };
-        for (String fName : fieldNames) {
-            try {
-                Field f = obj.getClass().getDeclaredField(fName);
-                f.setAccessible(true);
-                Object val = f.get(obj);
-                Integer ci = parseNumberLike(val);
-                if (ci != null) return ci;
-            } catch (NoSuchFieldException | IllegalAccessException ignored) {}
-        }
-
-        return null;
-    }
-
-    // Si encuentra un número o string numérico lo devuelve como Integer
-    private Integer parseNumberLike(Object val) {
-        if (val == null) return null;
-        if (val instanceof Number) {
-            return ((Number) val).intValue();
-        }
-        if (val instanceof String) {
-            try {
-                return Integer.parseInt(((String) val).trim());
-            } catch (NumberFormatException ignored) {}
-        }
-        return null;
-    }
-
-    // Busca en campos del objeto session (campo "usuario" o "usuarioDatos") por si acaso
-    private Integer buscarCampoCIEnObjeto(Object session) {
-        String[] sessionFieldNames = { "usuario", "usuarioDatos", "user", "userData" };
-        for (String fld : sessionFieldNames) {
-            try {
-                Field f = session.getClass().getDeclaredField(fld);
-                f.setAccessible(true);
-                Object val = f.get(session);
-                Integer ci = extraerCI(val);
-                if (ci != null) return ci;
-            } catch (NoSuchFieldException | IllegalAccessException ignored) {}
-        }
-        return null;
-    }
-
-    private void limpiarFormulario() {
-        espe.setText("Especialidad");
-        curso.setText("Curso");
-        seccion.setText("Sección");
-        especialidadSeleccionada = null;
-        cursoSeleccionado = null;
-        seccionSeleccionada = null;
-        comboAlumno.getItems().clear();
-        txt_nombre.setText("");
-        txt_apellido.setText("");
-        txt_caso.clear();
-        alumnoSeleccionado = null;
-    }
-
-    @FXML
-    private void volver() {
+    private void volver(ActionEvent event) {
         ControladorUtils.cambiarVista("teacher1");
     }
 
-    // Clase interna simple para el ComboBox de alumnos
-    public static class AlumnoItem {
-        public final int ci;
-        public final String nombre;
-        public final String apellido;
-
-        public AlumnoItem(int ci, String nombre, String apellido) {
-            this.ci = ci;
-            this.nombre = nombre;
-            this.apellido = apellido;
-        }
-
-        @Override
-        public String toString() {
-            return apellido + ", " + nombre + " (" + ci + ")";
-        }
+    @FXML
+    private void habilitarCurso(ActionEvent event) {
+        
+        Especialidad seleccion = cmb_espe.getSelectionModel().getSelectedItem();
+        if (seleccion != null) {
+            btn_cancelar.setDisable(false);
+            cmb_curso.setDisable(false);
+            int idEspecialidad = seleccion.getId();  // Aquí tenés el ID
+            List<Curso> cursos = profesorDao.obtenerCursos(profCI, idEspecialidad);
+            cmb_curso.getItems().clear();
+            cmb_alumno.getItems().clear();
+            btn_adjuntar.setDisable(true);
+            btn_guardar.setDisable(true);
+            txt_estudiante.setText(""); // limpiamos por si ya tenía algo
+            cmb_curso.getItems().addAll(cursos);
+        }   
+        
     }
+
+
+
+
+    @FXML
+    private void habilitarAlumno(ActionEvent event) {
+        
+        Curso seleccion = cmb_curso.getSelectionModel().getSelectedItem();
+        if (seleccion != null) {
+            cmb_alumno.setDisable(false);
+            int idCurso = seleccion.getId();  // Aquí tenés el ID
+            List<Alumno> alumnos = profesorDao.obtenerAlumnos(idCurso);
+            txt_estudiante.setText("");
+            btn_adjuntar.setDisable(true);
+            btn_guardar.setDisable(true);
+            cmb_alumno.getItems().clear(); // limpiamos por si ya tenía algo
+            cmb_alumno.getItems().addAll(alumnos);
+            
+            
+        }   
+        
+        
+    }
+
+   @FXML
+    private void cargarAlumno(ActionEvent event) {
+        Alumno seleccion = cmb_alumno.getSelectionModel().getSelectedItem();
+        if (seleccion != null) {
+            btn_guardar.setDisable(false); 
+            btn_adjuntar.setDisable(false); 
+            
+            txt_estudiante.setText(seleccion.getNombre()); // ahora usamos getNombre()
+        }   
+    }
+
+    @FXML
+    private void cargarArchivo(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccionar archivo");
+        archivoSeleccionado = fileChooser.showOpenDialog(btn_adjuntar.getScene().getWindow());
+
+        if (archivoSeleccionado != null) {
+             hboxArchivoSeleccionado = new HBox(5);
+            Label lblArchivo = new Label(archivoSeleccionado.getName());
+            Button btnQuitar = new Button("X");
+            btnQuitar.setTooltip(new Tooltip("Quitar archivo"));
+
+            hboxArchivoSeleccionado.getChildren().addAll(lblArchivo, btnQuitar);
+
+            // Reemplazar botón de adjuntar por HBox archivo
+            int index = hboxBotones.getChildren().indexOf(btn_adjuntar);
+            hboxBotones.getChildren().set(index, hboxArchivoSeleccionado);
+
+            // Evento para quitar archivo
+            btnQuitar.setOnAction(ev -> quitarArchivo(index));
+        } else {
+            btn_adjuntar.setText("Adjuntar archivo");
+        }
+
+    }
+    
+    private void quitarArchivo(int index) {
+        archivoSeleccionado = null;
+        // Reemplazar HBox archivo por el botón de adjuntar original
+        hboxBotones.getChildren().set(index, btn_adjuntar);
+    }
+
+    @FXML
+  private void cancelar(ActionEvent event) {
+    // Resetear combos
+        cmb_espe.getSelectionModel().clearSelection();
+        cmb_curso.getItems().clear();
+        cmb_curso.setDisable(true);
+        cmb_alumno.getItems().clear();
+        cmb_alumno.setDisable(true);
+
+        // Resetear campos de texto
+        txt_caso.clear();
+        txt_estudiante.setText("");
+
+        // Resetear botones
+        btn_guardar.setDisable(true);
+        btn_cancelar.setDisable(true);
+        btn_adjuntar.setDisable(true);
+
+        // Si hay HBox archivo, reemplazarlo por botón de adjuntar
+        if (hboxArchivoSeleccionado != null) {
+            int index = hboxBotones.getChildren().indexOf(hboxArchivoSeleccionado);
+            if (index >= 0) {
+                hboxBotones.getChildren().set(index, btn_adjuntar);
+            }
+            hboxArchivoSeleccionado = null;
+        }
+
+        archivoSeleccionado = null;
+    }
+
+    @FXML
+    private void GuardarCaso(ActionEvent event)  {
+        
+      if(ControladorUtils.hayCamposVacios(txt_caso)){
+          ControladorUtils.mostrarAlertaChill("Informamos", "No puede enviar un caso sin descripción. \n Describa el caso antes de enviar");
+          return; 
+      } 
+      String descripcion = txt_caso.getText(); 
+      int ciAlumno = cmb_alumno.getSelectionModel().getSelectedItem().getCi();
+      int profe_CI = Integer.parseInt(profCI); 
+      File archivoSeleccionado = this.archivoSeleccionado;
+      try {
+        
+        boolean exito = profesorDao.insertarCaso(descripcion, profe_CI, ciAlumno, archivoSeleccionado);
+
+        if (exito) {
+            ControladorUtils.mostrarAlertaChill("Éxito", "El caso fue guardado correctamente.");
+            txt_caso.clear();
+            cmb_alumno.getSelectionModel().clearSelection();
+            archivoSeleccionado = null; // limpiar para siguiente uso
+            cancelar(event);
+        } else {
+            ControladorUtils.mostrarError("Error", "No se pudo guardar el caso.", null);
+        }
+    } catch (Exception ex) {
+        ControladorUtils.mostrarError("Excepción", "Ocurrió un error al guardar el caso.", ex);
+    }        
+    }
+
 }
