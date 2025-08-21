@@ -12,6 +12,11 @@ public class Curso {
     private int id; 
     private String curso; 
 
+    public Curso() {
+    }
+    
+    
+
     public Curso(int id, String curso) {
         this.id = id;
         this.curso = curso;

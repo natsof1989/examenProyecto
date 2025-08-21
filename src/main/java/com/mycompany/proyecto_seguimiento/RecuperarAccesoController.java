@@ -82,11 +82,13 @@ public class RecuperarAccesoController implements Initializable {
 
                     // Guardarlo en la sesión para verificar después
                     session.setCodigoVerificacion(codigoVerificacion);
+                    
 
                     // Enviar el correo
                     try {
                         EmailUtils.enviarCodigo(correo, codigoVerificacion);
                         ControladorUtils.mostrarAlertaChill("Código enviado", "Revisa tu correo para continuar");
+                        session.setCiUsuario(cedula);
                     } catch (Exception e) {
                         ControladorUtils.mostrarError("Error de envío", "No se pudo enviar el código", e);
                         return;

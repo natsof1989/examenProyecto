@@ -10,20 +10,20 @@
 
 <AnchorPane id="AnchorPane" prefHeight="539.0" prefWidth="762.0" styleClass="mainFxmlClass" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.Teacher2Controller">
    <children>
-      <Pane layoutX="47.0" layoutY="31.0" prefHeight="461.0" prefWidth="669.0" styleClass="panel-contenedor">
+      <Pane layoutX="47.0" layoutY="31.0" prefHeight="461.0" prefWidth="704.0" styleClass="panel-contenedor">
          <children>
             <Label layoutX="235.0" layoutY="29.0" styleClass="titulo-principal" text="Casos enviados" />
-            <TableView layoutX="23.0" layoutY="138.0" onMouseClicked="#mostrarFila" prefHeight="220.0" prefWidth="623.0">
+            <TableView fx:id="tabla_casos" layoutX="23.0" layoutY="138.0" onMouseClicked="#mostrarFila" prefHeight="220.0" prefWidth="664.0">
               <columns>
-                <TableColumn id="col_idCaso" prefWidth="61.0" text="N° Caso" />
-                <TableColumn id="col_fecha" prefWidth="72.0" text="Fecha" />
-                  <TableColumn id="col_estudiante" prefWidth="255.0" text="Estudiante" />
-                  <TableColumn id="col_especialidad" prefWidth="117.0" text="Especialidad" />
-                  <TableColumn id="col_curso" prefWidth="117.0" text="Curso" />
+                <TableColumn id="col_idCaso" fx:id="col_idCaso" prefWidth="61.0" text="N° Caso" />
+                <TableColumn id="col_fecha" fx:id="col_fecha" prefWidth="141.0" text="Fecha" />
+                  <TableColumn id="col_estudiante" fx:id="col_estudiante" prefWidth="202.0" text="Estudiante" />
+                  <TableColumn id="col_especialidad" fx:id="col_especialidad" prefWidth="154.0" text="Especialidad" />
+                  <TableColumn id="col_curso" fx:id="col_curso" prefWidth="104.0" text="Curso" />
               </columns>
             </TableView>
-            <TextField fx:id="txt_buscar" layoutX="23.0" layoutY="85.0" onKeyReleased="#buscarCaso" prefHeight="36.0" prefWidth="623.0" promptText="🔎" styleClass="campo-texto" />
-            <Button fx:id="btn_abrir" disable="true" layoutX="257.0" layoutY="389.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="126.0" styleClass="boton-azul" text="Abrir caso" />
+            <TextField fx:id="txt_buscar" layoutX="23.0" layoutY="85.0" onKeyReleased="#buscarCaso" prefHeight="36.0" prefWidth="664.0" promptText="🔎" styleClass="campo-texto" />
+            <Button fx:id="btn_abrir" disable="true" layoutX="280.0" layoutY="392.0" mnemonicParsing="false" onAction="#AbrirCaso" prefHeight="38.0" prefWidth="126.0" styleClass="boton-azul" text="Abrir caso" />
             <Button fx:id="btn_volver" layoutX="35.0" layoutY="32.0" mnemonicParsing="false" onAction="#volver" prefHeight="38.0" prefWidth="55.0" styleClass="boton-azul" text="⬅" />
          </children>
       </Pane>

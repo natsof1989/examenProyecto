@@ -11,4 +11,6 @@ module com.mycompany.proyecto_seguimiento {
     
     // abre también el paquete de clases si EmailUtils está en otro
     opens com.mycompany.proyecto_seguimiento.clases to javafx.fxml;
+    
+    opens com.mycompany.proyecto_seguimiento.modelo to javafx.base;
 }

@@ -12,6 +12,11 @@ public class Alumno {
     private int ci; 
     private String nombre; 
 
+    public Alumno() {
+    }
+    
+    
+
     public Alumno(int ci, String nombre) {
         this.ci = ci;
         this.nombre = nombre;

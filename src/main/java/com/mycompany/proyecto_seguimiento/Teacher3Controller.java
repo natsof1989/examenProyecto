@@ -68,6 +68,7 @@ public class Teacher3Controller implements Initializable {
         List<Especialidad> especialidades = profesorDao.obtenerEspecialidad(profCI);
         cmb_espe.getItems().clear(); // limpiamos por si ya tenía algo
         cmb_espe.getItems().addAll(especialidades);
+        txt_caso.setDisable(true);
         
           
     }
@@ -91,7 +92,8 @@ public class Teacher3Controller implements Initializable {
             cmb_alumno.getItems().clear();
             btn_adjuntar.setDisable(true);
             btn_guardar.setDisable(true);
-            txt_estudiante.setText(""); // limpiamos por si ya tenía algo
+            txt_estudiante.setText("");
+            txt_caso.setDisable(true);// limpiamos por si ya tenía algo
             cmb_curso.getItems().addAll(cursos);
         }   
         
@@ -113,7 +115,7 @@ public class Teacher3Controller implements Initializable {
             btn_guardar.setDisable(true);
             cmb_alumno.getItems().clear(); // limpiamos por si ya tenía algo
             cmb_alumno.getItems().addAll(alumnos);
-            
+            txt_caso.setDisable(true);
             
         }   
         
@@ -126,7 +128,7 @@ public class Teacher3Controller implements Initializable {
         if (seleccion != null) {
             btn_guardar.setDisable(false); 
             btn_adjuntar.setDisable(false); 
-            
+            txt_caso.setDisable(false);
             txt_estudiante.setText(seleccion.getNombre()); // ahora usamos getNombre()
         }   
     }
@@ -171,6 +173,7 @@ public class Teacher3Controller implements Initializable {
         cmb_curso.setDisable(true);
         cmb_alumno.getItems().clear();
         cmb_alumno.setDisable(true);
+        txt_caso.setDisable(true);
 
         // Resetear campos de texto
         txt_caso.clear();

@@ -14,6 +14,11 @@ public class UsuarioDatos {
     private String telefono;
     private String email; 
 
+    public UsuarioDatos() {
+    }
+    
+    
+
     public UsuarioDatos(String nombre, String apellido, String telefono, String email) {
         this.nombre = nombre;
         this.apellido = apellido;

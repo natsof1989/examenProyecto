@@ -6,6 +6,7 @@ package com.mycompany.proyecto_seguimiento.clases;
 
 
 import com.mycompany.proyecto_seguimiento.modelo.Alumno;
+import com.mycompany.proyecto_seguimiento.modelo.CasoResumen;
 import com.mycompany.proyecto_seguimiento.modelo.Curso;
 import com.mycompany.proyecto_seguimiento.modelo.Especialidad;
 import java.io.File;
@@ -100,7 +101,7 @@ public class ProfesorDAO {
     
     //insertar casos a la base de datos 
     public boolean insertarCaso(String observaciones, int ciProfesor, int ciEstudiante, File archivoSeleccionado) {
-        String sql = "INSERT INTO caso (fecha, obs_generales, activo, profesor_CI, estudiante_CI, archivo) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO caso (fecha, obs_generales, activo, profesor_CI, estudiante_CI, archivo, extension) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
             // Fecha actual
@@ -120,9 +121,19 @@ public class ProfesorDAO {
             if (archivoSeleccionado != null && archivoSeleccionado.exists()) {
                 FileInputStream fis = new FileInputStream(archivoSeleccionado);
                 stmt.setBinaryStream(6, fis, (int) archivoSeleccionado.length());
-                // NOTA: no cerramos fis aquí, lo hace el PreparedStatement después de ejecutar
+
+                // Guardar extensión, incluyendo el punto (ej: ".pdf")
+                String nombre = archivoSeleccionado.getName();
+                String extension = "";
+                int i = nombre.lastIndexOf('.');
+                if (i > 0) {
+                    extension = nombre.substring(i); // ".pdf", ".jpg", etc.
+                }
+                stmt.setString(7, extension);
+
             } else {
                 stmt.setNull(6, Types.BLOB);
+                stmt.setNull(7, Types.VARCHAR);
             }
 
             stmt.executeUpdate();
@@ -133,6 +144,42 @@ public class ProfesorDAO {
             return false;
         }
     }
+
+    
+    public List<CasoResumen> obtenerCasosPorProfesor(String profesorCI) {
+        List<CasoResumen> listaCasos = new ArrayList<>();
+        String sql = "SELECT id_caso, fecha, estudiante, especialidad, curso " +
+                     "FROM seguimiento.profesor_caso_resumen " +
+                     "WHERE profesor_CI = ?";
+
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+            ps.setString(1, profesorCI);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    CasoResumen caso = new CasoResumen();
+                    caso.setId_caso(rs.getInt("id_caso"));
+
+                    // Convertimos de java.sql.Timestamp a LocalDateTime
+                    Timestamp ts = rs.getTimestamp("fecha");
+                    if (ts != null) {
+                        caso.setFecha(ts.toLocalDateTime());
+                    }
+
+                    caso.setEstudiante(rs.getString("estudiante"));
+                    caso.setEspecialidad(rs.getString("especialidad"));
+                    caso.setCurso(rs.getString("curso"));
+
+                    listaCasos.add(caso);
+                }
+            }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return listaCasos;
+         }
+
 
 
 }
