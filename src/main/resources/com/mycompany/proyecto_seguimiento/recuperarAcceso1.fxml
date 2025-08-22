@@ -13,15 +13,15 @@
          <children>
             <Label layoutX="103.0" layoutY="35.0" styleClass="titulo-principal" text="Introduzca el código" />
             <HBox layoutX="126.0" layoutY="95.0" prefHeight="44.0" prefWidth="210.0">
-               <children>
-                    <TextField fx:id="digit1" prefHeight="40.0" prefWidth="40.0" styleClass="campo-texto" />
-                    <TextField fx:id="digit2" prefHeight="40.0" prefWidth="40.0" styleClass="campo-texto" />
-                    <TextField fx:id="digit3" prefHeight="40.0" prefWidth="40.0" styleClass="campo-texto" />
-                    <TextField fx:id="digit5" prefHeight="40.0" prefWidth="40.0" styleClass="campo-texto" />
-                    <TextField fx:id="digit4" prefHeight="40.0" prefWidth="40.0" styleClass="campo-texto" />
-                    <TextField fx:id="digit6" prefHeight="40.0" prefWidth="40.0" styleClass="campo-texto" />               
-               </children>
-            </HBox>
+                <children>
+                     <TextField fx:id="digit1" prefHeight="40.0" prefWidth="40.0" styleClass="campo-texto" />
+                     <TextField fx:id="digit2" prefHeight="40.0" prefWidth="40.0" styleClass="campo-texto" />
+                     <TextField fx:id="digit3" prefHeight="40.0" prefWidth="40.0" styleClass="campo-texto" />
+                     <TextField fx:id="digit4" prefHeight="40.0" prefWidth="40.0" styleClass="campo-texto" />
+                     <TextField fx:id="digit5" prefHeight="40.0" prefWidth="40.0" styleClass="campo-texto" />
+                     <TextField fx:id="digit6" prefHeight="40.0" prefWidth="40.0" styleClass="campo-texto" />               
+                </children>
+             </HBox>
             <Button fx:id="bt_verificar" layoutX="171.0" layoutY="167.0" mnemonicParsing="false" styleClass="boton-azul" text="Verificar" />
             <Label layoutX="52.0" layoutY="222.0" styleClass="label-formulario" text="Nueva contraseña:" />
             <TextField fx:id="txt_newContra" layoutX="55.0" layoutY="247.0" prefHeight="23.0" prefWidth="210.0" styleClass="campo-texto" />

@@ -84,22 +84,51 @@ public class UsuarioDAO {
         }
     }
 
-    // Método para actualizar contraseña
+    // Mira quye lindo
     public boolean actualizarPassword(String ci, String nuevaContrasenia) throws SQLException {
         String hashNuevo = Seguridad.encriptarPassword(nuevaContrasenia);
-        
-        String sql = "UPDATE profesor SET password = ? WHERE CI = ?; " +
-                     "UPDATE equipo_tecnico SET password = ? WHERE CI = ?";
-        
-        try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
-            stmt.setString(1, hashNuevo);
-            stmt.setString(2, ci);
-            stmt.setString(3, hashNuevo);
-            stmt.setString(4, ci);
-            
-            int updates = stmt.executeUpdate();
-            return updates > 0;
+
+        String sqlProfesor = "UPDATE profesor SET password = ? WHERE CI = ?";
+        String sqlEquipo = "UPDATE equipo_tecnico SET password = ? WHERE CI = ?";
+
+        boolean actualizado = false;
+        boolean originalAutoCommit = true;
+
+        try {
+            // Guardar estado autoCommit y desactivarlo para la transacción
+            originalAutoCommit = conexion.getAutoCommit();
+            conexion.setAutoCommit(false);
+
+            try (PreparedStatement psProf = conexion.prepareStatement(sqlProfesor);
+                 PreparedStatement psEq = conexion.prepareStatement(sqlEquipo)) {
+
+                psProf.setString(1, hashNuevo);
+                psProf.setString(2, ci);
+                int filasProf = psProf.executeUpdate();
+
+                psEq.setString(1, hashNuevo);
+                psEq.setString(2, ci);
+                int filasEq = psEq.executeUpdate();
+
+                if (filasProf + filasEq > 0) {
+                    conexion.commit();
+                    actualizado = true;
+                } else {
+                    // no existía el CI en ninguna tabla: revertir
+                    conexion.rollback();
+                    actualizado = false;
+                }
+            } catch (SQLException e) {
+                // en caso de error, revertimos
+                try { conexion.rollback(); } catch (SQLException ex) { /* log si querés */ }
+                throw e;
+            }
+        } finally {
+            // restaurar autoCommit al estado original
+            try { conexion.setAutoCommit(originalAutoCommit); } catch (SQLException ex) { /* log */ }
         }
+
+        return actualizado;
     }
 
     // Método auxiliar para verificar rol específico
