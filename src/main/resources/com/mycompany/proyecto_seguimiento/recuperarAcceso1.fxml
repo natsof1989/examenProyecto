@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.PasswordField?>
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="593.0" styleClass="mainFxmlClass" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.RecuperarAcceso1Controller">
    <children>
@@ -24,9 +25,9 @@
              </HBox>
             <Button fx:id="bt_verificar" layoutX="171.0" layoutY="167.0" mnemonicParsing="false" styleClass="boton-azul" text="Verificar" />
             <Label layoutX="52.0" layoutY="222.0" styleClass="label-formulario" text="Nueva contraseña:" />
-            <TextField fx:id="txt_newContra" layoutX="55.0" layoutY="247.0" prefHeight="23.0" prefWidth="210.0" styleClass="campo-texto" />
+            <PasswordField fx:id="txt_newContra" layoutX="55.0" layoutY="247.0" prefHeight="23.0" prefWidth="210.0" styleClass="campo-texto" />
             <Label layoutX="52.0" layoutY="295.0" styleClass="label-formulario" text="Confirmar nueva contraseña:" />
-            <TextField fx:id="txt_condirmarContra" layoutX="55.0" layoutY="320.0" prefHeight="23.0" prefWidth="210.0" styleClass="campo-texto" />
+            <PasswordField fx:id="txt_condirmarContra" layoutX="55.0" layoutY="320.0" prefHeight="23.0" prefWidth="210.0" styleClass="campo-texto" />
             <Button fx:id="bt_confirmarCotra" layoutX="140.0" layoutY="400.0" mnemonicParsing="false" styleClass="boton-azul" text="Confirmar contraseña" />
             
          </children>
