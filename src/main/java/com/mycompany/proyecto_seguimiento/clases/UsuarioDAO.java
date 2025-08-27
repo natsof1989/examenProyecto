@@ -51,6 +51,29 @@ public class UsuarioDAO {
         
         return roles;
     }
+    
+    public boolean actualizarPassword(String ci, String nuevaContrasenia) throws SQLException {
+        String hashNuevo = Seguridad.encriptarPassword(nuevaContrasenia);
+
+        String sql1 = "UPDATE profesor SET password = ? WHERE CI = ?";
+        String sql2 = "UPDATE equipo_tecnico SET password = ? WHERE CI = ?";
+
+        boolean updated = false;
+
+        try (PreparedStatement stmt1 = conexion.prepareStatement(sql1)) {
+            stmt1.setString(1, hashNuevo);
+            stmt1.setString(2, ci);
+            updated = stmt1.executeUpdate() > 0;
+        }
+
+        try (PreparedStatement stmt2 = conexion.prepareStatement(sql2)) {
+            stmt2.setString(1, hashNuevo);
+            stmt2.setString(2, ci);
+            updated = updated || stmt2.executeUpdate() > 0;
+        }
+
+        return updated;
+    }
 
     
     // Verifica si existe un registro COMPLETO (con todos los campos obligatorios)
@@ -85,22 +108,7 @@ public class UsuarioDAO {
     }
 
     // Método para actualizar contraseña
-    public boolean actualizarPassword(String ci, String nuevaContrasenia) throws SQLException {
-        String hashNuevo = Seguridad.encriptarPassword(nuevaContrasenia);
-        
-        String sql = "UPDATE profesor SET password = ? WHERE CI = ?; " +
-                     "UPDATE equipo_tecnico SET password = ? WHERE CI = ?";
-        
-        try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
-            stmt.setString(1, hashNuevo);
-            stmt.setString(2, ci);
-            stmt.setString(3, hashNuevo);
-            stmt.setString(4, ci);
-            
-            int updates = stmt.executeUpdate();
-            return updates > 0;
-        }
-    }
+    
 
     // Método auxiliar para verificar rol específico
     private boolean esDeRol(String ci, String tabla) throws SQLException {
