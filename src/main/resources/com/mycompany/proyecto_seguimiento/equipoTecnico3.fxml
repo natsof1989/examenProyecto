@@ -8,18 +8,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="AnchorPane" prefHeight="633.0" prefWidth="814.0" stylesheets="@styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.mycompany.proyecto_seguimiento.EquipoTecnico3Controller">
+<AnchorPane id="AnchorPane" prefHeight="633.0" prefWidth="814.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.EquipoTecnico3Controller">
     <children>
       <Pane layoutX="43.0" layoutY="36.0" prefHeight="558.0" prefWidth="705.0" styleClass="panel-contenedor">
          <children>
-            <Label layoutX="206.0" layoutY="48.0" styleClass="titulo-principal" text="Lectura de todos los casos" />
+            <Label layoutX="206.0" layoutY="48.0" styleClass="titulo-principal" text="Casos asignados a mí" />
             <TableView layoutX="33.0" layoutY="169.0" prefHeight="276.0" prefWidth="639.0">
               <columns>
                 <TableColumn minWidth="6.0" prefWidth="53.0" text="N° Caso" />
-                <TableColumn prefWidth="121.0" text="Fecha" />
-                  <TableColumn prefWidth="184.0" text="Estudiante" />
-                  <TableColumn minWidth="8.0" prefWidth="103.0" text="Especialidad" />
-                  <TableColumn prefWidth="93.0" text="Curso" />
+                <TableColumn prefWidth="107.0" text="Fecha" />
+                  <TableColumn prefWidth="218.0" text="Estudiante" />
+                  <TableColumn minWidth="8.0" prefWidth="106.0" text="Especialidad" />
+                  <TableColumn prefWidth="70.0" text="Curso" />
                   <TableColumn prefWidth="84.0" text="Estado" />
               </columns>
             </TableView>

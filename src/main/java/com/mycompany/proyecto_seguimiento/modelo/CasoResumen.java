@@ -16,8 +16,18 @@ public class CasoResumen {
     private String estudiante;
     private String especialidad;
     private String curso;
+    private boolean activo; 
 
     public CasoResumen() {
+    }
+
+    public CasoResumen(int id_caso, LocalDateTime fecha, String estudiante, String especialidad, String curso, boolean activo) {
+        this.id_caso = id_caso;
+        this.fecha = fecha;
+        this.estudiante = estudiante;
+        this.especialidad = especialidad;
+        this.curso = curso;
+        this.activo = activo;
     }
     
     
@@ -29,6 +39,16 @@ public class CasoResumen {
         this.especialidad = especialidad;
         this.curso = curso;
     }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
+    
 
     public int getId_caso() {
         return id_caso;

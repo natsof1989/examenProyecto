@@ -94,7 +94,7 @@ public class SeleccionRolController {
             case "PROFESOR":
                 return "teacher1";
             case "EQUIPO_TECNICO":
-                return "equipo_tecnico";
+                return "equipoTecnico";
             case "ADMINISTRADOR":
                 return "admi";
             default:

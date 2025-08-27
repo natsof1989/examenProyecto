@@ -6,7 +6,10 @@ package com.mycompany.proyecto_seguimiento;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 
 /**
  * FXML Controller class
@@ -15,6 +18,9 @@ import javafx.fxml.Initializable;
  */
 public class EquipoTecnico3Controller implements Initializable {
 
+    @FXML
+    private Button btn_volver;
+
     /**
      * Initializes the controller class.
      */
@@ -22,5 +28,9 @@ public class EquipoTecnico3Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void volver(ActionEvent event) {
+    }
     
 }

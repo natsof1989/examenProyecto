@@ -49,7 +49,7 @@ public class Teacher2Controller implements Initializable {
 
     private final SessionManager session = SessionManager.getInstance();
     private final conexion dbConexion = new conexion();
-    private final UsuarioDAO usuarioDao = new UsuarioDAO(dbConexion.getConnection());
+    
     private final ProfesorDAO profesorDao = new ProfesorDAO(dbConexion.getConnection());
 
     private final CasoDAO casoDAO = new CasoDAO(dbConexion.getConnection()); 
@@ -78,10 +78,10 @@ public class Teacher2Controller implements Initializable {
             }
         });
 
-        // Inicialmente, el botón abrir está deshabilitado
+        
         btn_abrir.setDisable(true);
 
-        // Cargar datos en la tabla
+        
         mostrarDatos();
     }
 
@@ -128,7 +128,7 @@ public class Teacher2Controller implements Initializable {
     private void volver(ActionEvent event) {
         
         ControladorUtils.cambiarVista("teacher1");
-        // Lógica para volver a la pantalla anterior
+        
     }
 
     @FXML

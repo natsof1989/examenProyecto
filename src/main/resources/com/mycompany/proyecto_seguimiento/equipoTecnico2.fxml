@@ -9,25 +9,24 @@
 <?import javafx.scene.layout.Pane?>
 
 <AnchorPane id="AnchorPane" prefHeight="593.0" prefWidth="817.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.EquipoTecnico2Controller">
-   <children>
-      <Pane layoutX="24.0" layoutY="26.0" prefHeight="524.0" prefWidth="739.0" styleClass="panel-contenedor">
+    <children>
+      <Pane layoutX="43.0" layoutY="36.0" prefHeight="558.0" prefWidth="705.0" styleClass="panel-contenedor">
          <children>
-            
-            <TableView layoutX="51.0" layoutY="168.0" prefHeight="276.0" prefWidth="639.0">
+            <Label layoutX="206.0" layoutY="48.0" styleClass="titulo-principal" text="Lectura de todos los casos" />
+            <TableView layoutX="33.0" layoutY="169.0" prefHeight="276.0" prefWidth="639.0">
               <columns>
-                  <TableColumn prefWidth="299.0" text="Estudiante" />
-                  <TableColumn minWidth="8.0" prefWidth="162.0" text="Especialidad" />
-                  <TableColumn prefWidth="102.0" text="Curso" />
-                  <TableColumn prefWidth="75.0" text="Total casos" />
+                <TableColumn minWidth="6.0" prefWidth="53.0" text="N° Caso" />
+                <TableColumn prefWidth="121.0" text="Fecha" />
+                  <TableColumn prefWidth="184.0" text="Estudiante" />
+                  <TableColumn minWidth="8.0" prefWidth="103.0" text="Especialidad" />
+                  <TableColumn prefWidth="93.0" text="Curso" />
+                  <TableColumn prefWidth="84.0" text="Estado" />
               </columns>
             </TableView>
-            <TextField layoutX="50.0" layoutY="111.0" prefHeight="36.0" prefWidth="639.0" styleClass="campo-texto" text="🔎" />
-            <Label layoutX="222.0" layoutY="51.0" styleClass="titulo-principal" text="Mis alumnos con casos" />
-            <Button layoutX="306.0" layoutY="460.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="127.0" styleClass="boton-azul" text="Abrir" />
-            <Button fx:id="btn_volver" layoutX="50.0" layoutY="39.0" mnemonicParsing="false" onAction="#volver" styleClass="boton-azul" text="⬅" />
-            
-            
-         </children>
-      </Pane>
+            <TextField layoutX="33.0" layoutY="109.0" prefHeight="23.0" prefWidth="639.0" styleClass="campo-texto" text="🔎" />
+            <Button disable="true" layoutX="289.0" layoutY="475.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="127.0" styleClass="boton-azul" text="Abrir" />
+            <Button fx:id="btn_volver" layoutX="40.0" layoutY="39.0" mnemonicParsing="false" onAction="#volver" styleClass="boton-azul" text="⬅" />
+        </children>
+     </Pane>
    </children>
 </AnchorPane>
