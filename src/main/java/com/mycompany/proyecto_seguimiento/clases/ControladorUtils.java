@@ -1,6 +1,7 @@
 package com.mycompany.proyecto_seguimiento.clases;
 
 import com.mycompany.proyecto_seguimiento.App;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ConnectionBuilder;
@@ -144,4 +145,17 @@ public class ControladorUtils {
 
         return true;
     }
+    
+    // tamaño en bytes: 16 MB = 16 * 1024 * 1024
+    public static boolean validarTamanoArchivo(File file, long maxBytes) {
+        if (file == null) return true; // nada que validar
+        if (file.length() > maxBytes) {
+            long mb = maxBytes / (1024 * 1024);
+            String msg = String.format("El archivo supera el tamaño máximo permitido de %d MB. Seleccione un archivo más pequeño.", mb);
+            mostrarAlertaChill("Archivo demasiado grande", msg);
+            return false;
+        }
+        return true;
+    }
+
 }

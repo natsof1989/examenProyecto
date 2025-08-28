@@ -51,31 +51,7 @@ public class UsuarioDAO {
         
         return roles;
     }
-    /*
-    public boolean actualizarPassword(String ci, String nuevaContrasenia) throws SQLException {
-        String hashNuevo = Seguridad.encriptarPassword(nuevaContrasenia);
-
-        String sql1 = "UPDATE profesor SET password = ? WHERE CI = ?";
-        String sql2 = "UPDATE equipo_tecnico SET password = ? WHERE CI = ?";
-
-        boolean updated = false;
-
-        try (PreparedStatement stmt1 = conexion.prepareStatement(sql1)) {
-            stmt1.setString(1, hashNuevo);
-            stmt1.setString(2, ci);
-            updated = stmt1.executeUpdate() > 0;
-        }
-
-        try (PreparedStatement stmt2 = conexion.prepareStatement(sql2)) {
-            stmt2.setString(1, hashNuevo);
-            stmt2.setString(2, ci);
-            updated = updated || stmt2.executeUpdate() > 0;
-        }
-
-        return updated;
-    }
-
-    */
+    
     // Verifica si existe un registro COMPLETO (con todos los campos obligatorios)
     public boolean existeRegistroCompleto(String ci) throws SQLException {
         String sql = "SELECT 1 FROM profesor WHERE CI = ? AND nombre IS NOT NULL AND apellido IS NOT NULL AND password IS NOT NULL AND nro_telefono IS NOT NULL " +

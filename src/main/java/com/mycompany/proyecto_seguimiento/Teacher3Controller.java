@@ -59,7 +59,7 @@ public class Teacher3Controller implements Initializable {
     private File archivoSeleccionado;
     private HBox hboxArchivoSeleccionado; 
     
-
+    private static final long MAX_FILE_SIZE = 16L * 1024 * 1024; // 16 MB
    
     
     @Override
@@ -142,10 +142,17 @@ public class Teacher3Controller implements Initializable {
     private void cargarArchivo(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleccionar archivo");
-        archivoSeleccionado = fileChooser.showOpenDialog(btn_adjuntar.getScene().getWindow());
+        File seleccionado = fileChooser.showOpenDialog(btn_adjuntar.getScene().getWindow());
 
-        if (archivoSeleccionado != null) {
-             hboxArchivoSeleccionado = new HBox(5);
+        if (seleccionado != null) {
+            // validar tamaño antes de asignar y mostrar
+            if (!ControladorUtils.validarTamanoArchivo(seleccionado, MAX_FILE_SIZE)) {
+                // no asignamos archivo, dejamos el botón de adjuntar como está
+                return;
+            }
+
+            this.archivoSeleccionado = seleccionado;
+            hboxArchivoSeleccionado = new HBox(5);
             Label lblArchivo = new Label(archivoSeleccionado.getName());
             Button btnQuitar = new Button("X");
             btnQuitar.setTooltip(new Tooltip("Quitar archivo"));
@@ -161,14 +168,15 @@ public class Teacher3Controller implements Initializable {
         } else {
             btn_adjuntar.setText("Adjuntar archivo");
         }
-
     }
-    
+
     private void quitarArchivo(int index) {
-        archivoSeleccionado = null;
+        this.archivoSeleccionado = null;
         // Reemplazar HBox archivo por el botón de adjuntar original
         hboxBotones.getChildren().set(index, btn_adjuntar);
+        hboxArchivoSeleccionado = null;
     }
+
 
     @FXML
   private void cancelar(ActionEvent event) {
@@ -203,31 +211,38 @@ public class Teacher3Controller implements Initializable {
 
     @FXML
     private void GuardarCaso(ActionEvent event)  {
-        
-      if(ControladorUtils.hayCamposVacios(txt_caso)){
-          ControladorUtils.mostrarAlertaChill("Informamos", "No puede enviar un caso sin descripción. \n Describa el caso antes de enviar");
-          return; 
-      } 
-      String descripcion = txt_caso.getText(); 
-      int ciAlumno = cmb_alumno.getSelectionModel().getSelectedItem().getCi();
-      int profe_CI = Integer.parseInt(profCI); 
-      File archivoSeleccionado = this.archivoSeleccionado;
-      try {
-        
-        boolean exito = profesorDao.insertarCaso(descripcion, profe_CI, ciAlumno, archivoSeleccionado);
 
-        if (exito) {
-            ControladorUtils.mostrarAlertaChill("Éxito", "El caso fue guardado correctamente.");
-            txt_caso.clear();
-            cmb_alumno.getSelectionModel().clearSelection();
-            archivoSeleccionado = null; // limpiar para siguiente uso
-            cancelar(event);
-        } else {
-            ControladorUtils.mostrarError("Error", "No se pudo guardar el caso.", null);
+        if(ControladorUtils.hayCamposVacios(txt_caso)){
+            ControladorUtils.mostrarAlertaChill("Informamos", "No puede enviar un caso sin descripción. \n Describa el caso antes de enviar");
+            return; 
+        } 
+
+        // Validación tamaño archivo (última barrera)
+        if (this.archivoSeleccionado != null && !ControladorUtils.validarTamanoArchivo(this.archivoSeleccionado, MAX_FILE_SIZE)) {
+            // ya muestra la alerta desde validarTamanoArchivo
+            return;
         }
-    } catch (Exception ex) {
-        ControladorUtils.mostrarError("Excepción", "Ocurrió un error al guardar el caso.", ex);
-    }        
+
+        String descripcion = txt_caso.getText(); 
+        int ciAlumno = cmb_alumno.getSelectionModel().getSelectedItem().getCi();
+        int profe_CI = Integer.parseInt(profCI); 
+        File archivo = this.archivoSeleccionado;
+        try {
+            boolean exito = profesorDao.insertarCaso(descripcion, profe_CI, ciAlumno, archivo);
+
+            if (exito) {
+                ControladorUtils.mostrarAlertaChill("Éxito", "El caso fue guardado correctamente.");
+                txt_caso.clear();
+                cmb_alumno.getSelectionModel().clearSelection();
+                // limpiar la variable de instancia y UI
+                this.archivoSeleccionado = null;
+                cancelar(event);
+            } else {
+                ControladorUtils.mostrarError("Error", "No se pudo guardar el caso.", null);
+            }
+        } catch (Exception ex) {
+            ControladorUtils.mostrarError("Excepción", "Ocurrió un error al guardar el caso.", ex);
+        }        
     }
 
 }
