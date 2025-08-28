@@ -3,24 +3,46 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="434.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.EquipoTecnicoController">
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="544.0" prefWidth="560.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.EquipoTecnicoController">
    <children>
-      <Pane layoutX="55.0" layoutY="26.0" prefHeight="382.0" prefWidth="514.0" styleClass="panel-contenedor">
+      <VBox layoutX="43.0" layoutY="28.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="499.0" prefWidth="465.0" styleClass="panel-contenedor" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="28.0">
          <children>
-            <Label layoutX="173.0" layoutY="24.0" styleClass="titulo-principal" text="Bienvenido" />
-            <VBox layoutX="156.0" layoutY="73.0" prefHeight="295.0" prefWidth="160.0" spacing="10.0">
+            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="483.0" styleClass="titulo-principal" text="Bienvenido" VBox.vgrow="ALWAYS" />
+            <GridPane alignment="CENTER" prefHeight="96.0" prefWidth="401.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="81.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="380.0" minWidth="10.0" prefWidth="324.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <Button fx:id="btn_admiCaso" mnemonicParsing="false" onAction="#administrarCaso" prefHeight="38.0" prefWidth="161.0" styleClass="boton-azul" text="Administrar casos" />
-                  <Button fx:id="btn_atenderC" mnemonicParsing="false" onAction="#atenderCaso" prefHeight="38.0" prefWidth="163.0" styleClass="boton-azul" text="Atender casos" />
-                  <Button fx:id="btn_orientacion" mnemonicParsing="false" onAction="#verOrientaciones" styleClass="boton-azul" text="Ver orientaciones " />
-                  <Button fx:id="btn_reporte" mnemonicParsing="false" onAction="#generaReporte" prefHeight="38.0" prefWidth="166.0" styleClass="boton-azul" text="Generar reporte" />
-                  <Button fx:id="btn_configCuenta" mnemonicParsing="false" onAction="#configurarCuenta" styleClass="boton-azul" text="Configurar cuenta" />
-                  <Button fx:id="btn_logout" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="38.0" prefWidth="173.0" styleClass="boton-azul" text="Cerrar sesión" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="82.0" styleClass="subtitulo" text="Nombre:" GridPane.rowIndex="1" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="82.0" styleClass="subtitulo" text="Apellido:" GridPane.rowIndex="2" />
+                  <Text fx:id="txt_apellido" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitulo" text="Sofia Nathalia" wrappingWidth="287.13671875" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Text fx:id="txt_apellido" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitulo" text="Acosta Figueredo" wrappingWidth="275.13671875" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+            <VBox alignment="CENTER" prefHeight="350.0" prefWidth="444.0" spacing="10.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Button fx:id="btn_asignar" mnemonicParsing="false" onAction="#asignarCaso" prefHeight="38.0" prefWidth="186.0" styleClass="boton-azul" text="Asignar caso" VBox.vgrow="ALWAYS" />
+                  <Button fx:id="btn_CASOS" mnemonicParsing="false" onAction="#todo_caso" prefHeight="38.0" prefWidth="184.0" styleClass="boton-azul" text="Todos los casos" />
+                  <Button fx:id="btn_asignados" alignment="CENTER" mnemonicParsing="false" onAction="#casosAsignados" prefHeight="38.0" prefWidth="185.0" styleClass="boton-azul" text="Casos asignados" />
+                  <Button fx:id="btn_orientacion" mnemonicParsing="false" onAction="#orientaciones" prefHeight="38.0" prefWidth="182.0" styleClass="boton-azul" text="Mis orientaciones" />
+                  <Button fx:id="btn_configCuenta" mnemonicParsing="false" onAction="#configurarCuenta" prefHeight="38.0" prefWidth="186.0" styleClass="boton-azul" text="Configurar cuenta" />
+                  <Button fx:id="btn_logout" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="38.0" prefWidth="189.0" styleClass="boton-azul" text="Cerrar sesión" />
                </children>
             </VBox>
-         </children></Pane>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

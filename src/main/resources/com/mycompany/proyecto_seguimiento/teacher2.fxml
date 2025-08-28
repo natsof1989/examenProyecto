@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="539.0" prefWidth="762.0" styleClass="mainFxmlClass" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.Teacher2Controller">
    <children>
-      <Pane layoutX="47.0" layoutY="31.0" prefHeight="461.0" prefWidth="704.0" styleClass="panel-contenedor">
+      <Pane layoutX="29.0" layoutY="30.0" prefHeight="461.0" prefWidth="704.0" styleClass="panel-contenedor">
          <children>
             <Label layoutX="235.0" layoutY="29.0" styleClass="titulo-principal" text="Casos enviados" />
             <TableView fx:id="tabla_casos" layoutX="23.0" layoutY="138.0" onMouseClicked="#mostrarFila" prefHeight="220.0" prefWidth="664.0">
