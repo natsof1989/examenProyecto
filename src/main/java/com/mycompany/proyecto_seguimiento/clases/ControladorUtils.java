@@ -23,17 +23,42 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.layout.Region;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class ControladorUtils {
     // Para uso directo con nodos contenedores
     public static void cambiarVista(String fxmlName) {
-    try {
-        App.setRoot(fxmlName);
+        try {
+            App.setRoot(fxmlName);
+
+            // Obtener el Stage desde la escena
+            Stage stage = (Stage) App.scene.getWindow();
+            stage.setMinWidth(800);
+            stage.setMinHeight(600);
+            stage.setResizable(true);
+
         } catch (IOException e) {
             mostrarError("Error", "No se pudo cambiar la vista", e);
         }
+    }
 
+
+    public static void abrirModal(String fxmlNombre, String titulo) {
+        try {
+            FXMLLoader loader = new FXMLLoader(ControladorUtils.class.getResource("/com/mycompany/proyecto_seguimiento/" + fxmlNombre + ".fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle(titulo);
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL); // esto lo hace modal
+            stage.setResizable(false);
+
+            stage.showAndWait(); // espera hasta que se cierre la ventana
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void mostrarAlerta(String titulo, String mensaje) {

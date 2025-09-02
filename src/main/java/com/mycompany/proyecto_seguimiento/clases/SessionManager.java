@@ -20,6 +20,15 @@ public class SessionManager {
     private String passwordTemporal;
     private boolean registroEnProgreso = false;
     private UsuarioDatos usuarioDatos; 
+    private String pagina_anterior; 
+
+    public String getPagina_anterior() {
+        return pagina_anterior;
+    }
+
+    public void setPagina_anterior(String pagina_anterior) {
+        this.pagina_anterior = pagina_anterior;
+    }
 
     private String codigoVerificacion; // Nuevo campo del mauri
     public UsuarioDatos getUsuarioDatos() {
@@ -125,6 +134,7 @@ public class SessionManager {
         this.apellido = null;
         this.telefono = null;
         this.passwordTemporal = null;
+        this.pagina_anterior = null; 
         this.registroEnProgreso = false;
     }
     

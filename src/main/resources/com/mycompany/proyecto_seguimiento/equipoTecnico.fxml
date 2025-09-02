@@ -28,7 +28,7 @@
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="82.0" styleClass="subtitulo" text="Nombre:" GridPane.rowIndex="1" />
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="82.0" styleClass="subtitulo" text="Apellido:" GridPane.rowIndex="2" />
-                  <Text fx:id="txt_apellido" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitulo" text="Sofia Nathalia" wrappingWidth="287.13671875" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Text fx:id="txt_nombre" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitulo" text="Sofia Nathalia" wrappingWidth="287.13671875" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Text fx:id="txt_apellido" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitulo" text="Acosta Figueredo" wrappingWidth="275.13671875" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>

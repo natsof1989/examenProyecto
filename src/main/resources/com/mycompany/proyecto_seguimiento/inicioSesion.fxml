@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="Infinity" maxWidth="Infinity" prefHeight="585.0" prefWidth="463.0" styleClass="root" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.InicioSesionController">
+<StackPane fx:id="rootPane" maxHeight="Infinity" maxWidth="Infinity" prefHeight="585.0" prefWidth="463.0" styleClass="root" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.InicioSesionController">
     <!-- Fondo: imagen -->
     <ImageView fitHeight="585.0" fitWidth="463.0" preserveRatio="false">
         <image>

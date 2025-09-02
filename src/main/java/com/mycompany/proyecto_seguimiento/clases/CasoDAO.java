@@ -7,8 +7,10 @@ package com.mycompany.proyecto_seguimiento.clases;
 import java.sql.Connection;
 import com.mycompany.proyecto_seguimiento.clases.CasoSeleccionado;
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -45,6 +47,43 @@ public class CasoDAO {
             e.printStackTrace();
         }
     }
+    
+    public void aplicarCambiosAsignacion(int idCaso, List<Integer> aInsertar, List<Integer> aEliminar) throws SQLException {
+        String insertSQL = "INSERT INTO det_caso (id_caso, equipo_tecnico_CI) VALUES (?, ?)";
+        String deleteSQL = "DELETE FROM det_caso WHERE id_caso = ? AND equipo_tecnico_CI = ?";
+
+        try {
+            conexion.setAutoCommit(false);
+
+            if (aInsertar != null && !aInsertar.isEmpty()) {
+                try (PreparedStatement ps = conexion.prepareStatement(insertSQL)) {
+                    for (Integer ci : aInsertar) {
+                        ps.setInt(1, idCaso);
+                        ps.setInt(2, ci);
+                        ps.executeUpdate();
+                    }
+                }
+            }
+
+            if (aEliminar != null && !aEliminar.isEmpty()) {
+                try (PreparedStatement ps = conexion.prepareStatement(deleteSQL)) {
+                    for (Integer ci : aEliminar) {
+                        ps.setInt(1, idCaso);
+                        ps.setInt(2, ci);
+                        ps.executeUpdate();
+                    }
+                }
+            }
+
+            conexion.commit();
+        } catch (SQLException e) {
+            conexion.rollback();
+            throw e;
+        } finally {
+            conexion.setAutoCommit(true);
+        }
+    }
+
 
     
 }

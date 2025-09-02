@@ -13,18 +13,18 @@
       <Pane layoutX="43.0" layoutY="36.0" prefHeight="558.0" prefWidth="705.0" styleClass="panel-contenedor">
          <children>
             <Label layoutX="206.0" layoutY="48.0" styleClass="titulo-principal" text="Lectura de todos los casos" />
-            <TableView layoutX="33.0" layoutY="169.0" prefHeight="276.0" prefWidth="639.0">
+            <TableView fx:id="tabla_casos" layoutX="33.0" layoutY="169.0" prefHeight="276.0" prefWidth="639.0">
               <columns>
-                <TableColumn minWidth="6.0" prefWidth="53.0" text="N° Caso" />
-                <TableColumn prefWidth="121.0" text="Fecha" />
-                  <TableColumn prefWidth="184.0" text="Estudiante" />
-                  <TableColumn minWidth="8.0" prefWidth="103.0" text="Especialidad" />
-                  <TableColumn prefWidth="93.0" text="Curso" />
-                  <TableColumn prefWidth="84.0" text="Estado" />
+                <TableColumn fx:id="col_idCaso" minWidth="6.0" prefWidth="53.0" text="N° Caso" />
+                <TableColumn fx:id="col_fecha" prefWidth="121.0" text="Fecha" />
+                  <TableColumn fx:id="col_estudiante" prefWidth="184.0" text="Estudiante" />
+                  <TableColumn fx:id="col_espe" minWidth="8.0" prefWidth="103.0" text="Especialidad" />
+                  <TableColumn fx:id="col_curso" prefWidth="93.0" text="Curso" />
+                  <TableColumn fx:id="col_estado" prefWidth="84.0" text="Estado" />
               </columns>
             </TableView>
-            <TextField layoutX="33.0" layoutY="109.0" prefHeight="23.0" prefWidth="639.0" styleClass="campo-texto" text="🔎" />
-            <Button disable="true" layoutX="289.0" layoutY="475.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="127.0" styleClass="boton-azul" text="Abrir" />
+            <TextField fx:id="txt_buscar" layoutX="33.0" layoutY="109.0" onKeyReleased="#buscar" prefHeight="23.0" prefWidth="639.0" promptText="🔎" styleClass="campo-texto" />
+            <Button fx:id="btn_abrirCaso" disable="true" layoutX="289.0" layoutY="475.0" mnemonicParsing="false" onAction="#abrirCaso" prefHeight="38.0" prefWidth="127.0" styleClass="boton-azul" text="Abrir" />
             <Button fx:id="btn_volver" layoutX="40.0" layoutY="39.0" mnemonicParsing="false" onAction="#volver" styleClass="boton-azul" text="⬅" />
         </children>
      </Pane>

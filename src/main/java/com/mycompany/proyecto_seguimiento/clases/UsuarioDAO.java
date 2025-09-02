@@ -36,7 +36,18 @@ public class UsuarioDAO {
         }
     }
     
+   public boolean existeEquipoTecnico(int ci) throws SQLException {
+    String sql = "SELECT 1 FROM equipo_tecnico WHERE CI = ? LIMIT 1";
     
+    try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+        stmt.setInt(1, ci);
+        try (ResultSet rs = stmt.executeQuery()) {
+            return rs.next(); // si hay resultado, existe
+        }
+    }
+}
+
+
     // Obtiene todos los roles del usuario
     public List<String> obtenerRoles(String ci) throws SQLException {
         List<String> roles = new ArrayList<>();

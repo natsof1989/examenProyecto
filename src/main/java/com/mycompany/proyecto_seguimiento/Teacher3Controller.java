@@ -90,6 +90,7 @@ public class Teacher3Controller implements Initializable {
             List<Curso> cursos = profesorDao.obtenerCursos(profCI, idEspecialidad);
             cmb_curso.getItems().clear();
             cmb_alumno.getItems().clear();
+            cmb_alumno.setDisable(true);
             btn_adjuntar.setDisable(true);
             btn_guardar.setDisable(true);
             txt_estudiante.setText("");
@@ -109,12 +110,10 @@ public class Teacher3Controller implements Initializable {
         if (seleccion != null) {
             cmb_alumno.setDisable(false);
             int idCurso = seleccion.getId();  // Aquí tenés el ID
+            
 
             List<Alumno> alumnos = profesorDao.obtenerAlumnos(idCurso);
-            for(Alumno alumno : alumnos){
-                System.out.println(alumno.getCi());
-                System.out.println(alumno.getNombre());
-            }
+            
             txt_estudiante.setText("");
             btn_adjuntar.setDisable(true);
             btn_guardar.setDisable(true);
