@@ -5,6 +5,7 @@
 package com.mycompany.proyecto_seguimiento.clases;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  *
@@ -32,7 +33,20 @@ public class CasoSeleccionado {
     
     private String fxmlAnterior;
     private String extension; 
+    private List<Integer> asignados;
+    
 
+    public List<Integer> getAsignados() {
+        return asignados;
+    }
+
+    public void setAsignados(List<Integer> asignados) {
+        this.asignados = asignados;
+    }
+
+    
+
+    
     public String getExtension() {
         return extension;
     }
@@ -131,7 +145,13 @@ public class CasoSeleccionado {
     public void setArchivo(byte[] archivo) {
         this.archivo = archivo;
     }
-
+    
+    public void resetAsignados() {
+        if (asignados != null) {
+            asignados.clear(); // limpia la lista
+        }
+    }
+    
     // Método de conveniencia para resetear la instancia si es necesario
     public static void reset() {
         instancia = null;

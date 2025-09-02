@@ -5,21 +5,32 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/23.0.1"
-           xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="com.mycompany.proyecto_seguimiento.RecuperarAccesoController"
-           prefHeight="512.0" prefWidth="557.0"
-           stylesheets="@styles.css">
-    <VBox alignment="CENTER" spacing="20" styleClass="panel-contenedor" maxWidth="427" maxHeight="437">
-        <Label styleClass="titulo-principal" text="Verificación de cuenta">
-            <font>
-                <Font name="Segoe UI Semibold" size="24.0" />
-            </font>
-        </Label>
+<StackPane prefHeight="568.0" prefWidth="599.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.RecuperarAccesoController">
+    <VBox alignment="CENTER" maxHeight="437" maxWidth="427" spacing="20" styleClass="panel-contenedor">
+      <GridPane prefHeight="48.0" prefWidth="379.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="176.0" minWidth="10.0" prefWidth="90.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="277.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btn_volver" mnemonicParsing="false" onAction="#volver" prefHeight="38.0" prefWidth="56.0" styleClass="boton-azul" text="⬅" />
+              <Label styleClass="titulo-principal" text="Verificación de cuenta" GridPane.columnIndex="1">
+                  <font>
+                      <Font name="Segoe UI Semibold" size="24.0" />
+                  </font>
+              </Label>
+         </children>
+      </GridPane>
         <ImageView fitHeight="54.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@img/security.png" />
@@ -30,7 +41,7 @@
                 <Font name="Segoe UI Semibold" size="13.0" />
             </font>
         </Label>
-        <VBox spacing="10" alignment="CENTER_LEFT" maxWidth="340">
+        <VBox alignment="CENTER_LEFT" maxWidth="340" spacing="10">
             <Label styleClass="label-formulario" text="Número de cédula:" />
             <TextField fx:id="txt_ci" styleClass="campo-texto" />
             <Label styleClass="label-formulario" text="Correo electrónico:" />

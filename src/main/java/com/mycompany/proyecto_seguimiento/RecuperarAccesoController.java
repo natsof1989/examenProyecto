@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 /**
@@ -37,6 +38,8 @@ public class RecuperarAccesoController implements Initializable {
     private final conexion dbConexion = new conexion();
     private UsuarioDAO usuarioDao;
     private final SessionManager session = SessionManager.getInstance();
+    @FXML
+    private Button btn_volver;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.usuarioDao = new UsuarioDAO(dbConexion.getConnection());
@@ -110,6 +113,17 @@ public class RecuperarAccesoController implements Initializable {
                 ControladorUtils.mostrarError("Error de verificación", "Ocurrió un error al verificar los datos", ex);
 
             }
+    }
+
+    @FXML
+    private void volver(ActionEvent event) {
+        if(SessionManager.getInstance().getPagina_anterior()=="teacher1"){
+            ControladorUtils.cambiarVista("configurarCuenta");
+        } else if(SessionManager.getInstance().getPagina_anterior()=="equipoTecnico"){
+            ControladorUtils.cambiarVista("configurarCuenta");
+        } else {
+            ControladorUtils.cambiarVista("inicioSesion");
+        }
     }
 
     

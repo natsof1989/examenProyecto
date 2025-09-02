@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package com.mycompany.proyecto_seguimiento;
 
 import com.mycompany.proyecto_seguimiento.clases.CasoDAO;
 import com.mycompany.proyecto_seguimiento.clases.CasoSeleccionado;
 import com.mycompany.proyecto_seguimiento.clases.ControladorUtils;
-
 import com.mycompany.proyecto_seguimiento.clases.conexion;
 import com.mycompany.proyecto_seguimiento.clases.equipoTecnicoDAO;
 import com.mycompany.proyecto_seguimiento.modelo.CasoResumen;
@@ -28,47 +23,25 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 
-/**
- * FXML Controller class
- *
- * @author natha
- */
 public class EquipoTecnico1Controller implements Initializable {
 
-    @FXML
-    private Label label_title;
-    @FXML
-    private TableView<CasoResumen> tabla_caso;
-    @FXML
-    private TableColumn<CasoResumen, Integer> col_idCaso;
-    @FXML
-    private TableColumn<CasoResumen, LocalDateTime> col_fecha;
-    @FXML
-    private TableColumn<CasoResumen, String> col_estudiante;
-    @FXML
-    private TableColumn<CasoResumen, String> col_especialidad;
-    @FXML
-    private TableColumn<CasoResumen, String> col_curso;
-    @FXML
-    private TextField txt_buscar;
-    
+    @FXML private Label label_title;
+    @FXML private TableView<CasoResumen> tabla_caso;
+    @FXML private TableColumn<CasoResumen, Integer> col_idCaso;
+    @FXML private TableColumn<CasoResumen, LocalDateTime> col_fecha;
+    @FXML private TableColumn<CasoResumen, String> col_estudiante;
+    @FXML private TableColumn<CasoResumen, String> col_especialidad;
+    @FXML private TableColumn<CasoResumen, String> col_curso;
+    @FXML private TextField txt_buscar;
+    @FXML private Button btn_abrir;
+    @FXML private Button btn_volver;
 
-    /**
-     * Initializes the controller class.
-     */
     private final conexion dbConexion = new conexion();
-    
     private final equipoTecnicoDAO equipoTecDao = new equipoTecnicoDAO(dbConexion.getConnection());
-
     private final CasoDAO casoDAO = new CasoDAO(dbConexion.getConnection()); 
-     
     private ObservableList<CasoResumen> registros;
-    @FXML
-    private Button btn_abrir;
-    @FXML
-    private Button btn_volver;
+    ObservableList<CasoResumen> registrosFiltrados; 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -78,76 +51,72 @@ public class EquipoTecnico1Controller implements Initializable {
         col_especialidad.setCellValueFactory(new PropertyValueFactory<>("especialidad"));
         col_curso.setCellValueFactory(new PropertyValueFactory<>("curso"));
 
-        // 🔹 Formato personalizado para la columna fecha
+        // Formato personalizado para fecha
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         col_fecha.setCellFactory(column -> new TableCell<CasoResumen, LocalDateTime>() {
-        @Override
-        protected void updateItem(LocalDateTime fecha, boolean empty) {
-            super.updateItem(fecha, empty);
-              if (empty || fecha == null) {
-                    setText(null);
-               } else {
-                    setText(fecha.format(formatter));
-               }
+            @Override
+            protected void updateItem(LocalDateTime fecha, boolean empty) {
+                super.updateItem(fecha, empty);
+                setText((empty || fecha == null) ? null : fecha.format(formatter));
             }
         });
+
         btn_abrir.setDisable(true);
 
-        
         mostrarDatos();
-    }
 
-    @FXML
-    private void mostrarFila(MouseEvent event) {
-        btn_abrir.setDisable(tabla_caso.getSelectionModel().getSelectedItem() == null);
+        // Listener para habilitar el botón al seleccionar fila
+        tabla_caso.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            btn_abrir.setDisable(newSelection == null);
+        });
     }
 
     @FXML
     private void buscar(KeyEvent event) {
-         String busqueda = txt_buscar.getText().toLowerCase().trim();
+        String busqueda = txt_buscar.getText().toLowerCase().trim();
 
-        if (busqueda.isEmpty()) {
-            tabla_caso.setItems(registros); // Mostrar todos los registros
-        } else {
-            ObservableList<CasoResumen> registrosFiltrados = FXCollections.observableArrayList();
+        if (registros == null) return; // Evita nullpointer si tabla no cargó
 
-            for (CasoResumen caso : registros) {
-                if ((caso.getEstudiante() != null && caso.getEstudiante().toLowerCase().contains(busqueda)) ||
-                    (caso.getEspecialidad() != null && caso.getEspecialidad().toLowerCase().contains(busqueda)) ||
-                    (caso.getCurso() != null && caso.getCurso().toLowerCase().contains(busqueda)) ||
-                    (caso.getFecha() != null && caso.getFecha().toString().toLowerCase().contains(busqueda))) {
-                    registrosFiltrados.add(caso);
-                }
+        registrosFiltrados = FXCollections.observableArrayList();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        for (CasoResumen caso : registros) {
+            String fechaStr = (caso.getFecha() != null) ? caso.getFecha().format(formatter).toLowerCase() : "";
+            String estudiante = (caso.getEstudiante() != null) ? caso.getEstudiante().toLowerCase() : "";
+            String especialidad = (caso.getEspecialidad() != null) ? caso.getEspecialidad().toLowerCase() : "";
+            String curso = (caso.getCurso() != null) ? caso.getCurso().toLowerCase() : "";
+
+            if (busqueda.isEmpty() ||
+                estudiante.contains(busqueda) ||
+                especialidad.contains(busqueda) ||
+                curso.contains(busqueda) ||
+                fechaStr.contains(busqueda)) {
+                registrosFiltrados.add(caso);
             }
-
-            tabla_caso.setItems(registrosFiltrados);
         }
+
+        tabla_caso.setItems(registrosFiltrados);
     }
 
     @FXML
     private void abrirCaso(ActionEvent event) {
-         CasoResumen seleccionado = tabla_caso.getSelectionModel().getSelectedItem();
-        if (seleccionado != null) {
-            
-            CasoSeleccionado.getInstancia().setIdCaso(seleccionado.getId_caso());
-            CasoSeleccionado.getInstancia().setFecha(seleccionado.getFecha());
-            CasoSeleccionado.getInstancia().setEstudiante(seleccionado.getEstudiante());
-            CasoSeleccionado.getInstancia().setCurso(seleccionado.getCurso());
-            CasoSeleccionado.getInstancia().setFxmlAnterior("equipoTecnico1"); 
-            casoDAO.cargarDetalleCaso(seleccionado.getId_caso());
+        CasoResumen seleccionado = tabla_caso.getSelectionModel().getSelectedItem();
+        if (seleccionado == null) return;
 
-            ControladorUtils.cambiarVista("AbrirCaso"); 
-        }
+        CasoSeleccionado cs = CasoSeleccionado.getInstancia();
+        cs.setIdCaso(seleccionado.getId_caso());
+        cs.setFecha(seleccionado.getFecha());
+        cs.setEstudiante(seleccionado.getEstudiante());
+        cs.setEspecialidad(seleccionado.getEspecialidad());
+        cs.setCurso(seleccionado.getCurso());
+        cs.setFxmlAnterior("equipoTecnico1");
 
-    
+        casoDAO.cargarDetalleCaso(seleccionado.getId_caso());
+        ControladorUtils.cambiarVista("AbrirCaso");
     }
-        
-    
-    private void mostrarDatos(){
-         registros = FXCollections.observableArrayList(
-                equipoTecDao.obtenerCasosSinEquipo()
-         ); 
-        
+
+    private void mostrarDatos() {
+        registros = FXCollections.observableArrayList(equipoTecDao.obtenerCasosSinEquipo());
         tabla_caso.setItems(registros);
     }
 
@@ -155,8 +124,4 @@ public class EquipoTecnico1Controller implements Initializable {
     private void volver(ActionEvent event) {
         ControladorUtils.cambiarVista("equipoTecnico");
     }
-
-   
-    
-    
 }

@@ -14,12 +14,15 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
 
 public class InicioSesionController implements Initializable {
 
@@ -33,12 +36,16 @@ public class InicioSesionController implements Initializable {
     private final SessionManager session = SessionManager.getInstance();
     private final conexion dbConexion = new conexion();
     private UsuarioDatos datos;
+    @FXML
+    private StackPane rootPane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.usuarioDao = new UsuarioDAO(dbConexion.getConnection());
     }
 
+    
+   
     @FXML
     private void iniciarSesion(ActionEvent event) {
         if (ControladorUtils.hayCamposVacios(txtCI, txtContrasenhia)) {

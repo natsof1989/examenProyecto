@@ -10,6 +10,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -20,6 +24,24 @@ public class EquipoTecnico2Controller implements Initializable {
 
     @FXML
     private Button btn_volver;
+    @FXML
+    private TextField txt_buscar;
+    @FXML
+    private Button btn_abrirCaso;
+    @FXML
+    private TableView<?> tabla_casos;
+    @FXML
+    private TableColumn<?, ?> col_idCaso;
+    @FXML
+    private TableColumn<?, ?> col_fecha;
+    @FXML
+    private TableColumn<?, ?> col_estudiante;
+    @FXML
+    private TableColumn<?, ?> col_espe;
+    @FXML
+    private TableColumn<?, ?> col_curso;
+    @FXML
+    private TableColumn<?, ?> col_estado;
 
     /**
      * Initializes the controller class.
@@ -31,6 +53,14 @@ public class EquipoTecnico2Controller implements Initializable {
 
     @FXML
     private void volver(ActionEvent event) {
+    }
+
+    @FXML
+    private void buscar(KeyEvent event) {
+    }
+
+    @FXML
+    private void abrirCaso(ActionEvent event) {
     }
     
 }

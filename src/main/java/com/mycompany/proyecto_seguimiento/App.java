@@ -13,22 +13,28 @@ import java.io.IOException;
  */
 public class App extends Application {
 
-    private static Scene scene;
+    public static Scene scene;
 
    @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("inicioSesion"));
+        scene = new Scene(loadFXML("inicioSesion"), 800, 600); // tamaño inicial
         stage.setScene(scene);
-        // Pantalla completa
+        stage.setMinWidth(800);  // tamaño mínimo ancho
+        stage.setMinHeight(800); // tamaño mínimo alto
+        stage.setResizable(true); // permitir redimensionar
         stage.show();
     }
 
-
     public static void setRoot(String fxml) throws IOException {
-    scene.setRoot(loadFXML(fxml));
-}
+        scene.setRoot(loadFXML(fxml));
+        // Opcional: si querés forzar que al cambiar de vista la ventana siga con tamaño mínimo
+        Stage stage = (Stage) scene.getWindow();
+        stage.setMinWidth(800);
+        stage.setMinHeight(600);
+    }
 
-    private static Parent loadFXML(String fxml) throws IOException {
+
+    public static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }

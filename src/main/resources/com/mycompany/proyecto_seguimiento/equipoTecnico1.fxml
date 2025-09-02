@@ -13,7 +13,7 @@
       <Pane layoutX="24.0" layoutY="26.0" prefHeight="524.0" prefWidth="679.0" styleClass="panel-contenedor">
          <children>
             <Label fx:id="label_title" layoutX="252.0" layoutY="48.0" prefHeight="36.0" prefWidth="200.0" styleClass="titulo-principal" text="Casos sin asignar" />
-            <TableView fx:id="tabla_caso" layoutX="45.0" layoutY="168.0" onMouseClicked="#mostrarFila" prefHeight="276.0" prefWidth="575.0">
+            <TableView fx:id="tabla_caso" layoutX="45.0" layoutY="168.0" prefHeight="276.0" prefWidth="575.0">
               <columns>
                 <TableColumn fx:id="col_idCaso" minWidth="6.0" prefWidth="53.0" text="N° Caso" />
                 <TableColumn fx:id="col_fecha" prefWidth="115.0" text="Fecha" />
@@ -22,7 +22,7 @@
                   <TableColumn fx:id="col_curso" prefWidth="67.0" text="Curso" />
               </columns>
             </TableView>
-            <TextField fx:id="txt_buscar" layoutX="45.0" layoutY="109.0" onKeyReleased="#buscar" prefHeight="36.0" prefWidth="575.0" styleClass="campo-texto" text="🔎" />
+            <TextField fx:id="txt_buscar" layoutX="45.0" layoutY="109.0" onKeyReleased="#buscar" prefHeight="36.0" prefWidth="575.0" promptText="🔎" styleClass="campo-texto" />
             <Button fx:id="btn_abrir" disable="true" layoutX="261.0" layoutY="457.0" mnemonicParsing="false" onAction="#abrirCaso" prefHeight="38.0" prefWidth="127.0" styleClass="boton-azul" text="Abrir" />
             <Button fx:id="btn_volver" layoutX="45.0" layoutY="38.0" mnemonicParsing="false" onAction="#volver" styleClass="boton-azul" text="⬅" />
          </children>

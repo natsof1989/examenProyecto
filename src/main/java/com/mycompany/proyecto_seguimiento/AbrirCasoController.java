@@ -4,14 +4,25 @@
  */
 package com.mycompany.proyecto_seguimiento;
 
+import com.mycompany.proyecto_seguimiento.clases.ET_singleton;
 import com.mycompany.proyecto_seguimiento.clases.CasoSeleccionado;
 import com.mycompany.proyecto_seguimiento.clases.ControladorUtils;
+import com.mycompany.proyecto_seguimiento.clases.SessionManager;
+import com.mycompany.proyecto_seguimiento.clases.UsuarioDAO;
+import com.mycompany.proyecto_seguimiento.clases.conexion;
+import com.mycompany.proyecto_seguimiento.clases.equipoTecnicoDAO;
+import com.mycompany.proyecto_seguimiento.modelo.equipoTecnico;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,6 +33,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
@@ -56,12 +68,18 @@ public class AbrirCasoController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    private int ci = Integer.parseInt(SessionManager.getInstance().getCiUsuario());
+    
+    private final conexion dbConexion = new conexion();
+    
+    private final equipoTecnicoDAO equipoTecDAO = new equipoTecnicoDAO(dbConexion.getConnection());
+    private final int idCaso = CasoSeleccionado.getInstancia().getIdCaso();
+    List<Integer> asignados = new ArrayList<>(); 
+    
     CasoSeleccionado datosCaso = CasoSeleccionado.getInstancia(); 
     LocalDateTime fecha = datosCaso.getFecha();
     @FXML
     private GridPane equipoT_content;
-    @FXML
-    private Hyperlink link_historial;
     @FXML
     private Label lb_1;
     @FXML
@@ -69,9 +87,11 @@ public class AbrirCasoController implements Initializable {
     @FXML
     private Button btn_asignar;
     
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        txt_idCaso.setText(String.valueOf(datosCaso.getIdCaso()));
+        
+        txt_idCaso.setText(String.valueOf(idCaso)); 
         txt_estudiante.setText(datosCaso.getEstudiante());
         txt_espe.setText(datosCaso.getEspecialidad());
         txt_curso.setText(datosCaso.getCurso());
@@ -92,9 +112,60 @@ public class AbrirCasoController implements Initializable {
         
         Tooltip tooltip = new Tooltip("Descargar archivo adjunto");
         btn_descargar.setTooltip(tooltip);
+        
+            boolean jefa;
+            
+        try {
+            jefa = equipoTecDAO.perteneceDepartamento1(ci);
+            asignados = equipoTecDAO.obtenerAsignados(idCaso); 
+            if(asignados!=null){
+                CasoSeleccionado.getInstancia().setAsignados(asignados);
+            }
+            
+            if (jefa) {
+                btn_asignar.setVisible(true);
+
+            } else {
+                btn_asignar.setVisible(false);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AbrirCasoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            equipoT_content.setVisible(false); // Se oculta siempre
+
+    if (CasoSeleccionado.getInstancia().getFxmlAnterior()!="teacher1") {
+        equipoT_content.setVisible(true);
+        if (!asignados.isEmpty()) {
+            btn_asignar.setText("Reasignar");
+            datosCaso.setAsignados(asignados);
+            mostrarEquipoContent(asignados);
+        }
+    }
+
 
         // TODO
     }    
+    
+    private void mostrarEquipoContent(List<Integer> asignados) {
+    VBox content = new VBox(8); // Contenedor vertical con espacio
+    scroll_equipo.setContent(content);
+
+    List<equipoTecnico> equipos = ET_singleton.getInstancia().getEquipos();
+
+    for (equipoTecnico et : equipos) {
+        if (asignados.contains(Integer.parseInt(et.getCi()))) {
+            
+            Label label = new Label(et.getNombreCompleto() + " - " + et.getDepartamento());
+            label.setStyle("-fx-padding: 6; -fx-background-color: #f1f1f1; -fx-border-color: #ccc; -fx-background-radius: 5;");
+            content.getChildren().add(label);
+        }
+        /*if(asignados.contains(ci)){
+            link_writeOrientacion.setVisible(true);
+        } */
+
+    }
+}
+
 
     @FXML
     private void volver(ActionEvent event) {
@@ -130,11 +201,12 @@ public class AbrirCasoController implements Initializable {
     
     }
 
-    @FXML
-    private void ver_historial(ActionEvent event) {
-    }
 
     @FXML
     private void asignarCaso(ActionEvent event) {
+        ControladorUtils.abrirModal("asignar_Caso", "Asignación de los encargados de atender el caso");
+       
+        
     }
+
 }

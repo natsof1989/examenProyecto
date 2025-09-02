@@ -11,14 +11,25 @@ package com.mycompany.proyecto_seguimiento.modelo;
 public class equipoTecnico {
     private String ci; 
     private String nombreCompleto; 
+    private String departamento; 
 
     public equipoTecnico() {
     }
 
-    public equipoTecnico(String ci, String nombreCompleto) {
+    public equipoTecnico(String ci, String nombreCompleto, String departamento) {
         this.ci = ci;
         this.nombreCompleto = nombreCompleto;
+        this.departamento = departamento; 
     }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+    
 
     public String getCi() {
         return ci;
@@ -38,7 +49,7 @@ public class equipoTecnico {
     
     @Override
     public String toString() {
-        return nombreCompleto;
+        return nombreCompleto + " " + departamento;
     }
     
 }

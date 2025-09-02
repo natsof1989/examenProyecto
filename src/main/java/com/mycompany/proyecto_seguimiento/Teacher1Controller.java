@@ -37,6 +37,7 @@ public class Teacher1Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         txt_ci.setText(SessionManager.getInstance().getCiUsuario());
         txt_nombre.setText(SessionManager.getInstance().getUsuarioDatos().getNombre() + " " + SessionManager.getInstance().getUsuarioDatos().getApellido());
+        SessionManager.getInstance().setPagina_anterior("teacher1");
         // TODO
     }
 
@@ -60,6 +61,7 @@ public class Teacher1Controller implements Initializable {
 
     @FXML
     private void configurar(ActionEvent event) {
+        
         ControladorUtils.cambiarVista("configurarCuenta");
     }
 

@@ -210,7 +210,8 @@ private void eliminar(ActionEvent event) throws SQLException, IOException {
 
     @FXML
     private void salir(ActionEvent event) throws IOException {
-        ControladorUtils.cambiarVista("teacher1");
+        String pagina = SessionManager.getInstance().getPagina_anterior(); 
+        ControladorUtils.cambiarVista(pagina);
         
     }
 
