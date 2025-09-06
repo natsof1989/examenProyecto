@@ -10,7 +10,7 @@
     -fx-background-radius: 15px;
     -fx-border-width: 3px;
     -fx-border-radius: 12px;
-    -fx-padding: 30px;
+    -fx-padding: 15px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 20, 0, 0, 8);
 }
 
@@ -147,3 +147,51 @@
 #contenedorRoles .button:hover {
     -fx-background-color: #e0e0e0;
 }
+.titled-pane-celeste {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+.titled-pane-celeste > .title {
+    -fx-background-color: linear-gradient(to bottom, #e6f7ff, #b3e0ff);
+    -fx-background-radius: 5px 5px 0 0;
+    -fx-border-radius: 5px 5px 0 0;
+    -fx-padding: 10px 15px;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: #006699;
+    -fx-border-color: #99d6ff;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.titled-pane-celeste > .title > .arrow-button .arrow {
+    -fx-background-color: #0088cc;
+    -fx-scale-shape: true;
+    -fx-padding: 4px;
+}
+
+.titled-pane-celeste > .content {
+    -fx-background-color: #f7fbff;
+    -fx-padding: 15px;
+    -fx-border-color: #cce5ff;
+    -fx-border-width: 0 1px 1px 1px;
+    -fx-border-radius: 0 0 5px 5px;
+}
+
+.titled-pane-celeste:hover > .title {
+    -fx-background-color: linear-gradient(to bottom, #d9f0ff, #99d6ff);
+}
+
+.titled-pane-celeste:focused > .title {
+    -fx-background-color: #99d6ff;
+    -fx-background-insets: 0;
+    -fx-border-color: #66c2ff;
+}
+
+.titled-pane-celeste > .title > .arrow-button {
+    -fx-background-color: transparent;
+}
+
