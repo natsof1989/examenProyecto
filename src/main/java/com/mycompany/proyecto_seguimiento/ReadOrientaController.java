@@ -40,6 +40,10 @@ public class ReadOrientaController implements Initializable {
     private TableColumn<?, ?> col_idCaso;
     @FXML
     private Button btn_abrirCaso;
+    @FXML
+    private TableColumn<?, ?> col_autor;
+    @FXML
+    private TableColumn<?, ?> col_seleccionar;
 
     /**
      * Initializes the controller class.
