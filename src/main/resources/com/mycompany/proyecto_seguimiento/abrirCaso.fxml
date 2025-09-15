@@ -58,7 +58,7 @@
                         </VBox>
                      </content>
                   </TitledPane>
-                  <TitledPane fx:id="titled_tutores" animated="false" prefHeight="157.0" prefWidth="212.0" styleClass="titled-pane-celeste" text="Tutores">
+                  <TitledPane fx:id="titled_tutores" animated="false" prefHeight="283.0" prefWidth="212.0" styleClass="titled-pane-celeste" text="Tutores">
                     <content>
                         <VBox fx:id="tutor_content" prefHeight="56.0" prefWidth="178.0" />
                     </content>
