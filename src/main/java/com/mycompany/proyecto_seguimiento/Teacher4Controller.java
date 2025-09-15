@@ -5,8 +5,6 @@ import com.mycompany.proyecto_seguimiento.clases.CasoSeleccionado;
 import com.mycompany.proyecto_seguimiento.clases.ControladorUtils;
 import com.mycompany.proyecto_seguimiento.clases.ProfesorDAO;
 import com.mycompany.proyecto_seguimiento.clases.SessionManager;
-import com.mycompany.proyecto_seguimiento.clases.UsuarioDAO;
-import com.mycompany.proyecto_seguimiento.clases.conexion;
 import com.mycompany.proyecto_seguimiento.modelo.CasoResumen;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -51,18 +49,18 @@ public class Teacher4Controller implements Initializable {
     private Button btn_volver;
 
     private final SessionManager session = SessionManager.getInstance();
-    private final conexion dbConexion = new conexion();
-    private final ProfesorDAO profesorDao = new ProfesorDAO(dbConexion.getConnection());
-    private final CasoDAO casoDAO = new CasoDAO(dbConexion.getConnection());
-
+    private final ProfesorDAO profesorDao = new ProfesorDAO(new com.mycompany.proyecto_seguimiento.clases.conexion().getConnection());
+    private final CasoDAO casoDAO = new CasoDAO(new com.mycompany.proyecto_seguimiento.clases.conexion().getConnection());
     private ObservableList<CasoResumen> registros = FXCollections.observableArrayList();
     private ObservableList<CasoResumen> registrosFiltrados = FXCollections.observableArrayList();
-    // NUEVO: set para checkboxes seleccionados
     private Set<CasoResumen> seleccionados = new HashSet<>();
+    @FXML
+    private Label txt_label;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Configuración de columnas
+        // Configurar columnas
+        txt_label.setText("Casos de la especialidad de "+SessionManager.getInstance().getEspe().getNombre());
         col_idCaso.setCellValueFactory(new PropertyValueFactory<>("id_caso"));
         col_fecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         col_estudiante.setCellValueFactory(new PropertyValueFactory<>("estudiante"));
@@ -82,7 +80,7 @@ public class Teacher4Controller implements Initializable {
             }
         });
 
-        // Columna de checkboxes
+        // Columna de checkboxes adaptada igual a ReadCasosController
         col_seleccion.setCellValueFactory(data -> new SimpleBooleanProperty(false));
         col_seleccion.setCellFactory(tc -> new TableCell<CasoResumen, Boolean>() {
             private final CheckBox check = new CheckBox();
@@ -112,9 +110,7 @@ public class Teacher4Controller implements Initializable {
             }
         });
 
-        // Cargar datos
         mostrarDatos();
-
         registrosFiltrados.setAll(registros);
         tabla_casos.setItems(registrosFiltrados);
 
@@ -122,25 +118,37 @@ public class Teacher4Controller implements Initializable {
         btn_informe.setDisable(true);
     }
 
+    /**
+ * Carga todos los casos del profesor en la tabla y actualiza la lista completa.
+ */
     private void mostrarDatos() {
         String espe = session.getEspe().getNombre();
         registros = FXCollections.observableArrayList(
-                profesorDao.obtenerCasosPorEspe(espe)
+            profesorDao.obtenerCasosPorEspe(espe)
         );
         tabla_casos.setItems(registros);
-    
-        
     }
 
-    // Igual que en ReadCasosController
-    private void actualizarBotones() {
-        int sel = seleccionados.size();
-        btn_informe.setDisable(sel == 0);
-        btn_abrir.setDisable(sel != 1);
+   private void actualizarBotones() {
+        int selCheckbox = seleccionados.size();
+        boolean filaSeleccionada = tabla_casos.getSelectionModel().getSelectedItem() != null;
+
+        // Botón informe: al menos uno seleccionado de cualquier modo
+        btn_informe.setDisable(selCheckbox == 0 && !filaSeleccionada);
+
+        // Botón abrir: SOLO si hay exactamente 1 seleccionado por checkbox, O solo una fila seleccionada y ningún checkbox
+        if (selCheckbox == 1) {
+            btn_abrir.setDisable(false);
+        } else if (selCheckbox == 0 && filaSeleccionada) {
+            btn_abrir.setDisable(false);
+        } else {
+            btn_abrir.setDisable(true);
+        }
     }
 
     @FXML
     private void mostrarFila(MouseEvent event) {
+        // Permite interacción por selección de fila con mouse
         actualizarBotones();
     }
 

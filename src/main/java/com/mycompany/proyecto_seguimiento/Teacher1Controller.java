@@ -4,6 +4,7 @@ import com.mycompany.proyecto_seguimiento.clases.ControladorUtils;
 import com.mycompany.proyecto_seguimiento.clases.ProfesorDAO;
 import com.mycompany.proyecto_seguimiento.clases.UsuarioDAO;
 import com.mycompany.proyecto_seguimiento.clases.conexion;
+import com.mycompany.proyecto_seguimiento.modelo.Especialidad;
 import java.io.IOException;
 
 import java.net.URL;
@@ -47,18 +48,13 @@ public class Teacher1Controller implements Initializable {
         txt_ci.setText(SessionManager.getInstance().getCiUsuario());
         txt_nombre.setText(SessionManager.getInstance().getUsuarioDatos().getNombre() + " " + SessionManager.getInstance().getUsuarioDatos().getApellido());
         SessionManager.getInstance().setPagina_anterior("teacher1");
-        try {
-            SessionManager.getInstance().setEspe(profesorDao.esPioCoordi(ci));
-            
-            if(SessionManager.getInstance().getEspe()!=null){
-                btn_casosEspe.setVisible(true);
-            } else{
-                btn_casosEspe.setVisible(false);
-            }
-            // TODO
-        } catch (SQLException ex) {
-            Logger.getLogger(Teacher1Controller.class.getName()).log(Level.SEVERE, null, ex);
+        Especialidad espe = SessionManager.getInstance().getEspe(); 
+        if(espe!=null){
+            btn_casosEspe.setVisible(true); 
+        } else{
+            btn_casosEspe.setVisible(false);
         }
+        
     }
 
     @FXML
@@ -76,7 +72,7 @@ public class Teacher1Controller implements Initializable {
     @FXML
     private void orientaciones(ActionEvent event) {
         // Implementa navegación si lo necesitas, ejemplo:
-        ControladorUtils.cambiarVista("teacher4");
+        ControladorUtils.cambiarVista("teacher5");
     }
 
     @FXML
