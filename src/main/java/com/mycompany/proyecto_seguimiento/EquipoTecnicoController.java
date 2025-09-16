@@ -76,8 +76,13 @@ public class EquipoTecnicoController implements Initializable {
 
     @FXML
     private void cerrarSesion(ActionEvent event) {
+        // Limpiar todo el estado de la sesión
+        SessionManager.getInstance().limpiarSesion();
+
+        // Cambiar a la vista de inicio de sesión
         ControladorUtils.cambiarVista("inicioSesion");
     }
+
 
     @FXML
     private void asignarCaso(ActionEvent event) {

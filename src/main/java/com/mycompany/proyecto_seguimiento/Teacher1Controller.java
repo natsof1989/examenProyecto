@@ -83,8 +83,13 @@ public class Teacher1Controller implements Initializable {
 
     @FXML
     private void logout(ActionEvent event) {
+        // Limpiar todo el estado de la sesión
+        SessionManager.getInstance().limpiarSesion();
+
+        // Cambiar a la vista de inicio de sesión
         ControladorUtils.cambiarVista("inicioSesion");
     }
+
 
     @FXML
     private void abrirCasosEspe(ActionEvent event) {
