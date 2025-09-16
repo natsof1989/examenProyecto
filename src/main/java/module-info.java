@@ -14,4 +14,5 @@ module com.mycompany.proyecto_seguimiento {
     // si necesitas usar clases de estos paquetes desde fuera del módulo:
     exports com.mycompany.proyecto_seguimiento.clases;
     exports com.mycompany.proyecto_seguimiento.modelo;
+    requires java.desktop; 
 }
