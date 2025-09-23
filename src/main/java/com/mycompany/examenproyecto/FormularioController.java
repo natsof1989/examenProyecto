@@ -89,11 +89,12 @@ public class FormularioController implements Initializable {
 
     @FXML
     private void guardar(ActionEvent event) {
-        if(editado){
-            if(ControladorUtils.hayCamposVacios(txt_apellido, txt_nombre)){
+        if(ControladorUtils.hayCamposVacios(txt_apellido, txt_nombre)){
                 ControladorUtils.mostrarAlerta("Informampos", "No pueden haber campos vacíos");
                 return; 
-            }
+        }
+        if(editado){
+            
             int id = Integer.parseInt(txt_id.getText()); 
             String nombre = txt_nombre.getText(); 
             String apellido = txt_apellido.getText(); 
@@ -103,6 +104,7 @@ public class FormularioController implements Initializable {
                 editado = false; 
             }
         } else{
+            
             try {
             int id = Integer.parseInt(txt_id.getText());
             String nombre = txt_nombre.getText();
@@ -112,7 +114,7 @@ public class FormularioController implements Initializable {
                 
                 limpiarCampos();
                 deshabilitarCampos();
-                ControladorUtils.mostrarAlertaChill("Informamos", nombre + " " + apellido + "fue guardado con éxito.");
+                ControladorUtils.mostrarAlertaChill("Informamos", nombre + " " + apellido + " fue guardado con éxito.");
             } else {
                 System.out.println("Error al guardar el alumno");
             }
