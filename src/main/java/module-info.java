@@ -12,7 +12,7 @@ module com.mycompany.examenproyecto {
     opens com.mycompany.examenproyecto.modelo to javafx.base;
 
     exports com.mycompany.examenproyecto;
-    // si necesitas usar clases de estos paquetes desde fuera del módulo:
+    
     exports com.mycompany.examenproyecto.clases;
     exports com.mycompany.examenproyecto.modelo;
     requires java.desktop; 

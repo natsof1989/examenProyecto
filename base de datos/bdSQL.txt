@@ -1,0 +1,12 @@
+CREATE DATABASE IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8;
+USE `mydb`;
+
+-- -----------------------------------------------------
+-- Tabla: alumno
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `alumno` (
+  `id_alumno` INT NOT NULL,
+  `nombre` VARCHAR(50) NULL,
+  `apellido` VARCHAR(50) NULL,
+  PRIMARY KEY (`id_alumno`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
