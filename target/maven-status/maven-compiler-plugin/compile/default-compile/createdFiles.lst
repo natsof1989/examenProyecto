@@ -1,0 +1,10 @@
+com\mycompany\examenproyecto\FormularioController.class
+com\mycompany\examenproyecto\PrimaryController.class
+com\mycompany\examenproyecto\clases\conexion.class
+com\mycompany\examenproyecto\modelo\Alumno.class
+com\mycompany\examenproyecto\clases\claseDAO.class
+com\mycompany\examenproyecto\clases\ET_singleton.class
+com\mycompany\examenproyecto\App.class
+module-info.class
+com\mycompany\examenproyecto\SecondaryController.class
+com\mycompany\examenproyecto\clases\ControladorUtils.class
