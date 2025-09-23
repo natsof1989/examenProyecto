@@ -32,18 +32,7 @@ public class conexion {
         }
         return con;
     }
-    /*public Connection getConnection() {
-        try {
-            String url= "jdbc:mysql://"+host+"/"+base;//direccion de BD
-            con = DriverManager.getConnection(url, this.usuario, this.password);
-            System.out.println("Conectado");
-        } catch (SQLException ex) {
-            Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("No Conectado");
-        }
-        return con;
-        
-    }*/
+
     
     
    public conexion() {

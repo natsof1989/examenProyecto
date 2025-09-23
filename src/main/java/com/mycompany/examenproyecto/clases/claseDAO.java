@@ -21,7 +21,7 @@ public class claseDAO {
         this.conexion = conexion;
     }
     
-     // ------------------- INSERTAR -------------------
+     
     public boolean insertarAlumno(int id, String nombre, String apellido) {
         String sql = "INSERT INTO alumno (id_alumno, nombre, apellido) VALUES (?, ?, ?)";
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
@@ -35,7 +35,7 @@ public class claseDAO {
         }
     }
 
-    // ------------------- MODIFICAR -------------------
+    
     public boolean modificarAlumno(int id, String nombre, String apellido) {
         String sql = "UPDATE alumno SET nombre = ?, apellido = ? WHERE id_alumno = ?";
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
@@ -49,7 +49,7 @@ public class claseDAO {
         }
     }
 
-    // ------------------- ELIMINAR -------------------
+    
     public boolean eliminarAlumno(int id) {
         String sql = "DELETE FROM alumno WHERE id_alumno = ?";
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
@@ -61,7 +61,7 @@ public class claseDAO {
         }
     }
 
-    // ------------------- SELECCIONAR UNO -------------------
+    
     public Alumno obtenerAlumno(int id) {
         String sql = "SELECT * FROM alumno WHERE id_alumno = ?";
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
