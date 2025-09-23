@@ -112,6 +112,7 @@ public class FormularioController implements Initializable {
                 
                 limpiarCampos();
                 deshabilitarCampos();
+                ControladorUtils.mostrarAlertaChill("Informamos", nombre + " " + apellido + "fue guardado con éxito.");
             } else {
                 System.out.println("Error al guardar el alumno");
             }
@@ -140,6 +141,7 @@ public class FormularioController implements Initializable {
                 cargarTabla();
                 limpiarCampos();
                 deshabilitarCampos();
+                ControladorUtils.mostrarAlertaChill("Informamos", "Eliminación exitosa");
             }
             
         } else{
