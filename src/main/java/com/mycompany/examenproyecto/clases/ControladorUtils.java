@@ -167,6 +167,8 @@ public class ControladorUtils {
             case "TEL":
                 // Validar teléfono uruguayo (8 o 9 dígitos)
                 return textoLimpio.length() == 8 || textoLimpio.length() == 9;
+            case "EDAD":
+                return textoLimpio.length()>3 || textoLimpio.length()<1; 
                 
             default:
                 return false;
