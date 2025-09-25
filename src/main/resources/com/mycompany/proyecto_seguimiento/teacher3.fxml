@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-
 <HBox spacing="5.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_seguimiento.Teacher3Controller">
    <children>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="567.0" prefWidth="164.0" styleClass="contenedor-botones" HBox.hgrow="ALWAYS">
@@ -21,7 +20,7 @@
             <Button fx:id="btn_cancelar" disable="true" onAction="#cancelar" prefHeight="42.0" prefWidth="159.0" styleClass="boton-nuevo" text="Cancelar" /> 
             <Button fx:id="btn_adjuntar" disable="true" onAction="#cargarArchivo" prefHeight="42.0" prefWidth="163.0" styleClass="boton-nuevo" text="Ajuntar archivo" /> 
             <Button fx:id="btn_guardar" disable="true" onAction="#GuardarCaso" prefHeight="42.0" prefWidth="187.0" styleClass="boton-nuevo" text="Guardar caso" />
-            <Button fx:id="btn_imprimir" disable="true" mnemonicParsing="false" onAction="#imprimir" prefHeight="23.0" prefWidth="192.0" styleClass="boton-nuevo" text="Imprimir" />
+            <Button fx:id="btn_imprimir" disable="true" mnemonicParsing="false" onAction="#imprimir" prefHeight="23.0" prefWidth="192.0" styleClass="boton-nuevo" text="Generar PDF" />
          </children>
       </VBox>
       <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="contenedor-botones" HBox.hgrow="ALWAYS">

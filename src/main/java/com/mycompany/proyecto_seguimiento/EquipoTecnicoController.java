@@ -43,6 +43,8 @@ public class EquipoTecnicoController implements Initializable {
     private Button btn_ORIENTA;
     @FXML
     private Button btn_ayuda;
+    @FXML
+    private Button btn_admi;
     
 
     @Override
@@ -122,5 +124,10 @@ public class EquipoTecnicoController implements Initializable {
         } else{
             System.out.println("El archivo CHM no existe");
         }
+    }
+
+    @FXML
+    private void admi(ActionEvent event) {
+        ControladorUtils.cambiarVista("configDB");
     }
 }

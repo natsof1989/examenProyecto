@@ -31,6 +31,7 @@
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="92.0" styleClass="subtitulo" text="Apellido:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
                   <Text fx:id="txt_nombre" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitulo" text="Sofia Nathalia" wrappingWidth="287.13671875" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
                   <Text fx:id="txt_apellido" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitulo" text="Acosta Figueredo" wrappingWidth="275.13671875" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
+                  <Button fx:id="btn_admi" mnemonicParsing="false" onAction="#admi" text="admi" GridPane.columnIndex="1" />
                </children>
             </GridPane>
             <VBox alignment="CENTER" prefHeight="350.0" prefWidth="444.0" spacing="10.0" VBox.vgrow="ALWAYS">
@@ -40,7 +41,7 @@
                   <Button fx:id="btn_CASOS" alignment="CENTER" mnemonicParsing="false" onAction="#abrirCasos" prefHeight="38.0" prefWidth="185.0" styleClass="boton-azul" text="Casos" />
                   <Button fx:id="btn_configCuenta" mnemonicParsing="false" onAction="#configurarCuenta" prefHeight="38.0" prefWidth="186.0" styleClass="boton-azul" text="Configurar cuenta" />
                   <Button fx:id="btn_logout" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="38.0" prefWidth="189.0" styleClass="boton-azul" text="Cerrar sesión" />
-                  <Button fx:id="btn_ayuda" mnemonicParsing="false" onAction="#ayuda" prefHeight="23.0" prefWidth="230.0" styleClass="boton-azul" text="Sobre la app" />
+                  <Button fx:id="btn_ayuda" mnemonicParsing="false" onAction="#ayuda" prefHeight="23.0" prefWidth="189.0" styleClass="boton-azul" text="Sobre la app" />
                </children>
             </VBox>
          </children>
